@@ -1,6 +1,7 @@
 # volto-dropdownmenu
 
-Volto addon for a customizable dropdown menu
+Volto addon for a customizable dropdown menu.  
+Intended to be used with [collective.volto.dropdownmenu](https://github.com/collective/collective.volto.dropdownmenu)
   
 To be used with mrs-developer, see [Volto docs](https://docs.voltocms.com/customizing/add-ons/) for further usage informations.
 
