@@ -6,6 +6,7 @@ import { Form as UIForm, Grid } from 'semantic-ui-react';
 import { Form, TextWidget, FormFieldWrapper } from '@plone/volto/components';
 
 import { settings } from '~/config';
+import './menu_configuration.css';
 
 const messages = defineMessages({
   root_path: {
@@ -73,7 +74,12 @@ const MenuConfigurationForm = ({ menu, onChange }) => {
             </Grid.Column>
           </Grid.Row>
           <Grid.Row stretched>
-            <Grid.Column width={12}>
+            <Grid.Column
+              width={12}
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            >
               {' '}
               <Form
                 formData={menu}
