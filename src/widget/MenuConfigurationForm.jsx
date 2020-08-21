@@ -3,10 +3,14 @@ import { defineMessages, useIntl } from 'react-intl';
 import { v4 as uuid } from 'uuid';
 import { isEmpty } from 'lodash';
 import { Form as UIForm, Grid } from 'semantic-ui-react';
-import { Form, TextWidget, FormFieldWrapper } from '@plone/volto/components';
-
+import {
+  Form,
+  TextWidget,
+  FormFieldWrapper,
+  Sidebar,
+} from '@plone/volto/components';
+import { Portal } from 'react-portal';
 import { settings } from '~/config';
-import './menu_configuration.css';
 
 const messages = defineMessages({
   root_path: {
@@ -41,11 +45,21 @@ const MenuConfigurationForm = ({ menu, onChange }) => {
     };
   }
 
-  let formBlocks = React.createRef();
+  const preventClick = (e) => {
+    e.preventDefault();
+    console.log('prevent click');
+  };
 
   useEffect(() => {
-    console.log('formBlocks', formBlocks);
-  }, [formBlocks]);
+    document
+      .querySelector('form.ui.form')
+      .addEventListener('click', preventClick);
+    return () => {
+      document
+        .querySelector('form.ui.form')
+        .removeEventListener('click', preventClick);
+    };
+  }, []);
 
   const onChangeFormData = (data) => {
     onChange(data);
@@ -62,7 +76,7 @@ const MenuConfigurationForm = ({ menu, onChange }) => {
           onChange({ ...menu, rootPath: value?.length ? value : '/' });
         }}
       />
-      <UIForm.Field inline className="help" id="menu-blocks">
+      <UIForm.Field inline className="help wide" id="menu-blocks">
         <Grid>
           <Grid.Row stretched>
             <Grid.Column width={12}>
@@ -74,21 +88,19 @@ const MenuConfigurationForm = ({ menu, onChange }) => {
             </Grid.Column>
           </Grid.Row>
           <Grid.Row stretched>
-            <Grid.Column
-              width={12}
-              onClick={(e) => {
-                e.stopPropagation();
-              }}
-            >
-              {' '}
-              <Form
-                formData={menu}
-                visual={true}
-                hideActions
-                ref={formBlocks}
-                onChangeFormData={onChangeFormData}
-                onSubit={() => {}}
-              />
+            <Grid.Column width={12}>
+              <div className="menu-blocks-container">
+                <Form
+                  formData={menu}
+                  visual={true}
+                  hideActions
+                  onChangeFormData={onChangeFormData}
+                />
+              </div>
+
+              <Portal node={document.getElementById('sidebar')}>
+                <Sidebar />
+              </Portal>
             </Grid.Column>
           </Grid.Row>
         </Grid>

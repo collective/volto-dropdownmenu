@@ -1,0 +1,12 @@
+.menu-configuration-widget .menu-blocks-container {
+  padding: 2em;
+}
+
+.menu-configuration-widget
+  .menu-blocks-container
+  .block
+  .toolbar-inner
+  .ui.input
+  input {
+  height: unset;
+}

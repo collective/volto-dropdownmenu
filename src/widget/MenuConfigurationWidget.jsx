@@ -3,7 +3,7 @@ import { defineMessages, useIntl } from 'react-intl';
 import { Tab, Grid, Form } from 'semantic-ui-react';
 import { TextWidget } from '@plone/volto/components';
 import MenuConfigurationForm from './MenuConfigurationForm';
-
+import './menu_configuration.css';
 /* Types definition
 
 interface IMenuItemConfiguration {
@@ -154,7 +154,7 @@ const MenuConfigurationWidget = ({
   };
 
   return (
-    <>
+    <div className="menu-configuration-widget">
       <Tab
         menu={{ fluid: true, vertical: true, tabular: true }}
         panes={rootPanes}
@@ -190,7 +190,7 @@ const MenuConfigurationWidget = ({
           )}
         </Grid>
       </Form.Field>
-    </>
+    </div>
   );
 };
 
