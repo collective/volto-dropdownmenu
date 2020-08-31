@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { defineMessages, useIntl } from 'react-intl';
-import { Tab, Grid, Form } from 'semantic-ui-react';
+import { Tab, Menu, Grid, Form, Button } from 'semantic-ui-react';
 import { TextWidget } from '@plone/volto/components';
 import MenuConfigurationForm from './MenuConfigurationForm';
 import './menu_configuration.css';
+
 /* Types definition
 
 interface IMenuItemConfiguration {
@@ -31,7 +32,7 @@ const exampleMenuConfiguration = [
         visible: true,
         mode: 'dropdown',
         navigationRoot: '/',
-        showMoreText: 'Vedi tutto',
+        showMoreText: 'Show more',
         blocks: {},
         blocksLayout: { items: [] },
       },
@@ -44,14 +45,14 @@ const exampleMenuConfiguration = [
     ],
   },
   {
-    rootPath: '/it/sottosito',
+    rootPath: '/it/subsite',
     items: [
       {
         title: 'Lorem ipsum dolor',
         visible: true,
         mode: 'dropdown',
         navigationRoot: '/',
-        showMoreText: 'Vedi tutto',
+        showMoreText: 'Show more',
         blocks: {},
         blocksLayout: { items: [] },
       },
@@ -65,19 +66,24 @@ const exampleMenuConfiguration = [
   },
 ];
 
-const messages = defineMessages({});
+const messages = defineMessages({
+  deleteMenuItem: {
+    id: 'dropdownmenu-delete-menuitem',
+    defaultMessage: 'Delete menu item',
+  },
+});
 
-const defaultMenuItem = {
-  title: '',
+const defaultMenuItem = (title) => ({
+  title,
   visible: true,
   mode: 'simpleLink',
   linkUrl: '#',
-};
+});
 
-const defaultRootMenu = {
+const defaultRootMenu = (title) => ({
   rootPath: '/',
-  items: [defaultMenuItem],
-};
+  items: [defaultMenuItem(title)],
+});
 
 const defaultMenuConfiguration = [defaultRootMenu];
 
@@ -93,85 +99,110 @@ const MenuConfigurationWidget = ({
     ? JSON.parse(value)
     : defaultMenuConfiguration;
   const intl = useIntl();
-
-  const newRootPane = {
-    menuItem: '+',
-    render: () => renderRootPane(defaultRootMenu),
-  };
+  const [activeRootTab, setActiveRootTab] = useState(0);
 
   const handleChangeConfiguration = (value) => {
     console.dir(value);
     onChange(id, JSON.stringify(value));
   };
 
-  const initRootPanes = () => {
-    let panes = [];
+  const RootPane = React.memo(({ menu, index = -1 }) => (
+    <Tab.Pane>
+      <MenuConfigurationForm
+        menu={menu}
+        onChange={onChangeMenu(index)}
+        defaultMenuItem={defaultMenuItem}
+      />
+    </Tab.Pane>
+  ));
 
-    menuConfiguration.map((menu, index) => {
-      let pane = {
-        menuItem: { key: index, content: menu.rootPath },
-        render: () => renderRootPane(menu, index),
-      };
-      panes.push(pane);
-    });
-    panes.push(newRootPane);
-
-    return panes;
+  const newRootPane = {
+    menuItem: '+',
+    render: () => <RootPane menu={defaultRootMenu('New')} />,
   };
-  const rootPanes = initRootPanes();
+
+  const rootPanes = [
+    ...menuConfiguration.map((menu, index) => ({
+      menuItem: {
+        key: index,
+        content: (
+          <div className="dropdownmenu-menuItem">
+            <span>{menu.rootPath}</span>
+            <Button
+              icon="trash"
+              title={intl.formatMessage(messages.deleteMenuItem)}
+              onClick={(e) => deleteRootTab(e, index)}
+            />
+          </div>
+        ),
+      },
+      render: () => <RootPane menu={menu} index={index} />,
+    })),
+    newRootPane,
+  ];
 
   const addRootTab = () => {
     const index = rootPanes.length - 1;
-    const menuItem = `/new${index + 1}`;
+    const menuItem = `/tab${index + 1}`;
     let newMenuConfiguration = [
       ...menuConfiguration,
-      { ...defaultRootMenu, rootPath: menuItem },
+      { ...defaultRootMenu(`Tab ${index + 1}`), rootPath: menuItem },
     ];
 
+    console.log('add tab');
     handleChangeConfiguration(newMenuConfiguration);
   };
 
-  const onRootTabChange = (event, data) => {
-    if (data.activeIndex == data.panes.length - 1) {
+  const deleteRootTab = (e, index) => {
+    e.preventDefault();
+    let newMenuConfiguration = [...menuConfiguration];
+    newMenuConfiguration.splice(index, 1);
+
+    if (activeRootTab === index) {
+      setActiveRootTab(index > 0 ? index - 1 : 0);
+    }
+    setActiveRootTab(-1);
+
+    console.log('del tab');
+    handleChangeConfiguration(newMenuConfiguration);
+  };
+
+  const onRootTabChange = (e, data) => {
+    if (data.activeIndex === data.panes.length - 1) {
       addRootTab();
     }
+
+    setActiveRootTab(data.activeIndex);
   };
 
   const onChangeMenu = (index) => (menu) => {
     let newMenuConfiguration = [...menuConfiguration];
     newMenuConfiguration[index] = menu;
 
+    console.log('menu chg');
     handleChangeConfiguration(newMenuConfiguration);
-  };
-
-  const renderRootPane = (menu, index) => {
-    //TODO: Mettere in un componente wrappato da React.memo
-    return (
-      <Tab.Pane>
-        <MenuConfigurationForm menu={menu} onChange={onChangeMenu(index)} />
-      </Tab.Pane>
-    );
   };
 
   return (
     <div className="menu-configuration-widget">
-      <Tab
-        menu={{ fluid: true, vertical: true, tabular: true }}
-        panes={rootPanes}
-        grid={{ paneWidth: 9, tabWidth: 3 }}
-        onTabChange={onRootTabChange}
-      />
-
       <Form.Field inline required={required} id={id}>
         <Grid>
           <Grid.Row>
-            <Grid.Column width="4">
+            <Grid.Column width="12">
               <div className="wrapper">
                 <label htmlFor="menu-configuration">{title}</label>
               </div>
             </Grid.Column>
-            <Grid.Column width="8" className="menu-configuration-widget">
+            <Grid.Column width="12" className="menu-configuration-widget">
               <div id="menu-configuration">
+                <Tab
+                  menu={{ fluid: true, vertical: true, tabular: true }}
+                  panes={rootPanes}
+                  grid={{ paneWidth: 9, tabWidth: 3 }}
+                  activeIndex={activeRootTab}
+                  onTabChange={onRootTabChange}
+                />
+
                 <textarea
                   value={JSON.stringify(menuConfiguration)}
                   onChange={(e) => {

@@ -10,3 +10,7 @@
   input {
   height: unset;
 }
+
+#menu-configuration {
+  margin: 1em 0;
+}
