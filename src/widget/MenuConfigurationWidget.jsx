@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { defineMessages, useIntl } from 'react-intl';
-import { Tab, Menu, Grid, Form, Button } from 'semantic-ui-react';
-import { TextWidget } from '@plone/volto/components';
+import { Tab, Grid, Form, Button } from 'semantic-ui-react';
 import MenuConfigurationForm from './MenuConfigurationForm';
 import './menu_configuration.css';
 
@@ -32,6 +31,7 @@ const exampleMenuConfiguration = [
         visible: true,
         mode: 'dropdown',
         navigationRoot: '/',
+        showMoreLink: '/stuff',
         showMoreText: 'Show more',
         blocks: {},
         blocksLayout: { items: [] },
@@ -52,6 +52,7 @@ const exampleMenuConfiguration = [
         visible: true,
         mode: 'dropdown',
         navigationRoot: '/',
+        showMoreLink: '/it/subsite',
         showMoreText: 'Show more',
         blocks: {},
         blocksLayout: { items: [] },
@@ -67,9 +68,9 @@ const exampleMenuConfiguration = [
 ];
 
 const messages = defineMessages({
-  deleteMenuItem: {
-    id: 'dropdownmenu-delete-menuitem',
-    defaultMessage: 'Delete menu item',
+  deleteMenuPath: {
+    id: 'dropdownmenu-delete-menupath',
+    defaultMessage: 'Delete menu path',
   },
 });
 
@@ -77,7 +78,7 @@ const defaultMenuItem = (title) => ({
   title,
   visible: true,
   mode: 'simpleLink',
-  linkUrl: '#',
+  linkUrl: [],
 });
 
 const defaultRootMenu = (title) => ({
@@ -130,7 +131,7 @@ const MenuConfigurationWidget = ({
             <span>{menu.rootPath}</span>
             <Button
               icon="trash"
-              title={intl.formatMessage(messages.deleteMenuItem)}
+              title={intl.formatMessage(messages.deleteMenuPath)}
               onClick={(e) => deleteRootTab(e, index)}
             />
           </div>
@@ -196,7 +197,11 @@ const MenuConfigurationWidget = ({
             <Grid.Column width="12" className="menu-configuration-widget">
               <div id="menu-configuration">
                 <Tab
-                  menu={{ fluid: true, vertical: true, tabular: true }}
+                  menu={{
+                    fluid: true,
+                    vertical: true,
+                    tabular: true,
+                  }}
                   panes={rootPanes}
                   grid={{ paneWidth: 9, tabWidth: 3 }}
                   activeIndex={activeRootTab}

@@ -16,8 +16,10 @@ Created with [voltocli](https://github.com/nzambello/voltocli).
 ## TODO
 
 - [ ] when removing last root tab, it goes to the default new one, not editable
-- [ ] delete menu item
+- [ ] issue: you need to reload the page to see the new data when you save
+- [x] delete menu item
+- [ ] you can't delete the last menu item
 - [ ] sort menu items
-- [ ] add menu item form
+- [x] complete menu item form
 - [ ] customization for navigation
 - [ ] render menu and dropdown
