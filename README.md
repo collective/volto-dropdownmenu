@@ -13,13 +13,16 @@ Created with [voltocli](https://github.com/nzambello/voltocli).
 
 `Document your addon here`
 
+Example configuration [here](./menuConfigurationExample.json).
+
 ## TODO
 
-- [ ] when removing last root tab, it goes to the default new one, not editable
+- [x] when removing last root tab, it goes to the default new one, not editable
 - [ ] issue: you need to reload the page to see the new data when you save
 - [x] delete menu item
-- [ ] you can't delete the last menu item
+- [x] you can't delete the last menu item
 - [ ] sort menu items
 - [x] complete menu item form
+- [ ] selectwidget seems to keep the same data over menus
 - [ ] customization for navigation
 - [ ] render menu and dropdown

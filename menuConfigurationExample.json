@@ -1,0 +1,198 @@
+[
+  {
+    "rootPath": "/",
+    "items": [
+      {
+        "title": "Aree tematiche",
+        "visible": true,
+        "mode": "simpleLink",
+        "linkUrl": [
+          {
+            "@id": "/news",
+            "@type": "Folder",
+            "CreationDate": "2020-08-19T12:08:46+02:00",
+            "Creator": "admin",
+            "Date": "2020-08-19T12:08:46+02:00",
+            "Description": "Notizie del sito",
+            "EffectiveDate": "None",
+            "ExpirationDate": "None",
+            "ModificationDate": "2020-08-19T12:08:46+02:00",
+            "Subject": [],
+            "Title": "Notizie",
+            "Type": "Cartella",
+            "UID": "49be87c9a77640329ae4ec2031585cc1",
+            "author_name": null,
+            "cmf_uid": null,
+            "commentators": [],
+            "created": "2020-08-19T10:08:46+00:00",
+            "description": "Notizie del sito",
+            "effective": "1969-12-30T22:00:00+00:00",
+            "end": null,
+            "exclude_from_nav": false,
+            "expires": "2499-12-30T22:00:00+00:00",
+            "getIcon": null,
+            "getId": "news",
+            "getObjSize": "0 KB",
+            "getPath": "/Plone/news",
+            "getRemoteUrl": null,
+            "getURL": "http://localhost:3000/api/news",
+            "id": "news",
+            "in_response_to": null,
+            "is_folderish": true,
+            "last_comment_date": null,
+            "listCreators": ["admin"],
+            "location": null,
+            "meta_type": "Dexterity Container",
+            "mime_type": "text/plain",
+            "modified": "2020-08-19T10:08:46+00:00",
+            "portal_type": "Folder",
+            "review_state": "published",
+            "start": null,
+            "sync_uid": null,
+            "title": "Notizie",
+            "total_comments": 0
+          }
+        ],
+        "blocks_layout": { "items": ["f6525a16-53bf-41e4-b0d7-c411df528e69"] },
+        "blocks": {
+          "f6525a16-53bf-41e4-b0d7-c411df528e69": { "@type": "text" }
+        }
+      },
+      {
+        "title": "Come fare per",
+        "visible": true,
+        "mode": "dropdown",
+        "linkUrl": [],
+        "blocks_layout": {
+          "items": [
+            "79a791e7-b836-4f3a-a021-08f8e57447c7",
+            "9aa61152-3148-4330-891d-668b587859d2",
+            "e7d8215d-70f1-4bbc-9c24-72c085919670"
+          ]
+        },
+        "blocks": {
+          "79a791e7-b836-4f3a-a021-08f8e57447c7": {
+            "@type": "text",
+            "text": {
+              "blocks": [
+                {
+                  "key": "fe84d",
+                  "text": "Proin sodales lobortis libero eu facilisis. Proin sodales lobortis libero eu facilisis.",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {}
+            }
+          },
+          "9aa61152-3148-4330-891d-668b587859d2": { "@type": "listing" },
+          "e7d8215d-70f1-4bbc-9c24-72c085919670": { "@type": "text" }
+        },
+        "navigationRoot": [
+          {
+            "@id": "/events",
+            "@type": "Folder",
+            "CreationDate": "2020-08-19T12:08:46+02:00",
+            "Creator": "admin",
+            "Date": "2020-08-19T12:08:46+02:00",
+            "Description": "Eventi del sito",
+            "EffectiveDate": "None",
+            "ExpirationDate": "None",
+            "ModificationDate": "2020-08-19T12:08:46+02:00",
+            "Subject": [],
+            "Title": "Eventi",
+            "Type": "Cartella",
+            "UID": "915c8d9663f44297927f0f421bf6a381",
+            "author_name": null,
+            "cmf_uid": null,
+            "commentators": [],
+            "created": "2020-08-19T10:08:46+00:00",
+            "description": "Eventi del sito",
+            "effective": "1969-12-30T22:00:00+00:00",
+            "end": null,
+            "exclude_from_nav": false,
+            "expires": "2499-12-30T22:00:00+00:00",
+            "getIcon": null,
+            "getId": "events",
+            "getObjSize": "0 KB",
+            "getPath": "/Plone/events",
+            "getRemoteUrl": null,
+            "getURL": "http://localhost:3000/api/events",
+            "id": "events",
+            "in_response_to": null,
+            "is_folderish": true,
+            "last_comment_date": null,
+            "listCreators": ["admin"],
+            "location": null,
+            "meta_type": "Dexterity Container",
+            "mime_type": "text/plain",
+            "modified": "2020-08-19T10:08:46+00:00",
+            "portal_type": "Folder",
+            "review_state": "published",
+            "start": null,
+            "sync_uid": null,
+            "title": "Eventi",
+            "total_comments": 0
+          }
+        ],
+        "showMoreLink": [
+          {
+            "@id": "/events",
+            "@type": "Folder",
+            "CreationDate": "2020-08-19T12:08:46+02:00",
+            "Creator": "admin",
+            "Date": "2020-08-19T12:08:46+02:00",
+            "Description": "Eventi del sito",
+            "EffectiveDate": "None",
+            "ExpirationDate": "None",
+            "ModificationDate": "2020-08-19T12:08:46+02:00",
+            "Subject": [],
+            "Title": "Eventi",
+            "Type": "Cartella",
+            "UID": "915c8d9663f44297927f0f421bf6a381",
+            "author_name": null,
+            "cmf_uid": null,
+            "commentators": [],
+            "created": "2020-08-19T10:08:46+00:00",
+            "description": "Eventi del sito",
+            "effective": "1969-12-30T22:00:00+00:00",
+            "end": null,
+            "exclude_from_nav": false,
+            "expires": "2499-12-30T22:00:00+00:00",
+            "getIcon": null,
+            "getId": "events",
+            "getObjSize": "0 KB",
+            "getPath": "/Plone/events",
+            "getRemoteUrl": null,
+            "getURL": "http://localhost:3000/api/events",
+            "id": "events",
+            "in_response_to": null,
+            "is_folderish": true,
+            "last_comment_date": null,
+            "listCreators": ["admin"],
+            "location": null,
+            "meta_type": "Dexterity Container",
+            "mime_type": "text/plain",
+            "modified": "2020-08-19T10:08:46+00:00",
+            "portal_type": "Folder",
+            "review_state": "published",
+            "start": null,
+            "sync_uid": null,
+            "title": "Eventi",
+            "total_comments": 0
+          }
+        ],
+        "showMoreText": "Tutti gli eventi"
+      }
+    ]
+  },
+  {
+    "rootPath": "/subsite",
+    "items": [
+      { "title": "Link", "visible": true, "mode": "simpleLink", "linkUrl": [] }
+    ]
+  }
+]

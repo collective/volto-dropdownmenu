@@ -1,14 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { defineMessages, useIntl } from 'react-intl';
 import { v4 as uuid } from 'uuid';
 import { isEmpty } from 'lodash';
-import {
-  Form as UIForm,
-  Grid,
-  Accordion,
-  Icon,
-  Button,
-} from 'semantic-ui-react';
+import { Form as UIForm, Grid } from 'semantic-ui-react';
 import {
   Form,
   TextWidget,
@@ -21,18 +15,6 @@ import { Portal } from 'react-portal';
 import { settings } from '~/config';
 
 const messages = defineMessages({
-  root_path: {
-    id: 'dropdownmenu-rootpath',
-    defaultMessage: 'Root path',
-  },
-  addMenuItem: {
-    id: 'dropdownmenu-addmenuitem',
-    defaultMessage: 'Add menu item',
-  },
-  deleteMenuItem: {
-    id: 'dropdownmenu-deletemenuitem',
-    defaultMessage: 'Add menu item',
-  },
   title: {
     id: 'dropdownmenu-title',
     defaultMessage: 'Title',
@@ -79,25 +61,22 @@ const messages = defineMessages({
   },
 });
 
-const MenuConfigurationForm = ({ menu, onChange, defaultMenuItem }) => {
+const MenuConfigurationForm = ({ menuItem, onChange }) => {
   const intl = useIntl();
-  const [activeMenuItem, setActiveMenuItem] = useState(-1);
   const defaultBlockId = uuid();
 
-  (menu.items ?? []).forEach((item) => {
-    if (!item.blocks_layout || isEmpty(item.blocks_layout.items)) {
-      item.blocks_layout = {
-        items: [defaultBlockId],
-      };
-    }
-    if (!item.blocks || isEmpty(item.blocks)) {
-      item.blocks = {
-        [defaultBlockId]: {
-          '@type': settings.defaultBlockType,
-        },
-      };
-    }
-  });
+  if (!menuItem.blocks_layout || isEmpty(menuItem.blocks_layout.items)) {
+    menuItem.blocks_layout = {
+      items: [defaultBlockId],
+    };
+  }
+  if (!menuItem.blocks || isEmpty(menuItem.blocks)) {
+    menuItem.blocks = {
+      [defaultBlockId]: {
+        '@type': settings.defaultBlockType,
+      },
+    };
+  }
 
   const preventClick = (e) => {
     e.preventDefault();
@@ -115,194 +94,120 @@ const MenuConfigurationForm = ({ menu, onChange, defaultMenuItem }) => {
     };
   }, []);
 
-  const onChangeFormData = (idx) => (id, value) => {
-    let menuItems = [...menu.items];
-    menuItems[idx][id] = value;
-
+  const onChangeFormData = (id, value) => {
     console.log('chg menu item');
-    onChange({ ...menu, items: menuItems });
+    onChange({ ...menuItem, [id]: value });
   };
 
-  const onChangeFormBlocks = (idx) => (data) => {
-    let menuItems = [...menu.items];
-    menuItems[idx].blocks = data.blocks;
-    menuItems[idx].blocks_layout = data.blocks_layout;
-
+  const onChangeFormBlocks = (data) => {
     console.log('chg menu item');
-    onChange({ ...menu, items: menuItems });
-  };
-
-  const handleAccordionTitleClick = (e, titleProps) => {
-    const { index } = titleProps;
-    const newIndex = activeMenuItem === index ? -1 : index;
-
-    setActiveMenuItem(newIndex);
-  };
-
-  const addMenuItem = (e) => {
-    e.preventDefault();
-    console.log('add menu item');
     onChange({
-      ...menu,
-      items: [...menu.items, defaultMenuItem(`New ${menu.items.length}`)],
-    });
-  };
-
-  const deleteMenuItem = (e, index) => {
-    e.preventDefault();
-    console.log('remove menu item');
-
-    let newMenuItems = [...menu.items];
-    newMenuItems.splice(index, 1);
-    onChange({
-      ...menu,
-      items: newMenuItems,
+      ...menuItem,
+      blocks: data.blocks,
+      blocks_layout: data.blocks_layout,
     });
   };
 
   return (
     <>
       <TextWidget
-        id="rootPath"
-        title={intl.formatMessage(messages.root_path)}
+        id="title"
+        title={intl.formatMessage(messages.title)}
         description=""
         required={true}
-        value={menu.rootPath}
-        onChange={(id, value) => {
-          onChange({
-            ...menu,
-            rootPath: value?.length ? value : '/',
-          });
-        }}
+        value={menuItem.title}
+        onChange={onChangeFormData}
       />
-      <div>
-        {menu.items?.map((menuItem, idx) => (
-          <React.Fragment key={idx}>
-            <div
-              active={activeMenuItem === idx}
-              index={idx}
-              onClick={handleAccordionTitleClick}
-            >
-              <Icon name="dropdown" />
-              {menuItem.title}
-              <Button
-                icon="trash"
-                title={intl.formatMessage(messages.deleteMenuItem)}
-                onClick={(e) => deleteMenuItem(e, idx)}
-              />
-            </div>
-            <div active={activeMenuItem === idx}>
-              <>
-                <TextWidget
-                  id="title"
-                  title={intl.formatMessage(messages.title)}
-                  description=""
-                  required={true}
-                  value={menuItem.title}
-                  onChange={onChangeFormData(idx)}
-                />
-                <CheckboxWidget
-                  id="visible"
-                  title={intl.formatMessage(messages.visible)}
-                  description=""
-                  required={true}
-                  defaultValue={true}
-                  value={!!menuItem.visible}
-                  onChange={onChangeFormData(idx)}
-                />
-                <SelectWidget
-                  id="mode"
-                  title={intl.formatMessage(messages.mode)}
-                  description=""
-                  required={true}
-                  value={menuItem.mode ? menuItem.mode : 'simpleLink'}
-                  choices={[
-                    ['simpleLink', intl.formatMessage(messages.modeSimpleLink)],
-                    ['dropdown', intl.formatMessage(messages.modeDropdown)],
-                  ]}
-                  onChange={onChangeFormData(idx)}
-                />
-                {menuItem.mode === 'simpleLink' && (
-                  <ObjectBrowserWidget
-                    id="linkUrl"
-                    title={intl.formatMessage(messages.linkUrl)}
-                    description=""
-                    required={true}
-                    mode="link"
-                    value={menuItem.linkUrl ?? []}
-                    onChange={onChangeFormData(idx)}
-                  />
-                )}
-                {menuItem.mode === 'dropdown' && (
-                  <React.Fragment>
-                    <ObjectBrowserWidget
-                      id="navigationRoot"
-                      title={intl.formatMessage(messages.navigationRoot)}
-                      description=""
-                      required={true}
-                      value={menuItem.navigationRoot ?? []}
-                      onChange={onChangeFormData(idx)}
+      <CheckboxWidget
+        id="visible"
+        title={intl.formatMessage(messages.visible)}
+        description=""
+        required={false}
+        defaultValue={true}
+        value={!!menuItem.visible}
+        onChange={onChangeFormData}
+      />
+      <SelectWidget
+        id="mode"
+        title={intl.formatMessage(messages.mode)}
+        description=""
+        required={true}
+        value={menuItem.mode ? menuItem.mode : 'simpleLink'}
+        choices={[
+          ['simpleLink', intl.formatMessage(messages.modeSimpleLink)],
+          ['dropdown', intl.formatMessage(messages.modeDropdown)],
+        ]}
+        onChange={onChangeFormData}
+      />
+      {menuItem.mode === 'simpleLink' && (
+        <ObjectBrowserWidget
+          id="linkUrl"
+          title={intl.formatMessage(messages.linkUrl)}
+          description=""
+          required={true}
+          mode="link"
+          value={menuItem.linkUrl ?? []}
+          onChange={onChangeFormData}
+        />
+      )}
+      {menuItem.mode === 'dropdown' && (
+        <React.Fragment>
+          <ObjectBrowserWidget
+            id="navigationRoot"
+            title={intl.formatMessage(messages.navigationRoot)}
+            description=""
+            required={true}
+            value={menuItem.navigationRoot ?? []}
+            onChange={onChangeFormData}
+          />
+          <ObjectBrowserWidget
+            id="showMoreLink"
+            title={intl.formatMessage(messages.showMoreLink)}
+            description=""
+            required={false}
+            mode="link"
+            value={menuItem.showMoreLink ?? []}
+            onChange={onChangeFormData}
+          />
+          <TextWidget
+            id="showMoreText"
+            title={intl.formatMessage(messages.showMoreText)}
+            description=""
+            required={false}
+            value={menuItem.showMoreText}
+            onChange={onChangeFormData}
+          />
+          <UIForm.Field inline className="help wide" id="menu-blocks">
+            <Grid>
+              <Grid.Row stretched>
+                <Grid.Column width={12}>
+                  <div className="wrapper">
+                    <p className="help">
+                      {intl.formatMessage(messages.blocks_description)}
+                    </p>
+                  </div>
+                </Grid.Column>
+              </Grid.Row>
+              <Grid.Row stretched>
+                <Grid.Column width={12}>
+                  <div className="menu-blocks-container">
+                    <Form
+                      formData={menuItem}
+                      visual={true}
+                      hideActions
+                      onChangeFormData={onChangeFormBlocks}
                     />
-                    <ObjectBrowserWidget
-                      id="showMoreLink"
-                      title={intl.formatMessage(messages.showMoreLink)}
-                      description=""
-                      required={false}
-                      mode="link"
-                      value={menuItem.showMoreLink ?? []}
-                      onChange={onChangeFormData(idx)}
-                    />
-                    <TextWidget
-                      id="showMoreText"
-                      title={intl.formatMessage(messages.showMoreText)}
-                      description=""
-                      required={false}
-                      value={menuItem.showMoreText}
-                      onChange={onChangeFormData(idx)}
-                    />
-                    <UIForm.Field inline className="help wide" id="menu-blocks">
-                      <Grid>
-                        <Grid.Row stretched>
-                          <Grid.Column width={12}>
-                            <div className="wrapper">
-                              <p className="help">
-                                {intl.formatMessage(
-                                  messages.blocks_description,
-                                )}
-                              </p>
-                            </div>
-                          </Grid.Column>
-                        </Grid.Row>
-                        <Grid.Row stretched>
-                          <Grid.Column width={12}>
-                            <div className="menu-blocks-container">
-                              <Form
-                                formData={menuItem}
-                                visual={true}
-                                hideActions
-                                onChangeFormData={onChangeFormBlocks(idx)}
-                              />
-                            </div>
+                  </div>
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+          </UIForm.Field>
+        </React.Fragment>
+      )}
 
-                            <Portal node={document.getElementById('sidebar')}>
-                              <Sidebar />
-                            </Portal>
-                          </Grid.Column>
-                        </Grid.Row>
-                      </Grid>
-                    </UIForm.Field>
-                  </React.Fragment>
-                )}
-              </>
-            </div>
-          </React.Fragment>
-        ))}
-      </div>
-      <Button
-        icon="plus"
-        title={intl.formatMessage(messages.addMenuItem)}
-        onClick={addMenuItem}
-      />
+      <Portal node={document.getElementById('sidebar')}>
+        <Sidebar />
+      </Portal>
     </>
   );
 };

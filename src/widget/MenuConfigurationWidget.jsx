@@ -1,76 +1,39 @@
 import React, { useState } from 'react';
 import { defineMessages, useIntl } from 'react-intl';
-import { Tab, Grid, Form, Button } from 'semantic-ui-react';
+import { Icon, Grid, Menu, Form, Button, Segment } from 'semantic-ui-react';
+import { TextWidget } from '@plone/volto/components';
+
 import MenuConfigurationForm from './MenuConfigurationForm';
 import './menu_configuration.css';
 
-/* Types definition
-
-interface IMenuItemConfiguration {
-  title: string;
-  visible: boolean;
-  mode: 'simpleLink' | 'dropdown';
-  linkUrl?: string | null;
-  navigationRoot?: string | null;
-  showMoreText?: string | null;
-  blocks?: object | null;
-  blocksLayout?: object | null;
-}
-
-interface IMenuConfiguration {
-  [id: string]: Array<IMenuItemConfiguration>;
-}
-
-*/
-const exampleMenuConfiguration = [
-  {
-    rootPath: '/',
-    items: [
-      {
-        title: 'Lorem ipsum',
-        visible: true,
-        mode: 'dropdown',
-        navigationRoot: '/',
-        showMoreLink: '/stuff',
-        showMoreText: 'Show more',
-        blocks: {},
-        blocksLayout: { items: [] },
-      },
-      {
-        title: 'Dolor sit amet',
-        visible: true,
-        mode: 'simpleLink',
-        linkUrl: '/it/dolor-sit-amet',
-      },
-    ],
-  },
-  {
-    rootPath: '/it/subsite',
-    items: [
-      {
-        title: 'Lorem ipsum dolor',
-        visible: true,
-        mode: 'dropdown',
-        navigationRoot: '/',
-        showMoreLink: '/it/subsite',
-        showMoreText: 'Show more',
-        blocks: {},
-        blocksLayout: { items: [] },
-      },
-      {
-        title: 'Dolor sit',
-        visible: true,
-        mode: 'simpleLink',
-        linkUrl: '/it/dolor-sit-amet',
-      },
-    ],
-  },
-];
-
 const messages = defineMessages({
+  addMenuPath: {
+    id: 'dropdownmenu-add-rootpath',
+    defaultMessage: 'Add menu path',
+  },
   deleteMenuPath: {
     id: 'dropdownmenu-delete-menupath',
     defaultMessage: 'Delete menu path',
+  },
+  root_path: {
+    id: 'dropdownmenu-rootpath',
+    defaultMessage: 'Root path',
+  },
+  addMenuItem: {
+    id: 'dropdownmenu-addmenuitem',
+    defaultMessage: 'Add menu item',
+  },
+  deleteMenuItem: {
+    id: 'dropdownmenu-deletemenuitem',
+    defaultMessage: 'Add menu item',
+  },
+  emptyActiveMenuPath: {
+    id: 'dropdownmenu-emptyActiveMenuPath',
+    defaultMessage: 'Select a menu path',
+  },
+  emptyActiveMenuItem: {
+    id: 'dropdownmenu-emptyActiveMenuItem',
+    defaultMessage: 'Select a menu item',
   },
 });
 
@@ -100,87 +63,80 @@ const MenuConfigurationWidget = ({
     ? JSON.parse(value)
     : defaultMenuConfiguration;
   const intl = useIntl();
-  const [activeRootTab, setActiveRootTab] = useState(0);
+  const [activeMenu, setActiveMenu] = useState(0);
+  const [activeMenuItem, setActiveMenuItem] = useState(0);
 
   const handleChangeConfiguration = (value) => {
     console.dir(value);
     onChange(id, JSON.stringify(value));
   };
 
-  const RootPane = React.memo(({ menu, index = -1 }) => (
-    <Tab.Pane>
-      <MenuConfigurationForm
-        menu={menu}
-        onChange={onChangeMenu(index)}
-        defaultMenuItem={defaultMenuItem}
-      />
-    </Tab.Pane>
-  ));
-
-  const newRootPane = {
-    menuItem: '+',
-    render: () => <RootPane menu={defaultRootMenu('New')} />,
-  };
-
-  const rootPanes = [
-    ...menuConfiguration.map((menu, index) => ({
-      menuItem: {
-        key: index,
-        content: (
-          <div className="dropdownmenu-menuItem">
-            <span>{menu.rootPath}</span>
-            <Button
-              icon="trash"
-              title={intl.formatMessage(messages.deleteMenuPath)}
-              onClick={(e) => deleteRootTab(e, index)}
-            />
-          </div>
-        ),
-      },
-      render: () => <RootPane menu={menu} index={index} />,
-    })),
-    newRootPane,
-  ];
-
-  const addRootTab = () => {
-    const index = rootPanes.length - 1;
-    const menuItem = `/tab${index + 1}`;
+  const addMenuPath = (e) => {
+    e.preventDefault();
+    const menuItemsNumber = menuConfiguration.length;
+    const menuItem = `/tab${menuItemsNumber}`;
     let newMenuConfiguration = [
       ...menuConfiguration,
-      { ...defaultRootMenu(`Tab ${index + 1}`), rootPath: menuItem },
+      { ...defaultRootMenu(`Tab ${menuItemsNumber}`), rootPath: menuItem },
     ];
 
     console.log('add tab');
     handleChangeConfiguration(newMenuConfiguration);
+    setActiveMenu(newMenuConfiguration.length - 1);
   };
 
-  const deleteRootTab = (e, index) => {
+  const deleteMenuPath = (e, index) => {
     e.preventDefault();
     let newMenuConfiguration = [...menuConfiguration];
     newMenuConfiguration.splice(index, 1);
 
-    if (activeRootTab === index) {
-      setActiveRootTab(index > 0 ? index - 1 : 0);
+    if (activeMenu === index) {
+      setTimeout(() => setActiveMenu(index > 0 ? index - 1 : 0), 0);
     }
-    setActiveRootTab(-1);
 
     console.log('del tab');
     handleChangeConfiguration(newMenuConfiguration);
   };
 
-  const onRootTabChange = (e, data) => {
-    if (data.activeIndex === data.panes.length - 1) {
-      addRootTab();
+  const deleteMenuItem = (e, pathIndex, index) => {
+    e.preventDefault();
+    let newMenuConfiguration = [...menuConfiguration];
+    newMenuConfiguration[pathIndex].items.splice(index, 1);
+
+    if (activeMenuItem === index) {
+      setTimeout(() => setActiveMenuItem(index > 0 ? index - 1 : 0), 0);
     }
 
-    setActiveRootTab(data.activeIndex);
+    console.log('del menu item', pathIndex, index);
+    handleChangeConfiguration(newMenuConfiguration);
   };
 
-  const onChangeMenu = (index) => (menu) => {
+  const addMenuItem = (e, pathIndex) => {
+    e.preventDefault();
+    let newMenuConfiguration = [...menuConfiguration];
+    newMenuConfiguration[pathIndex].items = [
+      ...newMenuConfiguration[pathIndex].items,
+      defaultMenuItem(`New ${newMenuConfiguration[pathIndex].items.length}`),
+    ];
+
+    console.log('add menu item', pathIndex);
+    setActiveMenuItem(newMenuConfiguration[pathIndex].items.length - 1);
+    handleChangeConfiguration(newMenuConfiguration);
+  };
+
+  const onChangeMenuPath = (index, menu) => {
     let newMenuConfiguration = [...menuConfiguration];
     newMenuConfiguration[index] = menu;
 
-    console.log('menu chg');
+    console.log('menu chg', index);
+    handleChangeConfiguration(newMenuConfiguration);
+  };
+
+  const onChangeMenuItem = (pathIndex, menuItemIndex, menuItem) => {
+    let newMenuConfiguration = [...menuConfiguration];
+    newMenuConfiguration[pathIndex].items[menuItemIndex] = menuItem;
+
+    console.log('menu item chg', pathIndex, menuItemIndex);
     handleChangeConfiguration(newMenuConfiguration);
   };
 
@@ -196,18 +152,125 @@ const MenuConfigurationWidget = ({
             </Grid.Column>
             <Grid.Column width="12" className="menu-configuration-widget">
               <div id="menu-configuration">
-                <Tab
-                  menu={{
-                    fluid: true,
-                    vertical: true,
-                    tabular: true,
-                  }}
-                  panes={rootPanes}
-                  grid={{ paneWidth: 9, tabWidth: 3 }}
-                  activeIndex={activeRootTab}
-                  onTabChange={onRootTabChange}
-                />
-
+                <Menu pointing secondary>
+                  {menuConfiguration.map((menu, idx) => (
+                    <Menu.Item
+                      key={`menu-path-${idx}`}
+                      name={menu.rootPath}
+                      active={activeMenu === idx}
+                      onClick={() => {
+                        setActiveMenu(idx);
+                        setActiveMenuItem(0);
+                      }}
+                    >
+                      <span
+                        style={{
+                          display: 'inline-block',
+                          minWidth: '3em',
+                          paddingRight: '0.5em',
+                        }}
+                      >
+                        {menu.rootPath}
+                      </span>
+                      <Button
+                        icon="trash"
+                        title={intl.formatMessage(messages.deleteMenuPath)}
+                        onClick={(e) => deleteMenuPath(e, idx)}
+                      />
+                    </Menu.Item>
+                  ))}
+                  <Menu.Item
+                    active={false}
+                    name={intl.formatMessage(messages.addMenuPath)}
+                    onClick={addMenuPath}
+                  >
+                    <Icon name="plus" />
+                  </Menu.Item>
+                </Menu>
+                <Segment>
+                  {activeMenu > -1 && activeMenu < menuConfiguration.length ? (
+                    <Grid>
+                      <Grid.Column width={12}>
+                        <TextWidget
+                          id="rootPath"
+                          title={intl.formatMessage(messages.root_path)}
+                          description=""
+                          required={true}
+                          value={menuConfiguration[activeMenu].rootPath}
+                          onChange={(id, value) => {
+                            onChangeMenuPath(activeMenu, {
+                              ...menuConfiguration[activeMenu],
+                              rootPath: value?.length ? value : '/',
+                            });
+                          }}
+                        />
+                      </Grid.Column>
+                      <Grid.Column width={3}>
+                        <Menu fluid vertical tabular>
+                          {menuConfiguration[activeMenu].items?.map(
+                            (menuItem, idx) => (
+                              <Menu.Item
+                                key={`menu-item-${idx}`}
+                                name={menuItem.title}
+                                active={activeMenuItem === idx}
+                                onClick={() => setActiveMenuItem(idx)}
+                              >
+                                <span
+                                  style={{
+                                    display: 'inline-block',
+                                    minWidth: '3em',
+                                    paddingRight: '0.5em',
+                                  }}
+                                >
+                                  {menuItem.title}
+                                </span>
+                                <Button
+                                  icon="trash"
+                                  title={intl.formatMessage(
+                                    messages.deleteMenuItem,
+                                  )}
+                                  onClick={(e) =>
+                                    deleteMenuItem(e, activeMenu, idx)
+                                  }
+                                />
+                              </Menu.Item>
+                            ),
+                          )}
+                          <Menu.Item
+                            name={intl.formatMessage(messages.addMenuItem)}
+                            onClick={(e) => addMenuItem(e, activeMenu)}
+                          >
+                            <Icon name="plus" />
+                          </Menu.Item>
+                        </Menu>
+                      </Grid.Column>
+                      <Grid.Column stretched width={9}>
+                        {activeMenuItem > -1 &&
+                        activeMenuItem <
+                          menuConfiguration[activeMenu].items?.length ? (
+                          <MenuConfigurationForm
+                            menuItem={
+                              menuConfiguration[activeMenu].items[
+                                activeMenuItem
+                              ]
+                            }
+                            onChange={(menu) =>
+                              onChangeMenuItem(activeMenu, activeMenuItem, menu)
+                            }
+                          />
+                        ) : (
+                          <span>
+                            {intl.formatMessage(messages.emptyActiveMenuItem)}
+                          </span>
+                        )}
+                      </Grid.Column>
+                    </Grid>
+                  ) : (
+                    <span>
+                      {intl.formatMessage(messages.emptyActiveMenuPath)}
+                    </span>
+                  )}
+                </Segment>
                 <textarea
                   value={JSON.stringify(menuConfiguration)}
                   onChange={(e) => {
@@ -230,4 +293,4 @@ const MenuConfigurationWidget = ({
   );
 };
 
-export default MenuConfigurationWidget;
+export default React.memo(MenuConfigurationWidget);
