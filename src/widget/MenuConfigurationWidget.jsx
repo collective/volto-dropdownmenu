@@ -7,6 +7,10 @@ import MenuConfigurationForm from './MenuConfigurationForm';
 import './menu_configuration.css';
 
 const messages = defineMessages({
+  menuItemsHeader: {
+    id: 'dropdownmenu-menuitems-header',
+    defaultMessage: 'Menu items',
+  },
   addMenuPath: {
     id: 'dropdownmenu-add-rootpath',
     defaultMessage: 'Add menu path',
@@ -207,6 +211,9 @@ const MenuConfigurationWidget = ({
                       </Grid.Column>
                       <Grid.Column width={3}>
                         <Menu fluid vertical tabular>
+                          <Menu.Header>
+                            {intl.formatMessage(messages.menuItemsHeader)}
+                          </Menu.Header>
                           {menuConfiguration[activeMenu].items?.map(
                             (menuItem, idx) => (
                               <Menu.Item
@@ -271,12 +278,6 @@ const MenuConfigurationWidget = ({
                     </span>
                   )}
                 </Segment>
-                <textarea
-                  value={JSON.stringify(menuConfiguration)}
-                  onChange={(e) => {
-                    handleChangeConfiguration(JSON.parse(e.target.value));
-                  }}
-                />
               </div>
             </Grid.Column>
           </Grid.Row>
