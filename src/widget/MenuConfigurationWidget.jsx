@@ -256,6 +256,7 @@ const MenuConfigurationWidget = ({
                         activeMenuItem <
                           menuConfiguration[activeMenu].items?.length ? (
                           <MenuConfigurationForm
+                            id={`${activeMenu}-${activeMenuItem}`}
                             menuItem={
                               menuConfiguration[activeMenu].items[
                                 activeMenuItem

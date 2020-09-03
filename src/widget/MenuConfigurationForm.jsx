@@ -7,10 +7,10 @@ import {
   Form,
   TextWidget,
   CheckboxWidget,
-  SelectWidget,
   ObjectBrowserWidget,
   Sidebar,
 } from '@plone/volto/components';
+import RadioWidget from './RadioWidget';
 import { Portal } from 'react-portal';
 import { settings } from '~/config';
 
@@ -61,7 +61,7 @@ const messages = defineMessages({
   },
 });
 
-const MenuConfigurationForm = ({ menuItem, onChange }) => {
+const MenuConfigurationForm = ({ id, menuItem, onChange }) => {
   const intl = useIntl();
   const defaultBlockId = uuid();
 
@@ -95,7 +95,7 @@ const MenuConfigurationForm = ({ menuItem, onChange }) => {
   }, []);
 
   const onChangeFormData = (id, value) => {
-    console.log('chg menu item');
+    console.log('chg menu item', id, value);
     onChange({ ...menuItem, [id]: value });
   };
 
@@ -111,71 +111,77 @@ const MenuConfigurationForm = ({ menuItem, onChange }) => {
   return (
     <>
       <TextWidget
-        id="title"
+        id={`${id}-title`}
         title={intl.formatMessage(messages.title)}
         description=""
         required={true}
         value={menuItem.title}
-        onChange={onChangeFormData}
+        onChange={(id, value) => onChangeFormData('title', value)}
       />
       <CheckboxWidget
-        id="visible"
+        id={`${id}-visible`}
         title={intl.formatMessage(messages.visible)}
         description=""
         required={false}
         defaultValue={true}
         value={!!menuItem.visible}
-        onChange={onChangeFormData}
+        onChange={(id, value) => onChangeFormData('visible', value)}
       />
-      <SelectWidget
-        id="mode"
+      <RadioWidget
+        id={`${id}-mode`}
         title={intl.formatMessage(messages.mode)}
         description=""
         required={true}
-        value={menuItem.mode ? menuItem.mode : 'simpleLink'}
-        choices={[
-          ['simpleLink', intl.formatMessage(messages.modeSimpleLink)],
-          ['dropdown', intl.formatMessage(messages.modeDropdown)],
+        value={menuItem.mode}
+        onChange={(id, value) => onChangeFormData('mode', value)}
+        valueList={[
+          {
+            value: 'simpleLink',
+            label: intl.formatMessage(messages.modeSimpleLink),
+          },
+          {
+            value: 'dropdown',
+            label: intl.formatMessage(messages.modeDropdown),
+          },
         ]}
-        onChange={onChangeFormData}
       />
       {menuItem.mode === 'simpleLink' && (
         <ObjectBrowserWidget
-          id="linkUrl"
+          id={`${id}-linkUrl`}
           title={intl.formatMessage(messages.linkUrl)}
           description=""
           required={true}
           mode="link"
           value={menuItem.linkUrl ?? []}
-          onChange={onChangeFormData}
+          onChange={(id, value) => onChangeFormData('linkUrl', value)}
         />
       )}
       {menuItem.mode === 'dropdown' && (
         <React.Fragment>
           <ObjectBrowserWidget
-            id="navigationRoot"
+            id={`${id}-navigationRoot`}
             title={intl.formatMessage(messages.navigationRoot)}
             description=""
             required={true}
             value={menuItem.navigationRoot ?? []}
-            onChange={onChangeFormData}
+            onChange={(id, value) => onChangeFormData('navigationRoot', value)}
           />
           <ObjectBrowserWidget
-            id="showMoreLink"
+            id={`${id}-showMoreLink`}
             title={intl.formatMessage(messages.showMoreLink)}
             description=""
             required={false}
             mode="link"
             value={menuItem.showMoreLink ?? []}
-            onChange={onChangeFormData}
+            onChange={(id, value) => onChangeFormData('showMoreLink', value)}
           />
           <TextWidget
-            id="showMoreText"
+            id={`${id}-showMoreText`}
             title={intl.formatMessage(messages.showMoreText)}
             description=""
             required={false}
             value={menuItem.showMoreText}
-            onChange={onChangeFormData}
+            onChange={(id, value) => onChangeFormData('showMoreText', value)}
           />
           <UIForm.Field inline className="help wide" id="menu-blocks">
             <Grid>
