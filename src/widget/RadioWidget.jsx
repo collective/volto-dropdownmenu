@@ -38,7 +38,7 @@ const RadioWidget = ({
               checked={opt.value === value}
               onChange={(e) => onChange(id, e.target.value)}
             />
-            <label for={id + opt.value}>{opt.label}</label>
+            <label htmlFor={id + opt.value}>{opt.label}</label>
           </div>
         ))}
       </div>

@@ -14,3 +14,19 @@
 #menu-configuration {
   margin: 1em 0;
 }
+
+.menu-configuration-widget .ui.menu.menu-path-menu .item button.mini {
+  font-size: 0.78571429rem;
+}
+
+.menu-configuration-widget .ui.menu.menu-items-menu h2 {
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+  font-size: 1em;
+}
+
+.menu-configuration-widget .ui.menu.menu-items-menu .item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

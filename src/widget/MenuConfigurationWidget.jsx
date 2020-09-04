@@ -156,7 +156,7 @@ const MenuConfigurationWidget = ({
             </Grid.Column>
             <Grid.Column width="12" className="menu-configuration-widget">
               <div id="menu-configuration">
-                <Menu pointing secondary>
+                <Menu pointing secondary className="menu-path-menu">
                   {menuConfiguration.map((menu, idx) => (
                     <Menu.Item
                       key={`menu-path-${idx}`}
@@ -178,6 +178,7 @@ const MenuConfigurationWidget = ({
                       </span>
                       <Button
                         icon="trash"
+                        size="mini"
                         title={intl.formatMessage(messages.deleteMenuPath)}
                         onClick={(e) => deleteMenuPath(e, idx)}
                       />
@@ -210,9 +211,16 @@ const MenuConfigurationWidget = ({
                         />
                       </Grid.Column>
                       <Grid.Column width={3}>
-                        <Menu fluid vertical tabular>
+                        <Menu
+                          fluid
+                          vertical
+                          tabular
+                          className="menu-items-menu"
+                        >
                           <Menu.Header>
-                            {intl.formatMessage(messages.menuItemsHeader)}
+                            <h2>
+                              {intl.formatMessage(messages.menuItemsHeader)}
+                            </h2>
                           </Menu.Header>
                           {menuConfiguration[activeMenu].items?.map(
                             (menuItem, idx) => (
@@ -233,6 +241,7 @@ const MenuConfigurationWidget = ({
                                 </span>
                                 <Button
                                   icon="trash"
+                                  size="mini"
                                   title={intl.formatMessage(
                                     messages.deleteMenuItem,
                                   )}
