@@ -26,3 +26,10 @@ Example configuration [here](./menuConfigurationExample.json).
 - [ ] selectwidget seems to keep the same data over menus
 - [ ] customization for navigation
 - [ ] render menu and dropdown
+
+### Suggestions for controlpanel
+
+- [ ] mark as different rootPath
+- [ ] 3/9 columns for rootPath field
+- [ ] move h2 outside menu
+- [ ] h2 colors
