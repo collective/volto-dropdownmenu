@@ -3,18 +3,18 @@
  * @module components/theme/Navigation/Navigation
  */
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { defineMessages, injectIntl } from 'react-intl';
-import { Menu, Dropdown } from 'semantic-ui-react';
+import { defineMessages, useIntl } from 'react-intl';
+import { Menu, Button, Icon } from 'semantic-ui-react';
 import cx from 'classnames';
-import { getBaseUrl } from '@plone/volto/helpers';
+import OutsideClickHandler from 'react-outside-click-handler';
 import { settings } from '~/config';
 
 import { getControlpanel } from '@plone/volto/actions';
+
+import DropdownMenu from '../../../../components/DropdownMenu';
 
 const messages = defineMessages({
   closeMobileMenu: {
@@ -27,197 +27,151 @@ const messages = defineMessages({
   },
 });
 
-/**
- * Navigation container class.
- * @class Navigation
- * @extends Component
- */
-class Navigation extends Component {
-  /**
-   * Property types.
-   * @property {Object} propTypes Property types.
-   * @static
-   */
-  static propTypes = {
-    getControlpanel: PropTypes.func.isRequired,
-    pathname: PropTypes.string.isRequired,
-    menuConfiguration: PropTypes.arrayOf(PropTypes.object).isRequired,
-    lang: PropTypes.string.isRequired,
-  };
+const Navigation = ({ pathname, type }) => {
+  const intl = useIntl();
+  const { lang } = intl.locale;
+  const dispatch = useDispatch();
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [openDropdownIndex, setOpenDropodownIndex] = useState(-1);
 
-  /**
-   * Constructor
-   * @method constructor
-   * @param {Object} props Component properties
-   * @constructs Navigation
-   */
-  constructor(props) {
-    super(props);
-    this.toggleMobileMenu = this.toggleMobileMenu.bind(this);
-    this.closeMobileMenu = this.closeMobileMenu.bind(this);
-    this.state = {
-      isMobileMenuOpen: false,
-    };
-  }
-
-  /**
-   * Component will mount
-   * @method componentWillMount
-   * @returns {undefined}
-   */
-  UNSAFE_componentWillMount() {
-    // this.props.getNavigation(
-    //   getBaseUrl(this.props.pathname),
-    //   settings.navDepth,
-    // );
-    this.props.getControlpanel('dropdown-menu-settings');
-  }
-
-  /**
-   * Component will receive props
-   * @method componentWillReceiveProps
-   * @param {Object} nextProps Next properties
-   * @returns {undefined}
-   */
-  // UNSAFE_componentWillReceiveProps(nextProps) {
-  //   if (nextProps.pathname !== this.props.pathname) {
-  //     this.props.getNavigation(
-  //       getBaseUrl(nextProps.pathname),
-  //       settings.navDepth,
-  //     );
-  //   }
-  // }
-
-  /**
-   * Toggle mobile menu's open state
-   * @method toggleMobileMenu
-   * @returns {undefined}
-   */
-  toggleMobileMenu() {
-    this.setState({ isMobileMenuOpen: !this.state.isMobileMenuOpen });
-  }
-
-  /**
-   * Close mobile menu
-   * @method closeMobileMenu
-   * @returns {undefined}
-   */
-  closeMobileMenu() {
-    if (!this.state.isMobileMenuOpen) {
-      return;
-    }
-    this.setState({ isMobileMenuOpen: false });
-  }
-
-  /**
-   * Render method.
-   * @method render
-   * @returns {string} Markup for the component.
-   */
-  render() {
-    const { lang, menuConfiguration, pathname } = this.props;
-    const menu =
-      menuConfiguration
-        ?.filter((menu) =>
+  const initMenu = (menu) => {
+    const menuItems =
+      JSON.parse(menu)
+        .filter((menu) =>
           (pathname?.length ? pathname : '/').match(new RegExp(menu.rootPath)),
         )
         .pop()?.items ?? [];
 
-    return (
-      <nav className="navigation">
-        <div className="hamburger-wrapper mobile tablet only">
-          <button
-            className={cx('hamburger hamburger--collapse', {
-              'is-active': this.state.isMobileMenuOpen,
-            })}
-            aria-label={
-              this.state.isMobileMenuOpen
-                ? this.props.intl.formatMessage(messages.closeMobileMenu, {
-                    type: this.props.type,
-                  })
-                : this.props.intl.formatMessage(messages.openMobileMenu, {
-                    type: this.props.type,
-                  })
-            }
-            title={
-              this.state.isMobileMenuOpen
-                ? this.props.intl.formatMessage(messages.closeMobileMenu, {
-                    type: this.props.type,
-                  })
-                : this.props.intl.formatMessage(messages.openMobileMenu, {
-                    type: this.props.type,
-                  })
-            }
-            type="button"
-            onClick={this.toggleMobileMenu}
-          >
-            <span className="hamburger-box">
-              <span className="hamburger-inner" />
-            </span>
-          </button>
-        </div>
-        <Menu
-          stackable
-          pointing
-          secondary
-          className={
-            this.state.isMobileMenuOpen
-              ? 'open'
-              : 'computer large screen widescreen only'
-          }
-          onClick={this.closeMobileMenu}
-        >
-          {menu
-            ?.filter((item) => item.visible)
-            ?.map((item, index) =>
-              item.mode === 'simpleLink' ? (
-                <NavLink
-                  to={
-                    item.linkUrl[0]['@id'] === '' ? '/' : item.linkUrl[0]['@id']
-                  }
-                  key={item.linkUrl[0]['@id'] + index}
-                  className="item"
-                  activeClassName="active"
-                  exact={
-                    settings.isMultilingual
-                      ? item.linkUrl[0]['@id'] === `/${lang}`
-                      : item.linkUrl[0]['@id'] === ''
-                  }
-                >
-                  {item.title}
-                </NavLink>
-              ) : (
-                <Dropdown
-                  item
-                  text={item.title}
-                  key={item.title + index}
-                  icon="dropdown"
-                >
-                  <Dropdown.Menu>
-                    {item.navigationRoot?.map((navRoot) => (
-                      <Dropdown.Item key={navRoot['@id']}>
-                        {navRoot.Title}
-                      </Dropdown.Item>
-                    ))}
-                  </Dropdown.Menu>
-                </Dropdown>
-              ),
-            )}
-        </Menu>
-      </nav>
-    );
-  }
-}
+    return menuItems.reduce((acc, val) => {
+      return val.mode === 'simpleLink'
+        ? [
+            ...acc,
+            {
+              ...val,
+              linkUrl: {
+                ...(val.linkUrl ?? {}),
+                ['@id']: val.linkUrl[0] ? val.linkUrl[0]['@id'] : '/',
+              },
+            },
+          ]
+        : [...acc, val];
+    }, []);
+  };
 
-export default compose(
-  injectIntl,
-  connect(
-    (state) => ({
-      menuConfiguration: JSON.parse(
-        state.controlpanels?.controlpanel?.data?.menu_configuration ?? '[]',
-      ),
-      lang: state.intl.locale,
-    }),
-    { getControlpanel },
-  ),
-)(Navigation);
+  const menu = useSelector((state) =>
+    initMenu(
+      state.controlpanels?.controlpanel?.data?.menu_configuration ?? '[]',
+    ),
+  );
+
+  useEffect(() => {
+    dispatch(getControlpanel('dropdown-menu-settings'));
+  }, [dispatch]);
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+  };
+
+  return (
+    <nav className="navigation navigation-dropdownmenu">
+      <div className="hamburger-wrapper mobile tablet only">
+        <button
+          className={cx('hamburger hamburger--collapse', {
+            'is-active': isMobileMenuOpen,
+          })}
+          aria-label={
+            isMobileMenuOpen
+              ? intl.formatMessage(messages.closeMobileMenu, {
+                  type,
+                })
+              : intl.formatMessage(messages.openMobileMenu, {
+                  type,
+                })
+          }
+          title={
+            isMobileMenuOpen
+              ? intl.formatMessage(messages.closeMobileMenu, {
+                  type,
+                })
+              : intl.formatMessage(messages.openMobileMenu, {
+                  type,
+                })
+          }
+          type="button"
+          onClick={toggleMobileMenu}
+        >
+          <span className="hamburger-box">
+            <span className="hamburger-inner" />
+          </span>
+        </button>
+      </div>
+      <Menu
+        stackable
+        pointing
+        secondary
+        className={
+          isMobileMenuOpen ? 'open' : 'computer large screen widescreen only'
+        }
+        onClick={closeMobileMenu}
+      >
+        {menu?.length > 0
+          ? menu
+              ?.filter((item) => item.visible)
+              ?.map((item, index) =>
+                item.mode === 'simpleLink' ? (
+                  <NavLink
+                    to={
+                      item.linkUrl[0]['@id'] === ''
+                        ? '/'
+                        : item.linkUrl[0]['@id']
+                    }
+                    key={item.linkUrl[0]['@id'] + index}
+                    className="item"
+                    activeClassName="active"
+                    exact={
+                      settings.isMultilingual
+                        ? item.linkUrl[0]['@id'] === `/${lang}`
+                        : item.linkUrl[0]['@id'] === ''
+                    }
+                  >
+                    {item.title}
+                  </NavLink>
+                ) : (
+                  <OutsideClickHandler
+                    onOutsideClick={() => setOpenDropodownIndex(-1)}
+                    key={item.title + index}
+                  >
+                    <Button
+                      className="item"
+                      onClick={() => {
+                        if (openDropdownIndex === index)
+                          setOpenDropodownIndex(-1);
+                        else setOpenDropodownIndex(index);
+                      }}
+                    >
+                      {item.title}
+                      <Icon
+                        name="dropdown"
+                        size="large"
+                        flipped={
+                          openDropdownIndex === index ? 'vertically' : null
+                        }
+                      />
+                    </Button>
+                    {openDropdownIndex === index && (
+                      <DropdownMenu menu={item} />
+                    )}
+                  </OutsideClickHandler>
+                ),
+              )
+          : null}
+      </Menu>
+    </nav>
+  );
+};
+
+export default Navigation;
