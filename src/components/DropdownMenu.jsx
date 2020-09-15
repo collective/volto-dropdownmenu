@@ -83,7 +83,10 @@ const DropdownMenu = ({ menu }) => {
     ))} */}
           <Grid.Column width={3}>
             <h2>
-              <ConditionalLink condition={true} to="/">
+              <ConditionalLink
+                condition={menu.navigationRoot.length > 1}
+                to="/"
+              >
                 News
               </ConditionalLink>
             </h2>
@@ -101,7 +104,10 @@ const DropdownMenu = ({ menu }) => {
           </Grid.Column>
           <Grid.Column width={3}>
             <h2>
-              <ConditionalLink condition={true} to="/">
+              <ConditionalLink
+                condition={menu.navigationRoot.length > 1}
+                to="/"
+              >
                 Events
               </ConditionalLink>
             </h2>

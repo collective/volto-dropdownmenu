@@ -23,9 +23,8 @@ Example configuration [here](./menuConfigurationExample.json).
 - [x] you can't delete the last menu item
 - [ ] sort menu items
 - [x] complete menu item form
-- [ ] selectwidget seems to keep the same data over menus
-- [ ] customization for navigation
-- [ ] render menu and dropdown
+- [x] customization for navigation
+- [x] render menu and dropdown
 
 ### Suggestions for controlpanel
 
