@@ -146,7 +146,9 @@ const Navigation = ({ pathname, type }) => {
                     key={item.title + index}
                   >
                     <Button
-                      className="item"
+                      className={`item dropdownmenu-item${
+                        openDropdownIndex === index ? ' active' : ''
+                      }`}
                       onClick={() => {
                         if (openDropdownIndex === index)
                           setOpenDropodownIndex(-1);

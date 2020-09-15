@@ -3,9 +3,38 @@
 }
 
 .ui.segment.dropdown-menu {
-  position: absolute !important;
+  position: fixed !important;
   z-index: 1;
-  top: 100%;
+  top: 80px;
   left: 0;
+  overflow: hidden;
   width: 100%;
+  max-height: 0;
+  padding: 0;
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  transition: max-height 0.5s ease;
+}
+
+.ui.segment.dropdown-menu.open {
+  max-height: 100%;
+}
+
+.ui.segment.dropdown-menu .dropdown-menu-inner {
+  padding: 1em 1em;
+}
+
+.ui.segment.dropdown-menu .dropdownmenu-footer {
+  padding: 1em;
+  text-align: right;
+}
+
+.ui.menu .ui.button.item.dropdownmenu-item.active,
+.ui.menu .ui.button.item.dropdownmenu-item.active:hover {
+  border-color: #c7d5d8;
+}
+
+.ui.menu .ui.button.item.dropdownmenu-item i.dropdown.icon {
+  margin-left: 0.5rem;
 }
