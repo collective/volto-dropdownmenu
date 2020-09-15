@@ -49,8 +49,11 @@ const Navigation = ({ pathname, type }) => {
             {
               ...val,
               linkUrl: {
-                ...(val.linkUrl ?? {}),
-                ['@id']: val.linkUrl[0] ? val.linkUrl[0]['@id'] : '/',
+                ...(val.linkUrl[0] ?? {}),
+                ['@id']:
+                  val.linkUrl[0]?.['@id']?.length > 0
+                    ? val.linkUrl[0]?.['@id']
+                    : '/',
               },
             },
           ]
@@ -74,6 +77,12 @@ const Navigation = ({ pathname, type }) => {
 
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);
+  };
+
+  const toggleDropdownMenu = (index) => {
+    console.log(openDropdownIndex, index);
+    if (openDropdownIndex === index) setOpenDropodownIndex(-1);
+    else setOpenDropodownIndex(index);
   };
 
   return (
@@ -124,18 +133,14 @@ const Navigation = ({ pathname, type }) => {
               ?.map((item, index) =>
                 item.mode === 'simpleLink' ? (
                   <NavLink
-                    to={
-                      item.linkUrl[0]['@id'] === ''
-                        ? '/'
-                        : item.linkUrl[0]['@id']
-                    }
-                    key={item.linkUrl[0]['@id'] + index}
+                    to={item.linkUrl['@id']}
+                    key={item.linkUrl['@id'] + index}
                     className="item"
                     activeClassName="active"
                     exact={
                       settings.isMultilingual
-                        ? item.linkUrl[0]['@id'] === `/${lang}`
-                        : item.linkUrl[0]['@id'] === ''
+                        ? item.linkUrl['@id'] === `/${lang}`
+                        : item.linkUrl['@id'] === ''
                     }
                   >
                     {item.title}
@@ -149,11 +154,7 @@ const Navigation = ({ pathname, type }) => {
                       className={`item dropdownmenu-item${
                         openDropdownIndex === index ? ' active' : ''
                       }`}
-                      onClick={() => {
-                        if (openDropdownIndex === index)
-                          setOpenDropodownIndex(-1);
-                        else setOpenDropodownIndex(index);
-                      }}
+                      onClick={() => toggleDropdownMenu(index)}
                     >
                       {item.title}
                       <Icon
