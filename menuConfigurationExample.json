@@ -88,7 +88,11 @@
               "entityMap": {}
             }
           },
-          "9aa61152-3148-4330-891d-668b587859d2": { "@type": "listing" },
+          "9aa61152-3148-4330-891d-668b587859d2": {
+            "@type": "listing",
+            "query": [],
+            "block": "9aa61152-3148-4330-891d-668b587859d2"
+          },
           "e7d8215d-70f1-4bbc-9c24-72c085919670": { "@type": "text" }
         },
         "navigationRoot": [
@@ -135,6 +139,51 @@
             "start": null,
             "sync_uid": null,
             "title": "Eventi",
+            "total_comments": 0
+          },
+          {
+            "@id": "/news",
+            "@type": "Folder",
+            "CreationDate": "2020-08-19T12:08:46+02:00",
+            "Creator": "admin",
+            "Date": "2020-08-19T12:08:46+02:00",
+            "Description": "Notizie del sito",
+            "EffectiveDate": "None",
+            "ExpirationDate": "None",
+            "ModificationDate": "2020-08-19T12:08:46+02:00",
+            "Subject": [],
+            "Title": "Notizie",
+            "Type": "Cartella",
+            "UID": "49be87c9a77640329ae4ec2031585cc1",
+            "author_name": null,
+            "cmf_uid": null,
+            "commentators": [],
+            "created": "2020-08-19T10:08:46+00:00",
+            "description": "Notizie del sito",
+            "effective": "1969-12-30T22:00:00+00:00",
+            "end": null,
+            "exclude_from_nav": false,
+            "expires": "2499-12-30T22:00:00+00:00",
+            "getIcon": null,
+            "getId": "news",
+            "getObjSize": "0 KB",
+            "getPath": "/Plone/news",
+            "getRemoteUrl": null,
+            "getURL": "http://localhost:3000/api/news",
+            "id": "news",
+            "in_response_to": null,
+            "is_folderish": true,
+            "last_comment_date": null,
+            "listCreators": ["admin"],
+            "location": null,
+            "meta_type": "Dexterity Container",
+            "mime_type": "text/plain",
+            "modified": "2020-08-19T10:08:46+00:00",
+            "portal_type": "Folder",
+            "review_state": "published",
+            "start": null,
+            "sync_uid": null,
+            "title": "Notizie",
             "total_comments": 0
           }
         ],
@@ -186,13 +235,197 @@
           }
         ],
         "showMoreText": "Tutti gli eventi"
+      },
+      {
+        "visible": true,
+        "mode": "dropdown",
+        "linkUrl": [],
+        "blocks_layout": {
+          "items": [
+            "b9e5b3b8-5c09-4910-9370-c6a1a56be460",
+            "67ae6140-a9fb-4c20-acb4-cbb7ee360640",
+            "24f19d47-80e0-4a3f-bccf-87b86ebee646"
+          ]
+        },
+        "blocks": {
+          "b9e5b3b8-5c09-4910-9370-c6a1a56be460": {
+            "@type": "text",
+            "text": {
+              "blocks": [
+                {
+                  "key": "8h26s",
+                  "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {}
+            }
+          },
+          "67ae6140-a9fb-4c20-acb4-cbb7ee360640": { "@type": "listing" },
+          "24f19d47-80e0-4a3f-bccf-87b86ebee646": { "@type": "text" }
+        },
+        "title": "Il Comune",
+        "navigationRoot": [
+          {
+            "@id": "/news",
+            "@type": "Folder",
+            "CreationDate": "2020-08-19T12:08:46+02:00",
+            "Creator": "admin",
+            "Date": "2020-08-19T12:08:46+02:00",
+            "Description": "Notizie del sito",
+            "EffectiveDate": "None",
+            "ExpirationDate": "None",
+            "ModificationDate": "2020-08-19T12:08:46+02:00",
+            "Subject": [],
+            "Title": "Notizie",
+            "Type": "Cartella",
+            "UID": "49be87c9a77640329ae4ec2031585cc1",
+            "author_name": null,
+            "cmf_uid": null,
+            "commentators": [],
+            "created": "2020-08-19T10:08:46+00:00",
+            "description": "Notizie del sito",
+            "effective": "1969-12-30T22:00:00+00:00",
+            "end": null,
+            "exclude_from_nav": false,
+            "expires": "2499-12-30T22:00:00+00:00",
+            "getIcon": null,
+            "getId": "news",
+            "getObjSize": "0 KB",
+            "getPath": "/Plone/news",
+            "getRemoteUrl": null,
+            "getURL": "http://localhost:3000/api/news",
+            "id": "news",
+            "in_response_to": null,
+            "is_folderish": true,
+            "last_comment_date": null,
+            "listCreators": ["admin"],
+            "location": null,
+            "meta_type": "Dexterity Container",
+            "mime_type": "text/plain",
+            "modified": "2020-08-19T10:08:46+00:00",
+            "portal_type": "Folder",
+            "review_state": "published",
+            "start": null,
+            "sync_uid": null,
+            "title": "Notizie",
+            "total_comments": 0
+          }
+        ],
+        "showMoreLink": [
+          {
+            "@id": "/news",
+            "@type": "Folder",
+            "CreationDate": "2020-08-19T12:08:46+02:00",
+            "Creator": "admin",
+            "Date": "2020-08-19T12:08:46+02:00",
+            "Description": "Notizie del sito",
+            "EffectiveDate": "None",
+            "ExpirationDate": "None",
+            "ModificationDate": "2020-08-19T12:08:46+02:00",
+            "Subject": [],
+            "Title": "Notizie",
+            "Type": "Cartella",
+            "UID": "49be87c9a77640329ae4ec2031585cc1",
+            "author_name": null,
+            "cmf_uid": null,
+            "commentators": [],
+            "created": "2020-08-19T10:08:46+00:00",
+            "description": "Notizie del sito",
+            "effective": "1969-12-30T22:00:00+00:00",
+            "end": null,
+            "exclude_from_nav": false,
+            "expires": "2499-12-30T22:00:00+00:00",
+            "getIcon": null,
+            "getId": "news",
+            "getObjSize": "0 KB",
+            "getPath": "/Plone/news",
+            "getRemoteUrl": null,
+            "getURL": "http://localhost:3000/api/news",
+            "id": "news",
+            "in_response_to": null,
+            "is_folderish": true,
+            "last_comment_date": null,
+            "listCreators": ["admin"],
+            "location": null,
+            "meta_type": "Dexterity Container",
+            "mime_type": "text/plain",
+            "modified": "2020-08-19T10:08:46+00:00",
+            "portal_type": "Folder",
+            "review_state": "published",
+            "start": null,
+            "sync_uid": null,
+            "title": "Notizie",
+            "total_comments": 0
+          }
+        ],
+        "showMoreText": "Tutte le notizie"
       }
     ]
   },
   {
     "rootPath": "/subsite",
     "items": [
-      { "title": "Link", "visible": true, "mode": "simpleLink", "linkUrl": [] }
+      {
+        "title": "Link",
+        "visible": true,
+        "mode": "simpleLink",
+        "linkUrl": [
+          {
+            "@id": "/front-page",
+            "@type": "Document",
+            "CreationDate": "2020-08-19T12:08:46+02:00",
+            "Creator": "admin",
+            "Date": "2020-08-19T12:08:46+02:00",
+            "Description": "Congratulazioni! Hai completato con successo l'installazione di Plone.",
+            "EffectiveDate": "None",
+            "ExpirationDate": "None",
+            "ModificationDate": "2020-08-19T12:08:46+02:00",
+            "Subject": [],
+            "Title": "Benvenuto in Plone",
+            "Type": "Pagina",
+            "UID": "9fb9f886b8744dc7acf817202848bf37",
+            "author_name": null,
+            "cmf_uid": 1,
+            "commentators": [],
+            "created": "2020-08-19T10:08:46+00:00",
+            "description": "Congratulazioni! Hai completato con successo l'installazione di Plone.",
+            "effective": "1969-12-30T22:00:00+00:00",
+            "end": null,
+            "exclude_from_nav": false,
+            "expires": "2499-12-30T22:00:00+00:00",
+            "getIcon": null,
+            "getId": "front-page",
+            "getObjSize": "5.0 KB",
+            "getPath": "/Plone/front-page",
+            "getRemoteUrl": null,
+            "getURL": "http://localhost:3000/api/front-page",
+            "id": "front-page",
+            "in_response_to": null,
+            "is_folderish": false,
+            "last_comment_date": null,
+            "listCreators": ["admin"],
+            "location": null,
+            "meta_type": "Dexterity Item",
+            "mime_type": "text/plain",
+            "modified": "2020-08-19T10:08:46+00:00",
+            "portal_type": "Document",
+            "review_state": "published",
+            "start": null,
+            "sync_uid": null,
+            "title": "Benvenuto in Plone",
+            "total_comments": 0
+          }
+        ],
+        "blocks_layout": { "items": ["51d4c737-39f7-4843-937f-490106746abb"] },
+        "blocks": {
+          "51d4c737-39f7-4843-937f-490106746abb": { "@type": "text" }
+        }
+      }
     ]
   }
 ]
