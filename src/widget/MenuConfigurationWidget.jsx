@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 import { defineMessages, useIntl } from 'react-intl';
-import { Icon, Grid, Menu, Form, Button, Segment } from 'semantic-ui-react';
+import {
+  Icon,
+  Grid,
+  Menu,
+  Form,
+  Button,
+  Segment,
+  Header,
+} from 'semantic-ui-react';
 import { TextWidget } from '@plone/volto/components';
 
 import MenuConfigurationForm from './MenuConfigurationForm';
@@ -63,10 +71,10 @@ const MenuConfigurationWidget = ({
   title,
   description,
 }) => {
-  const menuConfiguration = value
-    ? JSON.parse(value)
-    : defaultMenuConfiguration;
   const intl = useIntl();
+  const [menuConfiguration] = useState(
+    value ? JSON.parse(value) : defaultMenuConfiguration,
+  );
   const [activeMenu, setActiveMenu] = useState(0);
   const [activeMenuItem, setActiveMenuItem] = useState(0);
 
@@ -210,18 +218,16 @@ const MenuConfigurationWidget = ({
                           }}
                         />
                       </Grid.Column>
-                      <Grid.Column width={3}>
+                      <Grid.Column width={4}>
+                        <Header as="h2" className="dropdownmenu-items-header">
+                          {intl.formatMessage(messages.menuItemsHeader)}
+                        </Header>
                         <Menu
                           fluid
                           vertical
                           tabular
                           className="menu-items-menu"
                         >
-                          <Menu.Header>
-                            <h2>
-                              {intl.formatMessage(messages.menuItemsHeader)}
-                            </h2>
-                          </Menu.Header>
                           {menuConfiguration[activeMenu].items?.map(
                             (menuItem, idx) => (
                               <Menu.Item
@@ -230,15 +236,7 @@ const MenuConfigurationWidget = ({
                                 active={activeMenuItem === idx}
                                 onClick={() => setActiveMenuItem(idx)}
                               >
-                                <span
-                                  style={{
-                                    display: 'inline-block',
-                                    minWidth: '3em',
-                                    paddingRight: '0.5em',
-                                  }}
-                                >
-                                  {menuItem.title}
-                                </span>
+                                <span>{menuItem.title}</span>
                                 <Button
                                   icon="trash"
                                   size="mini"
@@ -260,7 +258,7 @@ const MenuConfigurationWidget = ({
                           </Menu.Item>
                         </Menu>
                       </Grid.Column>
-                      <Grid.Column stretched width={9}>
+                      <Grid.Column stretched width={8}>
                         {activeMenuItem > -1 &&
                         activeMenuItem <
                           menuConfiguration[activeMenu].items?.length ? (

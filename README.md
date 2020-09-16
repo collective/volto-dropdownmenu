@@ -18,7 +18,7 @@ Example configuration [here](./menuConfigurationExample.json).
 ## TODO
 
 - [x] when removing last root tab, it goes to the default new one, not editable
-- [ ] issue: you need to reload the page to see the new data when you save
+- [x] issue: you need to reload the page to see the new data when you save
 - [x] delete menu item
 - [x] you can't delete the last menu item
 - [ ] sort menu items
@@ -26,11 +26,4 @@ Example configuration [here](./menuConfigurationExample.json).
 - [x] customization for navigation
 - [x] render menu and dropdown
 - [ ] issue: with multiple dropdown menus, you can't close a menu by clicking on its button, see toggleDropdownMenu
-- [ ] dropdownmenu positioning with sidebar and toolbar
-
-### Suggestions for controlpanel
-
-- [ ] mark as different rootPath
-- [ ] 3/9 columns for rootPath field
-- [ ] move h2 outside menu
-- [ ] h2 colors
+- [x] dropdownmenu positioning with sidebar and toolbar

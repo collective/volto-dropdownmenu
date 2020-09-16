@@ -17,6 +17,36 @@
   transition: max-height 0.5s ease;
 }
 
+body.has-toolbar.has-sidebar .ui.segment.dropdown-menu {
+  left: 80px;
+  width: calc(100% - 375px - 80px);
+}
+
+body.has-toolbar-collapsed.has-sidebar .ui.segment.dropdown-menu {
+  left: 20px;
+  width: calc(100% - 375px - 20px);
+}
+
+body.has-toolbar-collapsed.has-sidebar-collapsed .ui.segment.dropdown-menu {
+  left: 20px;
+  width: calc(100% - 20px - 20px);
+}
+
+body.has-toolbar.has-sidebar-collapsed .ui.segment.dropdown-menu {
+  left: 80px;
+  width: calc(100% - 20px - 80px);
+}
+
+body.has-toolbar:not(.has-sidebar):not(.has-sidebar-collapsed) {
+  left: 80px;
+  width: calc(100% - 80px);
+}
+
+body.has-toolbar-collapsed:not(.has-sidebar):not(.has-sidebar-collapsed) {
+  left: 20px;
+  width: calc(100% - 20px);
+}
+
 .ui.segment.dropdown-menu.open {
   max-height: 100%;
 }
