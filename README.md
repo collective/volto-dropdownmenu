@@ -25,5 +25,6 @@ Example configuration [here](./menuConfigurationExample.json).
 - [x] complete menu item form
 - [x] customization for navigation
 - [x] render menu and dropdown
-- [ ] issue: with multiple dropdown menus, you can't close a menu by clicking on its button, see toggleDropdownMenu
+- [x] issue: with multiple dropdown menus, you can't close a menu by clicking on its button, see toggleDropdownMenu
 - [x] dropdownmenu positioning with sidebar and toolbar
+- [ ] mobile layout and handling (click closes menu)

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { defineMessages, useIntl } from 'react-intl';
 import {
   Icon,
@@ -72,7 +72,7 @@ const MenuConfigurationWidget = ({
   description,
 }) => {
   const intl = useIntl();
-  const [menuConfiguration] = useState(
+  const [menuConfiguration, setMenuConfiguration] = useState(
     value ? JSON.parse(value) : defaultMenuConfiguration,
   );
   const [activeMenu, setActiveMenu] = useState(0);
@@ -80,6 +80,7 @@ const MenuConfigurationWidget = ({
 
   const handleChangeConfiguration = (value) => {
     console.dir(value);
+    setMenuConfiguration(value);
     onChange(id, JSON.stringify(value));
   };
 
@@ -175,15 +176,7 @@ const MenuConfigurationWidget = ({
                         setActiveMenuItem(0);
                       }}
                     >
-                      <span
-                        style={{
-                          display: 'inline-block',
-                          minWidth: '3em',
-                          paddingRight: '0.5em',
-                        }}
-                      >
-                        {menu.rootPath}
-                      </span>
+                      <span>{menu.rootPath}</span>
                       <Button
                         icon="trash"
                         size="mini"
@@ -302,4 +295,4 @@ const MenuConfigurationWidget = ({
   );
 };
 
-export default React.memo(MenuConfigurationWidget);
+export default MenuConfigurationWidget;

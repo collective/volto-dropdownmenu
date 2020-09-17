@@ -60,8 +60,8 @@ body.has-toolbar-collapsed:not(.has-sidebar):not(.has-sidebar-collapsed) {
   text-align: right;
 }
 
-.ui.menu .ui.button.item.dropdownmenu-item.active,
-.ui.menu .ui.button.item.dropdownmenu-item.active:hover {
+.ui.menu .ui.button.item.dropdownmenu-item.active.open,
+.ui.menu .ui.button.item.dropdownmenu-item.active.open:hover {
   border-color: #c7d5d8;
 }
 

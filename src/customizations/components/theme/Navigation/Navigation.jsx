@@ -13,6 +13,7 @@ import OutsideClickHandler from 'react-outside-click-handler';
 import { settings } from '~/config';
 
 import { getControlpanel } from '@plone/volto/actions';
+import { flattenToAppURL } from '@plone/volto/helpers';
 
 import DropdownMenu from '../../../../components/DropdownMenu';
 
@@ -80,9 +81,22 @@ const Navigation = ({ pathname, type }) => {
   };
 
   const toggleDropdownMenu = (index) => {
-    console.log(openDropdownIndex, index);
     if (openDropdownIndex === index) setOpenDropodownIndex(-1);
     else setOpenDropodownIndex(index);
+  };
+
+  const isMenuActive = (item) => {
+    const paths = [...item.navigationRoot];
+    if (item.showMoreLink?.length > 0) {
+      paths.push(item.showMoreLink[0]);
+    }
+
+    return paths.reduce(
+      (acc, path) =>
+        acc ||
+        flattenToAppURL(pathname).indexOf(flattenToAppURL(path['@id'])) > -1,
+      false,
+    );
   };
 
   return (
@@ -118,61 +132,61 @@ const Navigation = ({ pathname, type }) => {
           </span>
         </button>
       </div>
-      <Menu
-        stackable
-        pointing
-        secondary
-        className={
-          isMobileMenuOpen ? 'open' : 'computer large screen widescreen only'
-        }
-        onClick={closeMobileMenu}
-      >
-        {menu?.length > 0
-          ? menu
-              ?.filter((item) => item.visible)
-              ?.map((item, index) =>
-                item.mode === 'simpleLink' ? (
-                  <NavLink
-                    to={item.linkUrl['@id']}
-                    key={item.linkUrl['@id'] + index}
-                    className="item"
-                    activeClassName="active"
-                    exact={
-                      settings.isMultilingual
-                        ? item.linkUrl['@id'] === `/${lang}`
-                        : item.linkUrl['@id'] === ''
-                    }
-                  >
-                    {item.title}
-                  </NavLink>
-                ) : (
-                  <OutsideClickHandler
-                    onOutsideClick={() => setOpenDropodownIndex(-1)}
-                    key={item.title + index}
-                  >
-                    <Button
-                      className={`item dropdownmenu-item${
-                        openDropdownIndex === index ? ' active' : ''
-                      }`}
-                      onClick={() => toggleDropdownMenu(index)}
+      <OutsideClickHandler onOutsideClick={() => setOpenDropodownIndex(-1)}>
+        <Menu
+          stackable
+          pointing
+          secondary
+          className={
+            isMobileMenuOpen ? 'open' : 'computer large screen widescreen only'
+          }
+          onClick={closeMobileMenu}
+        >
+          {menu?.length > 0
+            ? menu
+                ?.filter((item) => item.visible)
+                ?.map((item, index) =>
+                  item.mode === 'simpleLink' ? (
+                    <NavLink
+                      to={item.linkUrl['@id']}
+                      key={item.linkUrl['@id'] + index}
+                      className="item"
+                      activeClassName="active"
+                      exact={
+                        settings.isMultilingual
+                          ? item.linkUrl['@id'] === `/${lang}`
+                          : item.linkUrl['@id'] === ''
+                      }
                     >
                       {item.title}
-                      <Icon
-                        name="dropdown"
-                        size="large"
-                        flipped={
-                          openDropdownIndex === index ? 'vertically' : null
-                        }
-                      />
-                    </Button>
-                    {openDropdownIndex === index && (
-                      <DropdownMenu menu={item} />
-                    )}
-                  </OutsideClickHandler>
-                ),
-              )
-          : null}
-      </Menu>
+                    </NavLink>
+                  ) : (
+                    <React.Fragment>
+                      <Button
+                        className={cx('item', 'dropdownmenu-item', {
+                          'active open': openDropdownIndex === index,
+                          active: isMenuActive(item),
+                        })}
+                        onClick={() => toggleDropdownMenu(index)}
+                      >
+                        {item.title}
+                        <Icon
+                          name="dropdown"
+                          size="large"
+                          flipped={
+                            openDropdownIndex === index ? 'vertically' : null
+                          }
+                        />
+                      </Button>
+                      {openDropdownIndex === index && (
+                        <DropdownMenu menu={item} />
+                      )}
+                    </React.Fragment>
+                  ),
+                )
+            : null}
+        </Menu>
+      </OutsideClickHandler>
     </nav>
   );
 };

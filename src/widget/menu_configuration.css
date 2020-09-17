@@ -36,6 +36,7 @@
   justify-content: space-between;
 }
 
+.menu-configuration-widget .ui.menu.menu-path-menu .item span,
 .menu-configuration-widget .ui.menu.menu-items-menu .item span {
   display: inline-block;
   min-width: 3rem;
