@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { defineMessages, useIntl } from 'react-intl';
 import {
   Icon,
@@ -87,7 +87,6 @@ const MenuConfigurationWidget = ({
   const [activeMenuItem, setActiveMenuItem] = useState(0);
 
   const handleChangeConfiguration = (value) => {
-    console.dir(value);
     setMenuConfiguration(value);
     onChange(id, JSON.stringify(value));
   };
@@ -104,7 +103,6 @@ const MenuConfigurationWidget = ({
       },
     ];
 
-    console.log('add tab');
     handleChangeConfiguration(newMenuConfiguration);
     setActiveMenu(newMenuConfiguration.length - 1);
   };
@@ -118,7 +116,6 @@ const MenuConfigurationWidget = ({
       setTimeout(() => setActiveMenu(index > 0 ? index - 1 : 0), 0);
     }
 
-    console.log('del tab');
     handleChangeConfiguration(newMenuConfiguration);
   };
 
@@ -131,7 +128,6 @@ const MenuConfigurationWidget = ({
       setTimeout(() => setActiveMenuItem(index > 0 ? index - 1 : 0), 0);
     }
 
-    console.log('del menu item', pathIndex, index);
     handleChangeConfiguration(newMenuConfiguration);
   };
 
@@ -143,7 +139,6 @@ const MenuConfigurationWidget = ({
       defaultMenuItem(`New ${newMenuConfiguration[pathIndex].items.length}`),
     ];
 
-    console.log('add menu item', pathIndex);
     setActiveMenuItem(newMenuConfiguration[pathIndex].items.length - 1);
     handleChangeConfiguration(newMenuConfiguration);
   };
@@ -152,7 +147,6 @@ const MenuConfigurationWidget = ({
     let newMenuConfiguration = [...menuConfiguration];
     newMenuConfiguration[index] = menu;
 
-    console.log('menu chg', index);
     handleChangeConfiguration(newMenuConfiguration);
   };
 
@@ -160,7 +154,6 @@ const MenuConfigurationWidget = ({
     let newMenuConfiguration = [...menuConfiguration];
     newMenuConfiguration[pathIndex].items[menuItemIndex] = menuItem;
 
-    console.log('menu item chg', pathIndex, menuItemIndex);
     handleChangeConfiguration(newMenuConfiguration);
   };
 
@@ -177,11 +170,6 @@ const MenuConfigurationWidget = ({
       menuItem,
     );
 
-    console.log(
-      `menu item move ${up ? 'up' : 'down'}`,
-      pathIndex,
-      menuItemIndex,
-    );
     handleChangeConfiguration(newMenuConfiguration);
   };
 

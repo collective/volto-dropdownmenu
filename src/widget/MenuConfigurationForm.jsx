@@ -103,12 +103,10 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
   }, []);
 
   const onChangeFormData = (id, value) => {
-    console.log('chg menu item', id, value);
     onChange({ ...menuItem, [id]: value });
   };
 
   const onChangeFormBlocks = (data) => {
-    console.log('chg menu item');
     onChange({
       ...menuItem,
       blocks: data.blocks,
