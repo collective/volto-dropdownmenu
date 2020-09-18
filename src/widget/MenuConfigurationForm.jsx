@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { defineMessages, useIntl } from 'react-intl';
 import { v4 as uuid } from 'uuid';
 import { isEmpty } from 'lodash';
-import { Form as UIForm, Grid } from 'semantic-ui-react';
+import { Form as UIForm, Grid, Button } from 'semantic-ui-react';
 import {
   Form,
   TextWidget,
@@ -59,9 +59,17 @@ const messages = defineMessages({
     id: 'dropdownmenu-blocks-description',
     defaultMessage: 'Add some blocks to show in dropdown menu.',
   },
+  deleteMenuItem: {
+    id: 'dropdownmenu-deletemenuitem',
+    defaultMessage: 'Delete menu item',
+  },
+  deleteButton: {
+    id: 'dropdownmenu-deletemenuitem-button',
+    defaultMessage: 'Delete',
+  },
 });
 
-const MenuConfigurationForm = ({ id, menuItem, onChange }) => {
+const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
   const intl = useIntl();
   const defaultBlockId = uuid();
 
@@ -210,6 +218,29 @@ const MenuConfigurationForm = ({ id, menuItem, onChange }) => {
           </UIForm.Field>
         </React.Fragment>
       )}
+      <UIForm.Field inline className="delete wide" id="menu-delete">
+        <Grid>
+          <Grid.Row stretched>
+            <Grid.Column width={4}>
+              <div className="wrapper">
+                <label htmlFor="delete-menuitem">
+                  {intl.formatMessage(messages.deleteMenuItem)}
+                </label>
+              </div>
+            </Grid.Column>
+            <Grid.Column width={8}>
+              <Button
+                icon="trash"
+                onClick={deleteMenuItem}
+                id="delete-menuitem"
+                negative
+              >
+                {intl.formatMessage(messages.deleteButton)}
+              </Button>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </UIForm.Field>
 
       <Portal node={document.getElementById('sidebar')}>
         <Sidebar />

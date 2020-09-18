@@ -27,6 +27,10 @@ const messages = defineMessages({
     id: 'dropdownmenu-delete-menupath',
     defaultMessage: 'Delete menu path',
   },
+  deleteButton: {
+    id: 'dropdownmenu-delete-button',
+    defaultMessage: 'Delete',
+  },
   root_path: {
     id: 'dropdownmenu-rootpath',
     defaultMessage: 'Root path',
@@ -35,9 +39,13 @@ const messages = defineMessages({
     id: 'dropdownmenu-addmenuitem',
     defaultMessage: 'Add menu item',
   },
-  deleteMenuItem: {
-    id: 'dropdownmenu-deletemenuitem',
-    defaultMessage: 'Add menu item',
+  moveMenuItemUp: {
+    id: 'dropdownmenu-move-menuitem-up',
+    defaultMessage: 'Move menu item up',
+  },
+  moveMenuItemDown: {
+    id: 'dropdownmenu-move-menuitem-down',
+    defaultMessage: 'Move menu item down',
   },
   emptyActiveMenuPath: {
     id: 'dropdownmenu-emptyActiveMenuPath',
@@ -90,7 +98,10 @@ const MenuConfigurationWidget = ({
     const menuItem = `/tab${menuItemsNumber}`;
     let newMenuConfiguration = [
       ...menuConfiguration,
-      { ...defaultRootMenu(`Tab ${menuItemsNumber}`), rootPath: menuItem },
+      {
+        ...defaultRootMenu(`Tab ${menuItemsNumber}`),
+        rootPath: menuItem,
+      },
     ];
 
     console.log('add tab');
@@ -153,6 +164,27 @@ const MenuConfigurationWidget = ({
     handleChangeConfiguration(newMenuConfiguration);
   };
 
+  const moveMenuItem = (e, pathIndex, menuItemIndex, direction) => {
+    e.preventDefault();
+    const up = direction === 'up';
+    let newMenuConfiguration = [...menuConfiguration];
+
+    let menuItem = newMenuConfiguration[pathIndex].items[menuItemIndex];
+    newMenuConfiguration[pathIndex].items.splice(menuItemIndex, 1);
+    newMenuConfiguration[pathIndex].items.splice(
+      menuItemIndex + (up ? -1 : 1),
+      0,
+      menuItem,
+    );
+
+    console.log(
+      `menu item move ${up ? 'up' : 'down'}`,
+      pathIndex,
+      menuItemIndex,
+    );
+    handleChangeConfiguration(newMenuConfiguration);
+  };
+
   return (
     <div className="menu-configuration-widget">
       <Form.Field inline required={required} id={id}>
@@ -177,12 +209,6 @@ const MenuConfigurationWidget = ({
                       }}
                     >
                       <span>{menu.rootPath}</span>
-                      <Button
-                        icon="trash"
-                        size="mini"
-                        title={intl.formatMessage(messages.deleteMenuPath)}
-                        onClick={(e) => deleteMenuPath(e, idx)}
-                      />
                     </Menu.Item>
                   ))}
                   <Menu.Item
@@ -196,7 +222,10 @@ const MenuConfigurationWidget = ({
                 <Segment>
                   {activeMenu > -1 && activeMenu < menuConfiguration.length ? (
                     <Grid>
-                      <Grid.Column width={12}>
+                      <Grid.Column
+                        width={12}
+                        className="dropdownmenu-rootpath-segment"
+                      >
                         <TextWidget
                           id="rootPath"
                           title={intl.formatMessage(messages.root_path)}
@@ -210,6 +239,35 @@ const MenuConfigurationWidget = ({
                             });
                           }}
                         />
+                        <Form.Field
+                          inline
+                          className="delete wide"
+                          id="menupath-delete"
+                        >
+                          <Grid>
+                            <Grid.Row stretched>
+                              <Grid.Column width={4}>
+                                <div className="wrapper">
+                                  <label htmlFor="delete-menupath">
+                                    {intl.formatMessage(
+                                      messages.deleteMenuPath,
+                                    )}
+                                  </label>
+                                </div>
+                              </Grid.Column>
+                              <Grid.Column width={8}>
+                                <Button
+                                  icon="trash"
+                                  negative
+                                  onClick={(e) => deleteMenuPath(e, activeMenu)}
+                                  id="delete-menupath"
+                                >
+                                  {intl.formatMessage(messages.deleteButton)}
+                                </Button>
+                              </Grid.Column>
+                            </Grid.Row>
+                          </Grid>
+                        </Form.Field>
                       </Grid.Column>
                       <Grid.Column width={4}>
                         <Header as="h2" className="dropdownmenu-items-header">
@@ -229,17 +287,36 @@ const MenuConfigurationWidget = ({
                                 active={activeMenuItem === idx}
                                 onClick={() => setActiveMenuItem(idx)}
                               >
+                                <Button.Group vertical className="move-buttons">
+                                  <Button
+                                    disabled={idx === 0}
+                                    size="tiny"
+                                    icon={<Icon name="arrow left" />}
+                                    title={intl.formatMessage(
+                                      messages.moveMenuItemUp,
+                                    )}
+                                    onClick={(e) =>
+                                      moveMenuItem(e, activeMenu, idx, 'up')
+                                    }
+                                  />
+                                  <Button
+                                    disabled={
+                                      idx ===
+                                      menuConfiguration[activeMenu].items
+                                        .length -
+                                        1
+                                    }
+                                    size="tiny"
+                                    icon={<Icon name="arrow right" />}
+                                    title={intl.formatMessage(
+                                      messages.moveMenuItemDown,
+                                    )}
+                                    onClick={(e) =>
+                                      moveMenuItem(e, activeMenu, idx, 'down')
+                                    }
+                                  />
+                                </Button.Group>
                                 <span>{menuItem.title}</span>
-                                <Button
-                                  icon="trash"
-                                  size="mini"
-                                  title={intl.formatMessage(
-                                    messages.deleteMenuItem,
-                                  )}
-                                  onClick={(e) =>
-                                    deleteMenuItem(e, activeMenu, idx)
-                                  }
-                                />
                               </Menu.Item>
                             ),
                           )}
@@ -264,6 +341,9 @@ const MenuConfigurationWidget = ({
                             }
                             onChange={(menu) =>
                               onChangeMenuItem(activeMenu, activeMenuItem, menu)
+                            }
+                            deleteMenuItem={(e) =>
+                              deleteMenuItem(e, activeMenu, activeMenuItem)
                             }
                           />
                         ) : (

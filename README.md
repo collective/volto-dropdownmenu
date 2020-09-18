@@ -21,7 +21,7 @@ Example configuration [here](./menuConfigurationExample.json).
 - [x] issue: you need to reload the page to see the new data when you save
 - [x] delete menu item
 - [x] you can't delete the last menu item
-- [ ] sort menu items
+- [x] sort menu items
 - [x] complete menu item form
 - [x] customization for navigation
 - [x] render menu and dropdown

@@ -34,11 +34,55 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+}
+
+.menu-configuration-widget .ui.menu.menu-items-menu .item span {
+  margin-left: 0.5rem;
+}
+
+.menu-configuration-widget .ui.menu.menu-items-menu .item button.ui.button {
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.menu-configuration-widget
+  .ui.menu.menu-items-menu
+  .item
+  button.ui.button
+  i.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(90deg);
 }
 
 .menu-configuration-widget .ui.menu.menu-path-menu .item span,
 .menu-configuration-widget .ui.menu.menu-items-menu .item span {
   display: inline-block;
   min-width: 3rem;
-  padding-right: 0.5em;
+  flex: 1;
+}
+
+.menu-configuration-widget .ui.menu.menu-items-menu .item span {
+  padding-left: 0.5rem;
+}
+
+.menu-configuration-widget #menupath-delete.field.delete .column,
+.menu-configuration-widget #menu-delete.field.delete .column {
+  justify-content: center;
+}
+
+button#delete-menupath,
+button#delete-menuitem {
+  display: inline-block;
+  flex-grow: 0;
+  align-self: self-start;
+}
+
+.menu-configuration-widget .dropdownmenu-rootpath-segment {
+  padding-bottom: 3rem;
+  border-bottom: 1px solid #c7d5d8;
+  margin-bottom: 3rem;
 }
