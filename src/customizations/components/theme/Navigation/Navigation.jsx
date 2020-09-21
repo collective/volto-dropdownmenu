@@ -12,10 +12,10 @@ import cx from 'classnames';
 import OutsideClickHandler from 'react-outside-click-handler';
 import { settings } from '~/config';
 
-import { getControlpanel } from '@plone/volto/actions';
 import { flattenToAppURL } from '@plone/volto/helpers';
 
 import DropdownMenu from '../../../../components/DropdownMenu';
+import { getDropdownMenuNavitems } from '../../../../actions';
 
 const messages = defineMessages({
   closeMobileMenu: {
@@ -35,41 +35,12 @@ const Navigation = ({ pathname, type }) => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openDropdownIndex, setOpenDropodownIndex] = useState(-1);
 
-  const initMenu = (menu) => {
-    const menuItems =
-      JSON.parse(menu)
-        .filter((menu) =>
-          (pathname?.length ? pathname : '/').match(new RegExp(menu.rootPath)),
-        )
-        .pop()?.items ?? [];
-
-    return menuItems.reduce((acc, val) => {
-      return val.mode === 'simpleLink'
-        ? [
-            ...acc,
-            {
-              ...val,
-              linkUrl: {
-                ...(val.linkUrl[0] ?? {}),
-                ['@id']:
-                  val.linkUrl[0]?.['@id']?.length > 0
-                    ? val.linkUrl[0]?.['@id']
-                    : '/',
-              },
-            },
-          ]
-        : [...acc, val];
-    }, []);
-  };
-
-  const menu = useSelector((state) =>
-    initMenu(
-      state.controlpanels?.controlpanel?.data?.menu_configuration ?? '[]',
-    ),
+  const dropdownMenuNavItems = useSelector(
+    (state) => state.dropdownMenuNavItems?.result,
   );
 
   useEffect(() => {
-    dispatch(getControlpanel('dropdown-menu-settings'));
+    dispatch(getDropdownMenuNavitems());
   }, [dispatch]);
 
   const toggleMobileMenu = () => {
@@ -98,6 +69,13 @@ const Navigation = ({ pathname, type }) => {
       false,
     );
   };
+
+  const menu =
+    dropdownMenuNavItems
+      .filter((menu) =>
+        (pathname?.length ? pathname : '/').match(new RegExp(menu.rootPath)),
+      )
+      .pop()?.items ?? [];
 
   return (
     <nav className="navigation navigation-dropdownmenu">
@@ -148,20 +126,20 @@ const Navigation = ({ pathname, type }) => {
                 ?.map((item, index) =>
                   item.mode === 'simpleLink' ? (
                     <NavLink
-                      to={item.linkUrl['@id']}
-                      key={item.linkUrl['@id'] + index}
+                      to={flattenToAppURL(item.linkUrl?.[0]?.['@id'])}
+                      key={item.linkUrl?.[0]?.['@id'] + index}
                       className="item"
                       activeClassName="active"
                       exact={
                         settings.isMultilingual
-                          ? item.linkUrl['@id'] === `/${lang}`
-                          : item.linkUrl['@id'] === ''
+                          ? item.linkUrl?.[0]?.['@id'] === `/${lang}`
+                          : item.linkUrl?.[0]?.['@id'] === ''
                       }
                     >
                       {item.title}
                     </NavLink>
                   ) : (
-                    <React.Fragment>
+                    <React.Fragment key={item.linkUrl?.[0]?.['@id'] + index}>
                       <Button
                         className={cx('item', 'dropdownmenu-item', {
                           'active open': openDropdownIndex === index,
@@ -178,9 +156,10 @@ const Navigation = ({ pathname, type }) => {
                           }
                         />
                       </Button>
-                      {openDropdownIndex === index && (
-                        <DropdownMenu menu={item} />
-                      )}
+                      <DropdownMenu
+                        menu={item}
+                        open={openDropdownIndex === index}
+                      />
                     </React.Fragment>
                   ),
                 )

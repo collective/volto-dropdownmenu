@@ -2,60 +2,64 @@
   position: relative;
 }
 
-.ui.segment.dropdown-menu {
+.dropdown-menu-wrapper {
   position: fixed !important;
   z-index: 1;
-  top: 80px;
+  top: 92px;
   left: 0;
   overflow: hidden;
   width: 100%;
   max-height: 0;
-  padding: 0;
+  transition: max-height 0.5s ease-in;
+}
+
+.dropdown-menu-wrapper.open {
+  z-index: 2;
+  max-height: 100%;
+  border-top: 1px solid rgba(199, 213, 216, 0.4);
+}
+
+.dropdown-menu-wrapper > .ui.segment {
+  position: relative;
+  width: 100%;
   border-top: 0;
   border-right: 0;
   border-left: 0;
-  transition: max-height 0.5s ease;
 }
 
-body.has-toolbar.has-sidebar .ui.segment.dropdown-menu {
+body.has-toolbar.has-sidebar .dropdown-menu-wrapper {
   left: 80px;
   width: calc(100% - 375px - 80px);
 }
 
-body.has-toolbar-collapsed.has-sidebar .ui.segment.dropdown-menu {
+body.has-toolbar-collapsed.has-sidebar .dropdown-menu-wrapper {
   left: 20px;
   width: calc(100% - 375px - 20px);
 }
 
-body.has-toolbar-collapsed.has-sidebar-collapsed .ui.segment.dropdown-menu {
+body.has-toolbar-collapsed.has-sidebar-collapsed .dropdown-menu-wrapper {
   left: 20px;
   width: calc(100% - 20px - 20px);
 }
 
-body.has-toolbar.has-sidebar-collapsed .ui.segment.dropdown-menu {
+body.has-toolbar.has-sidebar-collapsed .dropdown-menu-wrapper {
   left: 80px;
   width: calc(100% - 20px - 80px);
 }
 
-body.has-toolbar:not(.has-sidebar):not(.has-sidebar-collapsed) {
+body.has-toolbar:not(.has-sidebar):not(.has-sidebar-collapsed)
+  .dropdown-menu-wrapper {
   left: 80px;
   width: calc(100% - 80px);
 }
 
-body.has-toolbar-collapsed:not(.has-sidebar):not(.has-sidebar-collapsed) {
+body.has-toolbar-collapsed:not(.has-sidebar):not(.has-sidebar-collapsed)
+  .dropdown-menu-wrapper {
   left: 20px;
   width: calc(100% - 20px);
 }
 
-.ui.segment.dropdown-menu.open {
-  max-height: 100%;
-}
-
-.ui.segment.dropdown-menu .dropdown-menu-inner {
-  padding: 1em 1em;
-}
-
-.ui.segment.dropdown-menu .dropdownmenu-footer {
+.dropdown-menu-wrapper > .ui.segment .dropdownmenu-footer {
   padding: 1em;
   text-align: right;
 }
