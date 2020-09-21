@@ -11,20 +11,20 @@ Created with [voltocli](https://github.com/nzambello/voltocli).
 
 ## Usage
 
-`Document your addon here`
+Simply load the addon in your project, then edit the configuration in `/controlpanel/dropdown-menu-settings`.
 
-Example configuration [here](./menuConfigurationExample.json).
+Example configuration to be saved in Plone [here](./menuConfigurationExample.json).
 
-## TODO
+## Screenshots and demo
 
-- [x] when removing last root tab, it goes to the default new one, not editable
-- [x] issue: you need to reload the page to see the new data when you save
-- [x] delete menu item
-- [x] you can't delete the last menu item
-- [x] sort menu items
-- [x] complete menu item form
-- [x] customization for navigation
-- [x] render menu and dropdown
-- [x] issue: with multiple dropdown menus, you can't close a menu by clicking on its button, see toggleDropdownMenu
-- [x] dropdownmenu positioning with sidebar and toolbar
-- [ ] mobile layout and handling (click closes menu)
+### Controlpanel
+
+![Addon controlpanel](./docs/controlpanel.png)
+
+### Dropdown menu
+
+![Dropdown menu](./docs/dropdown-menu.png)
+
+### Demo
+
+![Demonstration video](https://youtu.be/YTibM90geQc)
