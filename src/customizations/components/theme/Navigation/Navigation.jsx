@@ -47,10 +47,6 @@ const Navigation = ({ pathname, type }) => {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  const closeMobileMenu = () => {
-    setMobileMenuOpen(false);
-  };
-
   const toggleDropdownMenu = (index) => {
     if (openDropdownIndex === index) setOpenDropodownIndex(-1);
     else setOpenDropodownIndex(index);
@@ -118,7 +114,6 @@ const Navigation = ({ pathname, type }) => {
           className={
             isMobileMenuOpen ? 'open' : 'computer large screen widescreen only'
           }
-          onClick={closeMobileMenu}
         >
           {menu?.length > 0
             ? menu

@@ -13,6 +13,16 @@
   transition: max-height 0.5s ease-in;
 }
 
+@media (max-width: 766px) {
+  .dropdown-menu-wrapper {
+    position: static !important;
+  }
+
+  .dropdown-menu-wrapper .ui.grid .column.column {
+    width: 100% !important;
+  }
+}
+
 .dropdown-menu-wrapper.open {
   z-index: 2;
   max-height: 100%;
