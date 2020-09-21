@@ -1,7 +1,5 @@
 # volto-dropdownmenu
 
-### Work In Progress
-
 Volto addon for a customizable dropdown menu.  
 Intended to be used with [collective.volto.dropdownmenu](https://github.com/collective/collective.volto.dropdownmenu)
 
