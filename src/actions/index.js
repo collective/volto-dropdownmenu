@@ -8,7 +8,7 @@ export const GET_DROPDOWNMENU_NAVITEMS = 'GET_DROPDOWNMENU_NAVITEMS';
  * Get dropdown menu items.
  * @function getDropdownMenuNavitems
  * @returns {Object} Get dropdown menu items action.
- * Es: http://localhost:8080/Plone/@search?path.query=/Plone/news&path.query=/Plone/events &path.depth=1&sort_on=getObjPositionInParent
+ * Es: http://localhost:8080/Plone/@dropdown-menu
  */
 export function getDropdownMenuNavitems() {
   return {
