@@ -44,7 +44,7 @@ const DropdownMenu = ({ menu, open = false }) => {
                     to={flattenToAppURL(navRoot['@id'])}
                     condition={menu.navigationRoot.length > 1}
                   >
-                    {navRoot.title}
+                    <span>{navRoot.title}</span>
                   </ConditionalLink>
                 </h2>
                 {navRoot.items?.length > 0 && (
@@ -52,7 +52,7 @@ const DropdownMenu = ({ menu, open = false }) => {
                     {navRoot.items?.map((navItem, idx) => (
                       <li key={navRoot['@id'] + idx}>
                         <NavLink to={flattenToAppURL(navItem['@id'])}>
-                          {navItem.title}
+                          <span>{navItem.title}</span>
                         </NavLink>
                       </li>
                     ))}

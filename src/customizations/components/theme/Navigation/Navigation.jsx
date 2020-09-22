@@ -131,7 +131,7 @@ const Navigation = ({ pathname, type }) => {
                           : item.linkUrl?.[0]?.['@id'] === ''
                       }
                     >
-                      {item.title}
+                      <span>{item.title}</span>
                     </NavLink>
                   ) : (
                     <React.Fragment key={item.linkUrl?.[0]?.['@id'] + index}>
@@ -142,7 +142,7 @@ const Navigation = ({ pathname, type }) => {
                         })}
                         onClick={() => toggleDropdownMenu(index)}
                       >
-                        {item.title}
+                        <span>{item.title}</span>
                         <Icon
                           name="dropdown"
                           size="large"
