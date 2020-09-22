@@ -10,8 +10,16 @@ Created with [voltocli](https://github.com/nzambello/voltocli).
 ## Usage
 
 Simply load the addon in your project, then edit the configuration in `/controlpanel/dropdown-menu-settings`.
-
 Example configuration to be saved in Plone [here](./menuConfigurationExample.json).
+
+To use the default template for the dropdown menu, add `src/addons/volto-dropdownmenu/src/customizations` in your `package.json` in `customizationPaths`.
+
+```json
+  "customizationPaths": [
+    "src/customizations",
+    "src/addons/volto-dropdownmenu/src/customizations"
+  ]
+```
 
 ## Screenshots and demo
 
