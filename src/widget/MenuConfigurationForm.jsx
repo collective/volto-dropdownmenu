@@ -128,7 +128,6 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
         id={`${id}-visible`}
         title={intl.formatMessage(messages.visible)}
         description=""
-        required={false}
         defaultValue={true}
         value={!!menuItem.visible}
         onChange={(id, value) => onChangeFormData('visible', value)}
@@ -176,7 +175,6 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
             id={`${id}-showMoreLink`}
             title={intl.formatMessage(messages.showMoreLink)}
             description=""
-            required={false}
             mode="link"
             value={menuItem.showMoreLink ?? []}
             onChange={(id, value) => onChangeFormData('showMoreLink', value)}
@@ -185,7 +183,6 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
             id={`${id}-showMoreText`}
             title={intl.formatMessage(messages.showMoreText)}
             description=""
-            required={false}
             value={menuItem.showMoreText}
             onChange={(id, value) => onChangeFormData('showMoreText', value)}
           />

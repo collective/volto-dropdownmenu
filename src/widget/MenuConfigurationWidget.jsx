@@ -175,7 +175,7 @@ const MenuConfigurationWidget = ({
 
   return (
     <div className="menu-configuration-widget">
-      <Form.Field inline required={required} id={id}>
+      <Form.Field inline id={id}>
         <Grid>
           <Grid.Row>
             <Grid.Column width="12">
