@@ -25,4 +25,4 @@ Example configuration to be saved in Plone [here](./menuConfigurationExample.jso
 
 ### Demo
 
-You can watch a demonstration video on ![YouTube](https://youtu.be/YTibM90geQc)
+You can watch a demonstration video on [YouTube](https://youtu.be/YTibM90geQc)
