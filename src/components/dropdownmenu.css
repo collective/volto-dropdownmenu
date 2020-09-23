@@ -82,3 +82,7 @@ body.has-toolbar-collapsed:not(.has-sidebar):not(.has-sidebar-collapsed)
 .ui.menu .ui.button.item.dropdownmenu-item i.dropdown.icon {
   margin-left: 0.5rem;
 }
+
+.dropdownmenu-blocks-column .ui.grid .column.column {
+  width: 50% !important;
+}
