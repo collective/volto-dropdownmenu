@@ -29,16 +29,19 @@ const DropdownMenu = ({ menu, open = false }) => {
   const blocksFieldname = getBlocksFieldname(menu);
   const blocksLayoutFieldname = getBlocksLayoutFieldname(menu);
 
+  const navItemWidth = menu.navigationRoot.length > 1 ? 3 : 4;
+  const blocksWidth =
+    menu.navigationRoot?.length > 2 || menu.navigationRoot?.length === 0
+      ? 12
+      : 6;
+
   return (
     <div className={cx('dropdown-menu-wrapper', { open })}>
       <Segment>
         <div className="dropdown-menu-inner">
           <Grid container>
             {menu.navigationRoot?.map((navRoot) => (
-              <Grid.Column
-                width={menu.navigationRoot.length > 1 ? 3 : 4}
-                key={navRoot['@id']}
-              >
+              <Grid.Column width={navItemWidth} key={navRoot['@id']}>
                 <h2>
                   <ConditionalLink
                     to={flattenToAppURL(navRoot['@id'])}
@@ -62,12 +65,8 @@ const DropdownMenu = ({ menu, open = false }) => {
             ))}
             {hasBlocksData(menu) && (
               <Grid.Column
-                width={
-                  menu.navigationRoot?.length > 2 ||
-                  menu.navigationRoot?.length === 0
-                    ? 12
-                    : 6
-                }
+                width={blocksWidth}
+                className="dropdownmenu-blocks-column"
               >
                 {map(menu[blocksLayoutFieldname].items, (block) => {
                   const blockType = menu[blocksFieldname]?.[block]?.['@type'];
