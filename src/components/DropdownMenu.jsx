@@ -33,6 +33,8 @@ const DropdownMenu = ({ menu, open = false }) => {
   const blocksWidth =
     menu.navigationRoot?.length > 2 || menu.navigationRoot?.length === 0
       ? 12
+      : menu.navigationRoot === 1
+      ? 8
       : 6;
 
   return (
