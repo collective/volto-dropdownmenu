@@ -23,13 +23,13 @@ const messages = defineMessages({
   },
 });
 
-const DropdownMenu = ({ menu, open = false }) => {
+const DropdownMenu = ({ menu, open = false, closeMenu }) => {
   const intl = useIntl();
   const location = useLocation();
   const blocksFieldname = getBlocksFieldname(menu);
   const blocksLayoutFieldname = getBlocksLayoutFieldname(menu);
 
-  const navItemWidth = menu.navigationRoot.length > 1 ? 3 : 4;
+  const navItemWidth = menu.navigationRoot?.length > 1 ? 3 : 4;
   const blocksWidth =
     menu.navigationRoot?.length > 2 || menu.navigationRoot?.length === 0
       ? 12
@@ -47,7 +47,7 @@ const DropdownMenu = ({ menu, open = false }) => {
                 <h2>
                   <ConditionalLink
                     to={flattenToAppURL(navRoot['@id'])}
-                    condition={menu.navigationRoot.length > 1}
+                    condition={menu.navigationRoot?.length > 1}
                   >
                     <span>{navRoot.title}</span>
                   </ConditionalLink>
@@ -98,7 +98,10 @@ const DropdownMenu = ({ menu, open = false }) => {
           </Grid>
           {menu.showMoreLink.length > 0 && menu.showMoreText.length > 0 && (
             <Container className="dropdownmenu-footer">
-              <NavLink to={flattenToAppURL(menu.showMoreLink[0]['@id']) ?? '#'}>
+              <NavLink
+                to={flattenToAppURL(menu.showMoreLink[0]['@id']) ?? '#'}
+                onClick={closeMenu}
+              >
                 {menu.showMoreText}
                 <Icon name="arrow right" />
               </NavLink>

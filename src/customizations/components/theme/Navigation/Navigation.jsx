@@ -69,7 +69,9 @@ const Navigation = ({ pathname, type }) => {
   const menu =
     dropdownMenuNavItems
       .filter((menu) =>
-        (pathname?.length ? pathname : '/').match(new RegExp(menu.rootPath)),
+        (pathname?.length ? pathname : '/').match(
+          new RegExp(flattenToAppURL(menu.rootPath)),
+        ),
       )
       .pop()?.items ?? [];
 
@@ -154,6 +156,7 @@ const Navigation = ({ pathname, type }) => {
                       <DropdownMenu
                         menu={item}
                         open={openDropdownIndex === index}
+                        closeMenu={() => setOpenDropodownIndex(-1)}
                       />
                     </React.Fragment>
                   ),
