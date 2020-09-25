@@ -31,16 +31,16 @@ const DropdownMenu = ({ menu, open = false, closeMenu }) => {
 
   const navItemWidth = menu.navigationRoot?.length > 1 ? 3 : 4;
   const blocksWidth =
-    menu.navigationRoot?.length > 2 || menu.navigationRoot?.length === 0
-      ? 12
-      : menu.navigationRoot === 1
+    menu.navigationRoot?.length === 1
       ? 8
+      : menu.navigationRoot?.length > 2 || menu.navigationRoot?.length === 0
+      ? 12
       : 6;
 
   return (
     <div className={cx('dropdown-menu-wrapper', { open })}>
-      <Segment>
-        <div className="dropdown-menu-inner">
+      <div className="dropdown-menu-inner">
+        <Segment>
           <Grid container>
             {menu.navigationRoot?.map((navRoot) => (
               <Grid.Column width={navItemWidth} key={navRoot['@id']}>
@@ -102,13 +102,13 @@ const DropdownMenu = ({ menu, open = false, closeMenu }) => {
                 to={flattenToAppURL(menu.showMoreLink[0]['@id']) ?? '#'}
                 onClick={closeMenu}
               >
-                {menu.showMoreText}
+                <span>{menu.showMoreText}</span>
                 <Icon name="arrow right" />
               </NavLink>
             </Container>
           )}
-        </div>
-      </Segment>
+        </Segment>
+      </div>
     </div>
   );
 };
