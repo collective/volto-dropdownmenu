@@ -10,6 +10,7 @@ import {
   Header,
 } from 'semantic-ui-react';
 import { TextWidget } from '@plone/volto/components';
+import { flattenToAppURL } from '@plone/volto/helpers/Url/Url';
 
 import MenuConfigurationForm from './MenuConfigurationForm';
 import './menu_configuration.css';
@@ -219,7 +220,9 @@ const MenuConfigurationWidget = ({
                           title={intl.formatMessage(messages.root_path)}
                           description=""
                           required={true}
-                          value={menuConfiguration[activeMenu].rootPath}
+                          value={flattenToAppURL(
+                            menuConfiguration[activeMenu].rootPath,
+                          )}
                           onChange={(id, value) => {
                             onChangeMenuPath(activeMenu, {
                               ...menuConfiguration[activeMenu],
