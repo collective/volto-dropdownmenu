@@ -197,7 +197,7 @@ const MenuConfigurationWidget = ({
                         setActiveMenuItem(0);
                       }}
                     >
-                      <span>{menu.rootPath}</span>
+                      <span>{flattenToAppURL(menu.rootPath)}</span>
                     </Menu.Item>
                   ))}
                   <Menu.Item
