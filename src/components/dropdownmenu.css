@@ -69,7 +69,7 @@ body.has-toolbar-collapsed:not(.has-sidebar):not(.has-sidebar-collapsed)
   width: calc(100% - 20px);
 }
 
-.dropdown-menu-wrapper > .ui.segment .dropdownmenu-footer {
+.dropdown-menu-wrapper .dropdownmenu-footer {
   padding: 1em;
   text-align: right;
 }
