@@ -90,17 +90,17 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
     e.preventDefault();
   };
 
-  useEffect(() => {
-    document
-      .querySelector('form.ui.form')
-      .addEventListener('click', preventClick);
+  // useEffect(() => {
+  //   document
+  //     .querySelector('form.ui.form')
+  //     .addEventListener('click', preventClick);
 
-    return () => {
-      document
-        .querySelector('form.ui.form')
-        .removeEventListener('click', preventClick);
-    };
-  }, []);
+  //   return () => {
+  //     document
+  //       .querySelector('form.ui.form')
+  //       .removeEventListener('click', preventClick);
+  //   };
+  // }, []);
 
   const onChangeFormData = (id, value) => {
     onChange({ ...menuItem, [id]: value });
