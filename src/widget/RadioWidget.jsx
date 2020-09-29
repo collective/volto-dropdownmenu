@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FormFieldWrapper } from '@plone/volto/components';
 import './radio_widget.css';
 
@@ -17,6 +17,14 @@ const RadioWidget = ({
   fieldSet,
   wrapped,
 }) => {
+  const [activeRadio, setActiveRadio] = useState(value ?? valueList[0]?.value);
+
+  useEffect(() => {
+    if (value !== activeRadio) {
+      setActiveRadio(value);
+    }
+  }, [value]);
+
   return (
     <FormFieldWrapper
       id={id}
@@ -35,8 +43,11 @@ const RadioWidget = ({
               name={id}
               id={id + opt.value}
               value={opt.value}
-              checked={opt.value === value}
-              onChange={(e) => onChange(id, e.target.value)}
+              checked={opt.value === activeRadio}
+              onChange={(e) => {
+                setActiveRadio(e.target.value);
+                onChange(id, e.target.value);
+              }}
             />
             <label htmlFor={id + opt.value}>{opt.label}</label>
           </div>

@@ -96,10 +96,10 @@ const DropdownMenu = ({ menu, open = false, closeMenu }) => {
               </Grid.Column>
             )}
           </Grid>
-          {menu.showMoreLink.length > 0 && menu.showMoreText.length > 0 && (
+          {menu.showMoreLink?.length > 0 && menu.showMoreText?.length > 0 && (
             <Container className="dropdownmenu-footer">
               <NavLink
-                to={flattenToAppURL(menu.showMoreLink[0]['@id']) ?? '#'}
+                to={flattenToAppURL(menu.showMoreLink[0]?.['@id']) ?? '#'}
                 onClick={closeMenu}
               >
                 <span>{menu.showMoreText}</span>
