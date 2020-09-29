@@ -1,3 +1,9 @@
+.radio-widget {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
 .radio-widget .radio-button {
   margin: 0.5rem 0;
 }
