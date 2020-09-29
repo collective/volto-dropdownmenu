@@ -53,7 +53,7 @@ const Navigation = ({ pathname, type }) => {
   };
 
   const isMenuActive = (item) => {
-    const paths = [...item.navigationRoot];
+    const paths = [...(item.navigationRoot ?? [])];
     if (item.showMoreLink?.length > 0) {
       paths.push(item.showMoreLink[0]);
     }
