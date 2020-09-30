@@ -58,14 +58,14 @@ const messages = defineMessages({
   },
 });
 
-const defaultMenuItem = (title) => ({
+const defaultMenuItem = title => ({
   title,
   visible: true,
   mode: 'simpleLink',
   linkUrl: [],
 });
 
-const defaultRootMenu = (title) => ({
+const defaultRootMenu = title => ({
   rootPath: '/',
   items: [defaultMenuItem(title)],
 });
@@ -87,12 +87,12 @@ const MenuConfigurationWidget = ({
   const [activeMenu, setActiveMenu] = useState(0);
   const [activeMenuItem, setActiveMenuItem] = useState(0);
 
-  const handleChangeConfiguration = (value) => {
+  const handleChangeConfiguration = value => {
     setMenuConfiguration(value);
     onChange(id, JSON.stringify(value));
   };
 
-  const addMenuPath = (e) => {
+  const addMenuPath = e => {
     e.preventDefault();
     const menuItemsNumber = menuConfiguration.length;
     const menuItem = `/tab${menuItemsNumber}`;
@@ -238,19 +238,13 @@ const MenuConfigurationWidget = ({
                           <Grid>
                             <Grid.Row stretched>
                               <Grid.Column width={4}>
-                                <div className="wrapper">
-                                  <label htmlFor="delete-menupath">
-                                    {intl.formatMessage(
-                                      messages.deleteMenuPath,
-                                    )}
-                                  </label>
-                                </div>
+                                <div className="wrapper"></div>
                               </Grid.Column>
                               <Grid.Column width={8}>
                                 <Button
                                   icon="trash"
                                   negative
-                                  onClick={(e) => deleteMenuPath(e, activeMenu)}
+                                  onClick={e => deleteMenuPath(e, activeMenu)}
                                   id="delete-menupath"
                                 >
                                   {intl.formatMessage(messages.deleteButton)}
@@ -286,7 +280,7 @@ const MenuConfigurationWidget = ({
                                     title={intl.formatMessage(
                                       messages.moveMenuItemUp,
                                     )}
-                                    onClick={(e) =>
+                                    onClick={e =>
                                       moveMenuItem(e, activeMenu, idx, 'up')
                                     }
                                   />
@@ -302,7 +296,7 @@ const MenuConfigurationWidget = ({
                                     title={intl.formatMessage(
                                       messages.moveMenuItemDown,
                                     )}
-                                    onClick={(e) =>
+                                    onClick={e =>
                                       moveMenuItem(e, activeMenu, idx, 'down')
                                     }
                                   />
@@ -313,7 +307,7 @@ const MenuConfigurationWidget = ({
                           )}
                           <Menu.Item
                             name={intl.formatMessage(messages.addMenuItem)}
-                            onClick={(e) => addMenuItem(e, activeMenu)}
+                            onClick={e => addMenuItem(e, activeMenu)}
                           >
                             <Icon name="plus" />
                           </Menu.Item>
@@ -330,10 +324,10 @@ const MenuConfigurationWidget = ({
                                 activeMenuItem
                               ]
                             }
-                            onChange={(menu) =>
+                            onChange={menu =>
                               onChangeMenuItem(activeMenu, activeMenuItem, menu)
                             }
-                            deleteMenuItem={(e) =>
+                            deleteMenuItem={e =>
                               deleteMenuItem(e, activeMenu, activeMenuItem)
                             }
                           />

@@ -86,7 +86,7 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
     };
   }
 
-  const preventClick = (e) => {
+  const preventClick = e => {
     e.preventDefault();
   };
 
@@ -106,7 +106,7 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
     onChange({ ...menuItem, [id]: value });
   };
 
-  const onChangeFormBlocks = (data) => {
+  const onChangeFormBlocks = data => {
     onChange({
       ...menuItem,
       blocks: data.blocks,
@@ -219,11 +219,7 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
         <Grid>
           <Grid.Row stretched>
             <Grid.Column width={4}>
-              <div className="wrapper">
-                <label htmlFor="delete-menuitem">
-                  {intl.formatMessage(messages.deleteMenuItem)}
-                </label>
-              </div>
+              <div className="wrapper"></div>
             </Grid.Column>
             <Grid.Column width={8}>
               <Button
