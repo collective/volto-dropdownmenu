@@ -186,6 +186,7 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
             value={menuItem.showMoreText}
             onChange={(id, value) => onChangeFormData('showMoreText', value)}
           />
+
           <UIForm.Field inline className="help wide" id="menu-blocks">
             <Grid>
               <Grid.Row stretched>
@@ -201,6 +202,7 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
                 <Grid.Column width={12}>
                   <div className="menu-blocks-container">
                     <Form
+                      key={id}
                       formData={menuItem}
                       visual={true}
                       hideActions
