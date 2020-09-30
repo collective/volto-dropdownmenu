@@ -1,5 +1,7 @@
 import React from 'react';
+import { Button } from 'semantic-ui-react';
 import { FormFieldWrapper } from '@plone/volto/components';
+import cx from 'classnames';
 import './radio_widget.css';
 
 const RadioWidget = ({
@@ -29,17 +31,19 @@ const RadioWidget = ({
     >
       <div className="radio-widget">
         {valueList.map((opt) => (
-          <div className="radio-button" key={opt.value}>
-            <input
-              type="radio"
-              name={id}
-              id={id + opt.value}
-              value={opt.value}
-              checked={opt.value === value}
-              onChange={(e) => onChange(id, e.target.value)}
-            />
-            <label htmlFor={id + opt.value}>{opt.label}</label>
-          </div>
+          <Button
+            key={opt.value}
+            id={id + opt.value}
+            className={cx('radio-button', { selected: opt.value === value })}
+            disabled={opt.value === value}
+            size="mini"
+            onClick={(e) => {
+              e.preventDefault();
+              onChange(id, opt.value);
+            }}
+          >
+            {opt.label}
+          </Button>
         ))}
       </div>
     </FormFieldWrapper>
