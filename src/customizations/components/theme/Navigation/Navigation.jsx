@@ -57,7 +57,7 @@ const Navigation = ({ pathname, type }) => {
     const blocksClickListener = (e) => {
       const dropdownmenuLinks = [
         ...document.querySelectorAll(
-          '.navigation-dropdownmenu .dropdown-menu-wrapper ul li a, .navigation-dropdownmenu .block a',
+          '.navigation-dropdownmenu .dropdown-menu-wrapper ul li a, .navigation-dropdownmenu .block a, .dropdownmenu-footer a',
         ),
       ];
 
