@@ -1,7 +1,8 @@
 import { dropdownMenuNavItemsReducer } from './reducers';
 import MenuConfigurationWidget from './widget/MenuConfigurationWidget';
+import { getDropdownMenuNavitems } from './actions';
 
-export { MenuConfigurationWidget };
+export { MenuConfigurationWidget, getDropdownMenuNavitems };
 
 export default (config) => {
   config.widgets.id = {
