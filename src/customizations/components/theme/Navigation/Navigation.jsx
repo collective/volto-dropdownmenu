@@ -43,6 +43,40 @@ const Navigation = ({ pathname, type }) => {
     dispatch(getDropdownMenuNavitems());
   }, [dispatch]);
 
+  const getAnchorTarget = (nodeElement) => {
+    if (nodeElement.nodeName === 'A') {
+      return nodeElement;
+    } else if (nodeElement.parentElement?.nodeName === 'A') {
+      return nodeElement.parentElement;
+    } else {
+      return null;
+    }
+  };
+
+  useEffect(() => {
+    const blocksClickListener = (e) => {
+      const dropdownmenuLinks = [
+        ...document.querySelectorAll(
+          '.navigation-dropdownmenu .dropdown-menu-wrapper ul li a, .navigation-dropdownmenu .block a, .dropdownmenu-footer a',
+        ),
+      ];
+
+      if (
+        dropdownmenuLinks?.length === 0 ||
+        dropdownmenuLinks?.indexOf(getAnchorTarget(e.target)) < 0
+      ) {
+        return;
+      }
+
+      setOpenDropodownIndex(-1);
+    };
+
+    document.body.addEventListener('click', blocksClickListener);
+
+    return () =>
+      document.body.removeEventListener('click', blocksClickListener);
+  }, []);
+
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
