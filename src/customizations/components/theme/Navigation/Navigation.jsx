@@ -54,27 +54,26 @@ const Navigation = ({ pathname, type }) => {
   };
 
   useEffect(() => {
-    const blocksClickListener = (e) => {
+    const clickListener = (e) => {
+      const targetItem = getAnchorTarget(e.target);
       const dropdownmenuLinks = [
         ...document.querySelectorAll(
-          '.navigation-dropdownmenu .dropdown-menu-wrapper ul li a, .navigation-dropdownmenu .block a, .dropdownmenu-footer a',
+          '.navigation-dropdownmenu .dropdown-menu-wrapper ul li a, .navigation-dropdownmenu .block a, .dropdownmenu-footer a, .navigation-dropdownmenu .menu > a',
         ),
       ];
 
       if (
-        dropdownmenuLinks?.length === 0 ||
-        dropdownmenuLinks?.indexOf(getAnchorTarget(e.target)) < 0
+        dropdownmenuLinks?.length > 0 &&
+        dropdownmenuLinks?.indexOf(targetItem) >= 0
       ) {
-        return;
+        setOpenDropodownIndex(-1);
+        setMobileMenuOpen(false); //close mobile menu
       }
-
-      setOpenDropodownIndex(-1);
     };
 
-    document.body.addEventListener('click', blocksClickListener);
+    document.body.addEventListener('click', clickListener);
 
-    return () =>
-      document.body.removeEventListener('click', blocksClickListener);
+    return () => document.body.removeEventListener('click', clickListener);
   }, []);
 
   const toggleMobileMenu = () => {
