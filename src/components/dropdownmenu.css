@@ -78,10 +78,29 @@ body.has-toolbar-collapsed:not(.has-sidebar):not(.has-sidebar-collapsed)
   font-size: 1.5rem;
 }
 
+@media (max-width: 766px) {
+  .ui.basic.button.dropdown-close-button {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+}
+
 .dropdown-menu-wrapper .dropdownmenu-footer {
   padding: 1em;
-  margin-top: 1em;
   text-align: right;
+}
+
+@media (min-width: 767px) {
+  .dropdown-menu-wrapper .dropdownmenu-footer {
+    margin-top: 1em;
+  }
 }
 
 .ui.menu > .ui.button.item.dropdownmenu-item.active.open,
