@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { defineMessages, useIntl } from 'react-intl';
-import { Segment, Container, Icon, Grid } from 'semantic-ui-react';
+import { Segment, Container, Icon, Grid, Button } from 'semantic-ui-react';
 import { map } from 'lodash';
 import cx from 'classnames';
 import { ConditionalLink } from '@plone/volto/components';
@@ -20,6 +20,10 @@ const messages = defineMessages({
   unknownBlock: {
     id: 'Unknown Block',
     defaultMessage: 'Unknown Block {block}',
+  },
+  closeMenu: {
+    id: 'dropdownmenu-close-menu-button',
+    defaultMessage: 'Close menu',
   },
 });
 
@@ -41,6 +45,16 @@ const DropdownMenu = ({ menu, open = false, closeMenu }) => {
     <div className={cx('dropdown-menu-wrapper', { open })}>
       <div className="dropdown-menu-inner">
         <Segment>
+          <div className="dropdownmenu-close-button-wrapper">
+            <Button
+              className="dropdown-close-button"
+              onClick={closeMenu}
+              title={intl.formatMessage(messages.closeMenu)}
+              icon="times"
+              basic
+              size="mini"
+            />
+          </div>
           <Grid container>
             {menu.navigationRoot?.map((navRoot) => (
               <Grid.Column width={navItemWidth} key={navRoot['@id']}>
@@ -96,7 +110,7 @@ const DropdownMenu = ({ menu, open = false, closeMenu }) => {
               </Grid.Column>
             )}
           </Grid>
-          {menu.showMoreLink.length > 0 && menu.showMoreText.length > 0 && (
+          {menu.showMoreLink?.length > 0 && menu.showMoreText?.length > 0 && (
             <Container className="dropdownmenu-footer">
               <NavLink
                 to={flattenToAppURL(menu.showMoreLink[0]['@id']) ?? '#'}

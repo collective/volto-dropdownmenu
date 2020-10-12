@@ -69,8 +69,18 @@ body.has-toolbar-collapsed:not(.has-sidebar):not(.has-sidebar-collapsed)
   width: calc(100% - 20px);
 }
 
+.dropdownmenu-close-button-wrapper {
+  text-align: right;
+}
+
+.ui.basic.button.dropdown-close-button {
+  color: inherit !important;
+  font-size: 1.5rem;
+}
+
 .dropdown-menu-wrapper .dropdownmenu-footer {
   padding: 1em;
+  margin-top: 1em;
   text-align: right;
 }
 
