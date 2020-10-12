@@ -246,9 +246,8 @@ const MenuConfigurationWidget = ({
                                   negative
                                   onClick={e => deleteMenuPath(e, activeMenu)}
                                   id="delete-menupath"
-                                >
-                                  {intl.formatMessage(messages.deleteButton)}
-                                </Button>
+                                  content={intl.formatMessage(messages.deleteButton)}
+                                />
                               </Grid.Column>
                             </Grid.Row>
                           </Grid>

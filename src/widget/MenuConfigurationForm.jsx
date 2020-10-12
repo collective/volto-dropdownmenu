@@ -227,9 +227,8 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
                 onClick={deleteMenuItem}
                 id="delete-menuitem"
                 negative
-              >
-                {intl.formatMessage(messages.deleteButton)}
-              </Button>
+                content={intl.formatMessage(messages.deleteButton)}
+              />
             </Grid.Column>
           </Grid.Row>
         </Grid>
