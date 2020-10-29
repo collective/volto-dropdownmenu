@@ -65,7 +65,7 @@ const messages = defineMessages({
   },
   deleteButton: {
     id: 'dropdownmenu-deletemenuitem-button',
-    defaultMessage: 'Delete',
+    defaultMessage: 'Delete menu item',
   },
 });
 
@@ -86,8 +86,14 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
     };
   }
 
-  const preventClick = e => {
+  const preventClick = (e) => {
     e.preventDefault();
+  };
+
+  const preventEnter = (e) => {
+    if (e.code === 'Enter') {
+      preventClick(e);
+    }
   };
 
   useEffect(() => {
@@ -95,10 +101,17 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
       .querySelector('form.ui.form')
       .addEventListener('click', preventClick);
 
+    document.querySelectorAll('form.ui.form input').forEach((item) => {
+      item.addEventListener('keypress', preventEnter);
+    });
+
     return () => {
       document
         .querySelector('form.ui.form')
         .removeEventListener('click', preventClick);
+      document.querySelectorAll('form.ui.form input').forEach((item) => {
+        item.removeEventListener('keypress', preventEnter);
+      });
     };
   }, []);
 
@@ -106,7 +119,7 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
     onChange({ ...menuItem, [id]: value });
   };
 
-  const onChangeFormBlocks = data => {
+  const onChangeFormBlocks = (data) => {
     onChange({
       ...menuItem,
       blocks: data.blocks,
@@ -233,7 +246,6 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
           </Grid.Row>
         </Grid>
       </UIForm.Field>
-
       <Portal node={document.getElementById('sidebar')}>
         <Sidebar />
       </Portal>
