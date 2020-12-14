@@ -141,7 +141,14 @@ const Navigation = ({ pathname, type }) => {
           </span>
         </button>
       </div>
-      <OutsideClickHandler onOutsideClick={() => setOpenDropodownIndex(-1)}>
+      <OutsideClickHandler
+        onOutsideClick={() => {
+          setOpenDropodownIndex(-1);
+          if (isMobileMenuOpen) {
+            setMobileMenuOpen(false);
+          }
+        }}
+      >
         <Menu
           stackable
           pointing
