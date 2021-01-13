@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { defineMessages, useIntl } from 'react-intl';
 import { Menu, Button, Icon } from 'semantic-ui-react';
@@ -28,7 +28,9 @@ const messages = defineMessages({
   },
 });
 
-const Navigation = ({ pathname, type }) => {
+const Navigation = connect((state) => ({
+  token: state.userSession.token,
+}))(({ pathname, token, type }) => {
   const intl = useIntl();
   const { lang } = intl.locale;
   const dispatch = useDispatch();
@@ -41,7 +43,7 @@ const Navigation = ({ pathname, type }) => {
 
   useEffect(() => {
     dispatch(getDropdownMenuNavitems());
-  }, [dispatch]);
+  }, [dispatch, token]);
 
   const getAnchorTarget = (nodeElement) => {
     if (nodeElement.nodeName === 'A') {
@@ -207,6 +209,6 @@ const Navigation = ({ pathname, type }) => {
       </OutsideClickHandler>
     </nav>
   );
-};
+});
 
 export default Navigation;
