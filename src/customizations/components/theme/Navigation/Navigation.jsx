@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { defineMessages, useIntl } from 'react-intl';
 import { Menu, Button, Icon } from 'semantic-ui-react';
