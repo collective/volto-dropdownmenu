@@ -28,9 +28,8 @@ const messages = defineMessages({
   },
 });
 
-const Navigation = connect((state) => ({
-  token: state.userSession.token,
-}))(({ pathname, token, type }) => {
+const Navigation = ({ pathname, type }) => {
+  const token = useSelector((state) => state.userSession?.token);
   const intl = useIntl();
   const { lang } = intl.locale;
   const dispatch = useDispatch();
@@ -209,6 +208,6 @@ const Navigation = connect((state) => ({
       </OutsideClickHandler>
     </nav>
   );
-});
+};
 
 export default Navigation;
