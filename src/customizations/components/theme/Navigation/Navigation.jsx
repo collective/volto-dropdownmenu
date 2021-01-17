@@ -170,7 +170,7 @@ const Navigation = ({ pathname, type }) => {
                   item.mode === 'simpleLink' ? (
                     <NavLink
                       to={flattenToAppURL(item.linkUrl?.[0]?.['@id'])}
-                      key={item.linkUrl?.[0]?.['@id'] + index}
+                      key={'simplelink-' + index}
                       className="item"
                       activeClassName="active"
                       exact={
@@ -182,7 +182,7 @@ const Navigation = ({ pathname, type }) => {
                       <span>{item.title}</span>
                     </NavLink>
                   ) : (
-                    <React.Fragment key={index}>
+                    <React.Fragment key={'dropdown-' + index}>
                       <Button
                         className={cx('item', 'dropdownmenu-item', {
                           'active open': openDropdownIndex === index,
