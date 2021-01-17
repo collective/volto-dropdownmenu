@@ -162,7 +162,10 @@ const Navigation = ({ pathname, type }) => {
           {menu?.length > 0
             ? menu
                 ?.filter((item) => item.visible)
-                ?.filter((item) => item.linkUrl?.[0]?.['@id'])
+                ?.filter(
+                  (item) =>
+                    item.mode === 'dropdown' || item.linkUrl?.[0]?.['@id'],
+                )
                 ?.map((item, index) =>
                   item.mode === 'simpleLink' ? (
                     <NavLink
