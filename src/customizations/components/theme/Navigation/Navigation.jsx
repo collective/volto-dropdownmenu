@@ -150,7 +150,6 @@ const Navigation = ({ pathname, type }) => {
             </span>
           </button>
         </div>
-
         <Menu
           stackable
           pointing
