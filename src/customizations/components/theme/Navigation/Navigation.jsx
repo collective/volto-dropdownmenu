@@ -176,7 +176,7 @@ const Navigation = ({ pathname, type }) => {
                       <span>{item.title}</span>
                     </NavLink>
                   ) : (
-                    <React.Fragment key={item.linkUrl?.[0]?.['@id'] + index}>
+                    <React.Fragment key={index}>
                       <Button
                         className={cx('item', 'dropdownmenu-item', {
                           'active open': openDropdownIndex === index,
