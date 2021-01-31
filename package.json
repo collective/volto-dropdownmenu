@@ -1,6 +1,6 @@
 {
   "name": "volto-dropdownmenu",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Volto addon for a customizable dropdown menu",
   "main": "src/index.js",
   "repository": "https://github.com/collective/volto-dropdownmenu.git",
