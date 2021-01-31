@@ -110,37 +110,6 @@ const Navigation = ({ pathname, type }) => {
 
   return (
     <nav className="navigation navigation-dropdownmenu">
-      <div className="hamburger-wrapper mobile tablet only">
-        <button
-          className={cx('hamburger hamburger--collapse', {
-            'is-active': isMobileMenuOpen,
-          })}
-          aria-label={
-            isMobileMenuOpen
-              ? intl.formatMessage(messages.closeMobileMenu, {
-                  type,
-                })
-              : intl.formatMessage(messages.openMobileMenu, {
-                  type,
-                })
-          }
-          title={
-            isMobileMenuOpen
-              ? intl.formatMessage(messages.closeMobileMenu, {
-                  type,
-                })
-              : intl.formatMessage(messages.openMobileMenu, {
-                  type,
-                })
-          }
-          type="button"
-          onClick={toggleMobileMenu}
-        >
-          <span className="hamburger-box">
-            <span className="hamburger-inner" />
-          </span>
-        </button>
-      </div>
       <OutsideClickHandler
         onOutsideClick={() => {
           setOpenDropodownIndex(-1);
@@ -149,6 +118,38 @@ const Navigation = ({ pathname, type }) => {
           }
         }}
       >
+        <div className="hamburger-wrapper mobile tablet only">
+          <button
+            className={cx('hamburger hamburger--collapse', {
+              'is-active': isMobileMenuOpen,
+            })}
+            aria-label={
+              isMobileMenuOpen
+                ? intl.formatMessage(messages.closeMobileMenu, {
+                    type,
+                  })
+                : intl.formatMessage(messages.openMobileMenu, {
+                    type,
+                  })
+            }
+            title={
+              isMobileMenuOpen
+                ? intl.formatMessage(messages.closeMobileMenu, {
+                    type,
+                  })
+                : intl.formatMessage(messages.openMobileMenu, {
+                    type,
+                  })
+            }
+            type="button"
+            onClick={toggleMobileMenu}
+          >
+            <span className="hamburger-box">
+              <span className="hamburger-inner" />
+            </span>
+          </button>
+        </div>
+
         <Menu
           stackable
           pointing
