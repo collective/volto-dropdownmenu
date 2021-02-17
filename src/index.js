@@ -19,9 +19,8 @@ export default (config) => {
     ...config.settings.extendableAsyncConnect,
     {
       key: 'dropdownMenuNavItems',
-      promise: ({ location, store: { dispatch } }) => {
-        __SERVER__ && dispatch(getDropdownMenuNavitems());
-      },
+      promise: ({ location, store: { dispatch } }) =>
+        __SERVER__ && dispatch(getDropdownMenuNavitems()),
     },
   ];
   return config;
