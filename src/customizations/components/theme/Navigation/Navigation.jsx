@@ -29,6 +29,7 @@ const messages = defineMessages({
 });
 
 const Navigation = ({ pathname, type }) => {
+  const token = useSelector((state) => state.userSession?.token);
   const intl = useIntl();
   const { lang } = intl.locale;
   const dispatch = useDispatch();
@@ -41,7 +42,7 @@ const Navigation = ({ pathname, type }) => {
 
   useEffect(() => {
     dispatch(getDropdownMenuNavitems());
-  }, [dispatch]);
+  }, [dispatch, token]);
 
   const getAnchorTarget = (nodeElement) => {
     if (nodeElement.nodeName === 'A') {
@@ -149,7 +150,6 @@ const Navigation = ({ pathname, type }) => {
             </span>
           </button>
         </div>
-
         <Menu
           stackable
           pointing
@@ -161,11 +161,15 @@ const Navigation = ({ pathname, type }) => {
           {menu?.length > 0
             ? menu
                 ?.filter((item) => item.visible)
+                ?.filter(
+                  (item) =>
+                    item.mode === 'dropdown' || item.linkUrl?.[0]?.['@id'],
+                )
                 ?.map((item, index) =>
                   item.mode === 'simpleLink' ? (
                     <NavLink
                       to={flattenToAppURL(item.linkUrl?.[0]?.['@id'])}
-                      key={item.linkUrl?.[0]?.['@id'] + index}
+                      key={'simplelink-' + index}
                       className="item"
                       activeClassName="active"
                       exact={
@@ -177,7 +181,7 @@ const Navigation = ({ pathname, type }) => {
                       <span>{item.title}</span>
                     </NavLink>
                   ) : (
-                    <React.Fragment key={index}>
+                    <React.Fragment key={'dropdown-' + index}>
                       <Button
                         className={cx('item', 'dropdownmenu-item', {
                           'active open': openDropdownIndex === index,
