@@ -15,5 +15,13 @@ export default (config) => {
     dropdownMenuNavItems: dropdownMenuNavItemsReducer,
   };
 
+  config.settings.extendableAsyncConnect = [
+    ...config.settings.extendableAsyncConnect,
+    {
+      key: 'dropdownMenuNavItems',
+      promise: ({ location, store: { dispatch } }) =>
+        __SERVER__ && dispatch(getDropdownMenuNavitems()),
+    },
+  ];
   return config;
 };
