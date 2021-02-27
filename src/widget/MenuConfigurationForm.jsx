@@ -12,7 +12,7 @@ import {
 } from '@plone/volto/components';
 import RadioWidget from './RadioWidget';
 import { Portal } from 'react-portal';
-import { settings } from '~/config';
+import config from '@plone/volto/registry';
 
 const messages = defineMessages({
   title: {
@@ -81,7 +81,7 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
   if (!menuItem.blocks || isEmpty(menuItem.blocks)) {
     menuItem.blocks = {
       [defaultBlockId]: {
-        '@type': settings.defaultBlockType,
+        '@type': config.settings.defaultBlockType,
       },
     };
   }

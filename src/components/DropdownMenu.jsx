@@ -12,7 +12,7 @@ import {
   hasBlocksData,
   getBaseUrl,
 } from '@plone/volto/helpers';
-import { blocks } from '~/config';
+import config from '@plone/volto/registry';
 
 import './dropdownmenu.css';
 
@@ -90,7 +90,7 @@ const DropdownMenu = ({ menu, open = false, closeMenu }) => {
                     return null;
 
                   const Block =
-                    blocks.blocksConfig[blockType]?.['view'] ?? null;
+                    config.blocks.blocksConfig[blockType]?.['view'] ?? null;
                   return Block !== null ? (
                     <Block
                       key={block}

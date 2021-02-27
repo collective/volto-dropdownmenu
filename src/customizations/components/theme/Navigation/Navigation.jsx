@@ -10,7 +10,7 @@ import { defineMessages, useIntl } from 'react-intl';
 import { Menu, Button, Icon } from 'semantic-ui-react';
 import cx from 'classnames';
 import OutsideClickHandler from 'react-outside-click-handler';
-import { settings } from '~/config';
+import config from '@plone/volto/registry';
 
 import { flattenToAppURL } from '@plone/volto/helpers';
 
@@ -29,6 +29,7 @@ const messages = defineMessages({
 });
 
 const Navigation = ({ pathname, type }) => {
+  const { settings } = config;
   const token = useSelector((state) => state.userSession?.token);
   const intl = useIntl();
   const { lang } = intl.locale;
@@ -100,7 +101,7 @@ const Navigation = ({ pathname, type }) => {
     );
   };
 
-  const menu =
+  const initialmenu =
     dropdownMenuNavItems
       .filter((menu) =>
         (pathname?.length ? pathname : '/').match(
@@ -158,8 +159,8 @@ const Navigation = ({ pathname, type }) => {
             isMobileMenuOpen ? 'open' : 'computer large screen widescreen only'
           }
         >
-          {menu?.length > 0
-            ? menu
+          {initialmenu?.length > 0
+            ? initialmenu
                 ?.filter((item) => item.visible)
                 ?.filter(
                   (item) =>

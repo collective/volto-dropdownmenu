@@ -11,6 +11,7 @@ export const GET_DROPDOWNMENU_NAVITEMS = 'GET_DROPDOWNMENU_NAVITEMS';
  * Es: http://localhost:8080/Plone/@dropdown-menu
  */
 export function getDropdownMenuNavitems() {
+  console.log('action getDropdownMenuNavitems');
   return {
     type: GET_DROPDOWNMENU_NAVITEMS,
     request: {

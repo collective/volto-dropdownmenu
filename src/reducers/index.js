@@ -23,6 +23,7 @@ export const dropdownMenuNavItemsReducer = (
         loadingResults: true,
       };
     case `${GET_DROPDOWNMENU_NAVITEMS}_SUCCESS`:
+      console.log('dropdownMenuNavItemsReducer: result', result);
       return {
         ...state,
         result: action.result,
