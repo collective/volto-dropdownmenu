@@ -15,19 +15,20 @@ export default (config) => {
     dropdownMenuNavItems: dropdownMenuNavItemsReducer,
   };
 
-  // TODO dispatching with new asyncPropsExtenders
-  // config.settings.asyncPropsExtenders = [
-  //   ...config.settings.asyncPropsExtenders,
-  //   {
-  //     path: '/',
-  //     extend: (dispatchActions) =>
-  //       dispatchActions.push({
-  //         key: 'dropdownMenuNavItems',
-  //         promise: ({ location, store: { dispatch } }) =>
-  //           __SERVER__ && dispatch(getDropdownMenuNavitems()),
-  //       }),
-  //   },
-  // ];
+  config.settings.asyncPropsExtenders = [
+    ...config.settings.asyncPropsExtenders,
+    {
+      path: '/',
+      extend: (dispatchActions) => {
+        dispatchActions.push({
+          key: 'dropdownMenuNavItems',
+          promise: ({ location, store: { dispatch } }) =>
+            dispatch(getDropdownMenuNavitems()),
+        });
+        return dispatchActions;
+      },
+    },
+  ];
 
   return config;
 };
