@@ -76,7 +76,7 @@ const Navigation = ({ pathname, type }) => {
     document.body.addEventListener('click', clickListener);
 
     return () => document.body.removeEventListener('click', clickListener);
-  }, []);
+  }, [token]);
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
