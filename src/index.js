@@ -23,7 +23,7 @@ export default (config) => {
         dispatchActions.push({
           key: 'dropdownMenuNavItems',
           promise: ({ location, store: { dispatch } }) =>
-            dispatch(getDropdownMenuNavitems()),
+            __SERVER__ && dispatch(getDropdownMenuNavitems()),
         });
         return dispatchActions;
       },
