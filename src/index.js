@@ -15,16 +15,20 @@ export default (config) => {
     dropdownMenuNavItems: dropdownMenuNavItemsReducer,
   };
 
-  if (config.settings.extendableAsyncConnect) {
-    config.settings.extendableAsyncConnect = [
-      ...config.settings.extendableAsyncConnect,
-      {
-        key: 'dropdownMenuNavItems',
-        promise: ({ location, store: { dispatch } }) =>
-          __SERVER__ && dispatch(getDropdownMenuNavitems()),
+  config.settings.asyncPropsExtenders = [
+    ...config.settings.asyncPropsExtenders,
+    {
+      path: '/',
+      extend: (dispatchActions) => {
+        dispatchActions.push({
+          key: 'dropdownMenuNavItems',
+          promise: ({ location, store: { dispatch } }) =>
+            __SERVER__ && dispatch(getDropdownMenuNavitems()),
+        });
+        return dispatchActions;
       },
-    ];
-  }
+    },
+  ];
 
   return config;
 };
