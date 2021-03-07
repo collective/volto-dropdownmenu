@@ -9,6 +9,8 @@ Created with [voltocli](https://github.com/nzambello/voltocli).
 
 ## Usage
 
+> If you're using Volto < 12, then use [v1.3.0](https://github.com/collective/volto-dropdownmenu/tree/v1.3.0)
+
 Simply load the addon in your project, then edit the configuration in `/controlpanel/dropdown-menu-settings`.
 Example configuration to be saved in Plone [here](./menuConfigurationExample.json).
 
