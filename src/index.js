@@ -16,7 +16,7 @@ export default (config) => {
   };
 
   config.settings.asyncPropsExtenders = [
-    ...config.settings.asyncPropsExtenders,
+    ...(config.settings.asyncPropsExtenders ?? []),
     {
       path: '/',
       extend: (dispatchActions) => {
