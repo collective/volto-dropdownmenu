@@ -35,4 +35,4 @@ To use the default template for the dropdown menu, add `src/addons/volto-dropdow
 
 ### Demo
 
-You can watch a demonstration video on [YouTube](https://youtu.be/YTibM90geQc)
+You can watch a demonstration video on [YouTube](https://youtu.be/p2xBpTou26M)
