@@ -1,0 +1,112 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language: \n"
+"Language-Team: \n"
+"Content-Type: \n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#: components/DropdownMenu
+msgid "Unknown Block"
+msgstr "Unknown Block {block}"
+
+#: widget/MenuConfigurationWidget
+msgid "dropdownmenu-add-rootpath"
+msgstr "Add menu path"
+
+#: widget/MenuConfigurationWidget
+msgid "dropdownmenu-addmenuitem"
+msgstr "Add menu item"
+
+#: widget/MenuConfigurationForm
+msgid "dropdownmenu-blocks"
+msgstr "Blocks"
+
+#: widget/MenuConfigurationForm
+msgid "dropdownmenu-blocks-description"
+msgstr "Add some blocks to show in dropdown menu."
+
+#: components/DropdownMenu
+msgid "dropdownmenu-close-menu-button"
+msgstr "Close menu"
+
+#: widget/MenuConfigurationWidget
+msgid "dropdownmenu-delete-button"
+msgstr "Delete"
+
+#: widget/MenuConfigurationWidget
+msgid "dropdownmenu-delete-menupath"
+msgstr "Delete menu path"
+
+#: widget/MenuConfigurationForm
+msgid "dropdownmenu-deletemenuitem"
+msgstr "Delete menu item"
+
+#: widget/MenuConfigurationForm
+msgid "dropdownmenu-deletemenuitem-button"
+msgstr "Delete menu item"
+
+#: widget/MenuConfigurationWidget
+msgid "dropdownmenu-emptyActiveMenuItem"
+msgstr "Select a menu path"
+
+#: widget/MenuConfigurationWidget
+msgid "dropdownmenu-emptyActiveMenuPath"
+msgstr "Select a menu item"
+
+#: widget/MenuConfigurationForm
+msgid "dropdownmenu-linkUrl"
+msgstr "Link"
+
+#: widget/MenuConfigurationWidget
+msgid "dropdownmenu-menuitems-header"
+msgstr "Menu items"
+
+#: widget/MenuConfigurationForm
+msgid "dropdownmenu-mode"
+msgstr "Mode"
+
+#: widget/MenuConfigurationForm
+msgid "dropdownmenu-mode-dropdown"
+msgstr "Dropdown"
+
+#: widget/MenuConfigurationForm
+msgid "dropdownmenu-mode-simpleLink"
+msgstr "Simple link"
+
+#: widget/MenuConfigurationWidget
+msgid "dropdownmenu-move-menuitem-down"
+msgstr "Move menu item up"
+
+#: widget/MenuConfigurationWidget
+msgid "dropdownmenu-move-menuitem-up"
+msgstr "Move menu item down"
+
+#: widget/MenuConfigurationForm
+msgid "dropdownmenu-navigationRoot"
+msgstr "Navigation root"
+
+#: widget/MenuConfigurationWidget
+msgid "dropdownmenu-rootpath"
+msgstr "Root path"
+
+#: widget/MenuConfigurationForm
+msgid "dropdownmenu-showMoreLink"
+msgstr "Show more link"
+
+#: widget/MenuConfigurationForm
+msgid "dropdownmenu-showMoreText"
+msgstr "Show more link text"
+
+#: widget/MenuConfigurationForm
+msgid "dropdownmenu-title"
+msgstr "Title"
+
+#: widget/MenuConfigurationForm
+msgid "dropdownmenu-visible"
+msgstr "Visible"
