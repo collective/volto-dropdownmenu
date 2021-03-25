@@ -16,6 +16,7 @@ import { flattenToAppURL } from '@plone/volto/helpers';
 
 import DropdownMenu from '../../../../components/DropdownMenu';
 import { getDropdownMenuNavitems } from '../../../../actions';
+import { getItemsByPath } from '../../../../utils';
 
 const messages = defineMessages({
   closeMobileMenu: {
@@ -43,7 +44,7 @@ const Navigation = ({ pathname, type }) => {
 
   useEffect(() => {
     dispatch(getDropdownMenuNavitems());
-  }, [dispatch]);
+  }, [dispatch, token]);
 
   const getAnchorTarget = (nodeElement) => {
     if (nodeElement.nodeName === 'A') {
@@ -101,14 +102,7 @@ const Navigation = ({ pathname, type }) => {
     );
   };
 
-  const initialmenu =
-    dropdownMenuNavItems
-      .filter((menu) =>
-        (pathname?.length ? pathname : '/').match(
-          new RegExp(flattenToAppURL(menu.rootPath)),
-        ),
-      )
-      .pop()?.items ?? [];
+  const menu = getItemsByPath(dropdownMenuNavItems, pathname);
 
   return (
     <nav className="navigation navigation-dropdownmenu">
@@ -159,8 +153,8 @@ const Navigation = ({ pathname, type }) => {
             isMobileMenuOpen ? 'open' : 'computer large screen widescreen only'
           }
         >
-          {initialmenu?.length > 0
-            ? initialmenu
+          {menu?.length > 0
+            ? menu
                 ?.filter((item) => item.visible)
                 ?.filter(
                   (item) =>
