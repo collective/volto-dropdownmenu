@@ -42,7 +42,12 @@ const DropdownMenu = ({ menu, open = false, closeMenu }) => {
       : 6;
 
   return (
-    <div className={cx('dropdown-menu-wrapper', { open })}>
+    <div
+      className={cx('dropdown-menu-wrapper', {
+        open,
+        'multi-navigation-root': menu.navigationRoot?.length > 1,
+      })}
+    >
       <div className="dropdown-menu-inner">
         <Segment>
           <div className="dropdownmenu-close-button-wrapper">
