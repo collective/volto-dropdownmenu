@@ -1,7 +1,7 @@
 msgid ""
  msgstr ""
  "Project-Id-Version: Plone\n"
- "POT-Creation-Date: 2021-03-23T16:39:54.696Z\n"
+ "POT-Creation-Date: 2021-03-30T07:18:46.247Z\n"
  "Last-Translator: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
  "Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
  "MIME-Version: 1.0\n"
@@ -21,6 +21,16 @@ msgstr ""
 #: widget/MenuConfigurationWidget
 # defaultMessage: Add menu path
 msgid "dropdownmenu-add-rootpath"
+msgstr ""
+
+#: widget/MenuConfigurationForm
+# defaultMessage: Additional classes
+msgid "dropdownmenu-additionalClasses"
+msgstr ""
+
+#: widget/MenuConfigurationForm
+# defaultMessage: Additional classes for the item to apply specific styles, accordingly to site layout.
+msgid "dropdownmenu-additionalClassesDescription"
 msgstr ""
 
 #: widget/MenuConfigurationWidget

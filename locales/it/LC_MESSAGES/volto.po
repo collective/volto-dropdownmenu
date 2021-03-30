@@ -11,13 +11,21 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#: components/DropdownMenu
+ #: components/DropdownMenu
 msgid "Unknown Block"
 msgstr "Blocco {block} sconosciuto"
 
 #: widget/MenuConfigurationWidget
 msgid "dropdownmenu-add-rootpath"
 msgstr "Aggiungi radice di navigazione"
+
+#: widget/MenuConfigurationForm
+msgid "dropdownmenu-additionalClasses"
+msgstr ""
+
+#: widget/MenuConfigurationForm
+msgid "dropdownmenu-additionalClassesDescription"
+msgstr ""
 
 #: widget/MenuConfigurationWidget
 msgid "dropdownmenu-addmenuitem"

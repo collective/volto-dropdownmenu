@@ -19,6 +19,14 @@ msgstr ""
 msgid "dropdownmenu-add-rootpath"
 msgstr ""
 
+#: widget/MenuConfigurationForm
+msgid "dropdownmenu-additionalClasses"
+msgstr ""
+
+#: widget/MenuConfigurationForm
+msgid "dropdownmenu-additionalClassesDescription"
+msgstr ""
+
 #: widget/MenuConfigurationWidget
 msgid "dropdownmenu-addmenuitem"
 msgstr ""
