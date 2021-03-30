@@ -51,6 +51,15 @@ const messages = defineMessages({
     id: 'dropdownmenu-showMoreText',
     defaultMessage: '"Show more" link text',
   },
+  additionalClasses: {
+    id: 'dropdownmenu-additionalClasses',
+    defaultMessage: 'Additional classes',
+  },
+  additionalClassesDescription: {
+    id: 'dropdownmenu-additionalClassesDescription',
+    defaultMessage:
+      'Additional classes for the item to apply specific styles, accordingly to site layout.',
+  },
   blocks: {
     id: 'dropdownmenu-blocks',
     defaultMessage: 'Blocks',
@@ -198,6 +207,18 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
             description=""
             value={menuItem.showMoreText}
             onChange={(id, value) => onChangeFormData('showMoreText', value)}
+          />
+
+          <TextWidget
+            id={`${id}-additionalClasses`}
+            title={intl.formatMessage(messages.additionalClasses)}
+            description={intl.formatMessage(
+              messages.additionalClassesDescription,
+            )}
+            value={menuItem.additionalClasses}
+            onChange={(id, value) =>
+              onChangeFormData('additionalClasses', value)
+            }
           />
 
           <UIForm.Field inline className="help wide" id="menu-blocks">

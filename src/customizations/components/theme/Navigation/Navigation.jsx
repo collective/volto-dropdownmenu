@@ -165,7 +165,10 @@ const Navigation = ({ pathname, type }) => {
                     <NavLink
                       to={flattenToAppURL(item.linkUrl?.[0]?.['@id'])}
                       key={'simplelink-' + index}
-                      className="item"
+                      className={cx('item', {
+                        [item.additionalClasses]:
+                          item.additionalClasses?.length > 0,
+                      })}
                       activeClassName="active"
                       exact={
                         settings.isMultilingual
@@ -181,6 +184,8 @@ const Navigation = ({ pathname, type }) => {
                         className={cx('item', 'dropdownmenu-item', {
                           'active open': openDropdownIndex === index,
                           active: isMenuActive(item),
+                          [item.additionalClasses]:
+                            item.additionalClasses?.length > 0,
                         })}
                         onClick={() => toggleDropdownMenu(index)}
                       >

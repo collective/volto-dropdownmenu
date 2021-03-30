@@ -11,13 +11,21 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#: components/DropdownMenu
+ #: components/DropdownMenu
 msgid "Unknown Block"
 msgstr "Unknown Block {block}"
 
 #: widget/MenuConfigurationWidget
 msgid "dropdownmenu-add-rootpath"
 msgstr "Add menu path"
+
+#: widget/MenuConfigurationForm
+msgid "dropdownmenu-additionalClasses"
+msgstr "Additional classes"
+
+#: widget/MenuConfigurationForm
+msgid "dropdownmenu-additionalClassesDescription"
+msgstr "Additional classes for the item to apply specific styles, accordingly to site layout."
 
 #: widget/MenuConfigurationWidget
 msgid "dropdownmenu-addmenuitem"
