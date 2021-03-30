@@ -21,11 +21,11 @@ msgstr "Aggiungi radice di navigazione"
 
 #: widget/MenuConfigurationForm
 msgid "dropdownmenu-additionalClasses"
-msgstr ""
+msgstr "Classi aggiuntive"
 
 #: widget/MenuConfigurationForm
 msgid "dropdownmenu-additionalClassesDescription"
-msgstr ""
+msgstr "Classi aggiuntive per l'elemento per applicare stili specifici, in base al layout del sito."
 
 #: widget/MenuConfigurationWidget
 msgid "dropdownmenu-addmenuitem"
