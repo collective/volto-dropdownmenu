@@ -11,7 +11,19 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
- #: components/DropdownMenu
+ #: customizations/components/theme/Navigation/Navigation
+msgid "Close menu"
+msgstr "Close menu"
+
+#: customizations/components/theme/Navigation/Navigation
+msgid "Main navigation"
+msgstr "Main navigation"
+
+#: customizations/components/theme/Navigation/Navigation
+msgid "Open menu"
+msgstr "Open menu"
+
+#: components/DropdownMenu
 msgid "Unknown Block"
 msgstr "Unknown Block {block}"
 

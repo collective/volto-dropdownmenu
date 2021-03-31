@@ -27,6 +27,10 @@ const messages = defineMessages({
     id: 'Open menu',
     defaultMessage: 'Open menu',
   },
+  dropdownmenu_aria: {
+    id: 'Main navigation',
+    defaultMessage: 'Main navigation',
+  },
 });
 
 const Navigation = ({ pathname, type }) => {
@@ -105,7 +109,11 @@ const Navigation = ({ pathname, type }) => {
   const menu = getItemsByPath(dropdownMenuNavItems, pathname);
 
   return (
-    <nav className="navigation navigation-dropdownmenu">
+    <nav
+      className="navigation navigation-dropdownmenu"
+      role="navigation"
+      aria-label={intl.formatMessage(messages.dropdownmenu_aria)}
+    >
       <OutsideClickHandler
         onOutsideClick={() => {
           setOpenDropodownIndex(-1);
