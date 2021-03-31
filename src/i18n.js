@@ -38,9 +38,12 @@ function getMessages() {
         // We ignore the existing customized shadowed components ones, since most
         // probably we won't be overriding them
         // If so, we should do it in the config object or somewhere else
-        glob('build/messages/src/**/*.json', {
-          ignore: 'build/messages/src/customizations/**',
-        }),
+        glob(
+          'build/messages/src/**/*.json',
+          // , {
+          //   ignore: 'build/messages/src/customizations/**',
+          // }
+        ),
         (filename) =>
           map(JSON.parse(fs.readFileSync(filename, 'utf8')), (message) => ({
             ...message,
