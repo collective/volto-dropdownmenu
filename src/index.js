@@ -21,11 +21,17 @@ export default (config) => {
     {
       path: '/',
       extend: (dispatchActions) => {
-        dispatchActions.push({
-          key: 'dropdownMenuNavItems',
-          promise: ({ location, store: { dispatch } }) =>
-            __SERVER__ && dispatch(getDropdownMenuNavitems()),
-        });
+        if (
+          dispatchActions.filter(
+            (asyncAction) => asyncAction.key === 'dropdownMenuNavItems',
+          ).length === 0
+        ) {
+          dispatchActions.push({
+            key: 'dropdownMenuNavItems',
+            promise: ({ location, store: { dispatch } }) =>
+              __SERVER__ && dispatch(getDropdownMenuNavitems()),
+          });
+        }
         return dispatchActions;
       },
     },
