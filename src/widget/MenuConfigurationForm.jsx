@@ -145,6 +145,7 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
         required={true}
         value={menuItem.title}
         onChange={(id, value) => onChangeFormData('title', value)}
+        className="menu-item-field-title"
       />
       <CheckboxWidget
         id={`${id}-visible`}
@@ -153,6 +154,7 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
         defaultValue={true}
         value={!!menuItem.visible}
         onChange={(id, value) => onChangeFormData('visible', value)}
+        className="menu-item-field-visible"
       />
       <RadioWidget
         id={`${id}-mode`}
@@ -171,6 +173,7 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
             label: intl.formatMessage(messages.modeDropdown),
           },
         ]}
+        className="menu-item-field-mode"
       />
       {menuItem.mode === 'simpleLink' && (
         <ObjectBrowserWidget
@@ -181,45 +184,55 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
           mode="link"
           value={menuItem.linkUrl ?? []}
           onChange={(id, value) => onChangeFormData('linkUrl', value)}
+          className="menu-item-field-linkUrl"
         />
       )}
       {menuItem.mode === 'dropdown' && (
         <React.Fragment>
-          <ObjectBrowserWidget
-            id={`${id}-navigationRoot`}
-            title={intl.formatMessage(messages.navigationRoot)}
-            description=""
-            required={true}
-            value={menuItem.navigationRoot ?? []}
-            onChange={(id, value) => onChangeFormData('navigationRoot', value)}
-          />
-          <ObjectBrowserWidget
-            id={`${id}-showMoreLink`}
-            title={intl.formatMessage(messages.showMoreLink)}
-            description=""
-            mode="link"
-            value={menuItem.showMoreLink ?? []}
-            onChange={(id, value) => onChangeFormData('showMoreLink', value)}
-          />
-          <TextWidget
-            id={`${id}-showMoreText`}
-            title={intl.formatMessage(messages.showMoreText)}
-            description=""
-            value={menuItem.showMoreText}
-            onChange={(id, value) => onChangeFormData('showMoreText', value)}
-          />
-
-          <TextWidget
-            id={`${id}-additionalClasses`}
-            title={intl.formatMessage(messages.additionalClasses)}
-            description={intl.formatMessage(
-              messages.additionalClassesDescription,
-            )}
-            value={menuItem.additionalClasses}
-            onChange={(id, value) =>
-              onChangeFormData('additionalClasses', value)
-            }
-          />
+          <div className="menu-item-field-navigationRoot">
+            <ObjectBrowserWidget
+              id={`${id}-navigationRoot`}
+              title={intl.formatMessage(messages.navigationRoot)}
+              description=""
+              required={true}
+              value={menuItem.navigationRoot ?? []}
+              onChange={(id, value) =>
+                onChangeFormData('navigationRoot', value)
+              }
+            />
+          </div>
+          <div className="menu-item-field-showMoreLink">
+            <ObjectBrowserWidget
+              id={`${id}-showMoreLink`}
+              title={intl.formatMessage(messages.showMoreLink)}
+              description=""
+              mode="link"
+              value={menuItem.showMoreLink ?? []}
+              onChange={(id, value) => onChangeFormData('showMoreLink', value)}
+            />
+          </div>
+          <div className="menu-item-field-showMoreText">
+            <TextWidget
+              id={`${id}-showMoreText`}
+              title={intl.formatMessage(messages.showMoreText)}
+              description=""
+              value={menuItem.showMoreText}
+              onChange={(id, value) => onChangeFormData('showMoreText', value)}
+            />
+          </div>
+          <div className="menu-item-field-additionalClasses">
+            <TextWidget
+              id={`${id}-additionalClasses`}
+              title={intl.formatMessage(messages.additionalClasses)}
+              description={intl.formatMessage(
+                messages.additionalClassesDescription,
+              )}
+              value={menuItem.additionalClasses}
+              onChange={(id, value) =>
+                onChangeFormData('additionalClasses', value)
+              }
+            />
+          </div>
 
           <UIForm.Field inline className="help wide" id="menu-blocks">
             <Grid>
