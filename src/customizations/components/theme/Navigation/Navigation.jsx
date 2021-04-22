@@ -64,9 +64,9 @@ const Navigation = ({ pathname, type }) => {
     const clickListener = (e) => {
       const targetItem = getAnchorTarget(e.target);
       const dropdownmenuLinks = [
-        ...document.querySelectorAll(
+        ...(document?.querySelectorAll(
           '.navigation-dropdownmenu .dropdown-menu-wrapper ul li a, .navigation-dropdownmenu .dropdownmenu-blocks-column a, .dropdownmenu-footer a, .navigation-dropdownmenu .menu > a',
-        ),
+        ) ?? []),
       ];
 
       if (
