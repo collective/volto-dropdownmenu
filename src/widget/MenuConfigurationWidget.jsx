@@ -70,7 +70,7 @@ const defaultRootMenu = title => ({
   items: [defaultMenuItem(title)],
 });
 
-const defaultMenuConfiguration = [defaultRootMenu];
+const defaultMenuConfiguration = [defaultRootMenu(`Tab 0`)];
 
 const MenuConfigurationWidget = ({
   value,
