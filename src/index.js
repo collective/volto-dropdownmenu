@@ -1,3 +1,4 @@
+import menuSVG from '@plone/volto/icons/menu.svg';
 import { dropdownMenuNavItemsReducer } from './reducers';
 import MenuConfigurationWidget from './widget/MenuConfigurationWidget';
 import { getDropdownMenuNavitems } from './actions';
@@ -36,6 +37,8 @@ export default (config) => {
       },
     },
   ];
+
+  config.settings.controlPanelsIcons['dropdown-menu-settings'] = menuSVG;
 
   return config;
 };
