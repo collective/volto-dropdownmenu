@@ -190,7 +190,7 @@ const Navigation = ({ pathname, type }) => {
                     <React.Fragment key={'dropdown-' + index}>
                       <Button
                         className={cx('item', 'dropdownmenu-item', {
-                          'active open': openDropdownIndex === index,
+                          open: openDropdownIndex === index,
                           active: isMenuActive(item),
                           [item.additionalClasses]:
                             item.additionalClasses?.length > 0,
