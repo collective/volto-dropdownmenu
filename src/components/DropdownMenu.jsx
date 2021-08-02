@@ -47,6 +47,9 @@ const DropdownMenu = ({ menu, open = false, closeMenu }) => {
         open,
         'multi-navigation-root': menu.navigationRoot?.length > 1,
       })}
+      aria-hidden={!open}
+      tabIndex={-1}
+      role="menu"
     >
       <div className="dropdown-menu-inner">
         <Segment>

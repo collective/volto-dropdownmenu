@@ -196,6 +196,10 @@ const Navigation = ({ pathname, type }) => {
                             item.additionalClasses?.length > 0,
                         })}
                         onClick={() => toggleDropdownMenu(index)}
+                        aria-expanded={
+                          openDropdownIndex === index ? true : false
+                        }
+                        aria-haspopup={true}
                       >
                         <span>{item.title}</span>
                         <Icon
