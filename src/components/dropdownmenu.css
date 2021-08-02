@@ -7,10 +7,9 @@
   z-index: 1;
   top: 92px;
   left: 0;
+  display: none;
   overflow: hidden;
   width: 100%;
-  max-height: 0;
-  transition: max-height 0.5s ease-in;
 }
 
 @media (max-width: 766px) {
@@ -25,7 +24,7 @@
 
 .dropdown-menu-wrapper.open {
   z-index: 2;
-  max-height: 100%;
+  display: block;
   border-top: 1px solid rgba(199, 213, 216, 0.4);
 }
 
