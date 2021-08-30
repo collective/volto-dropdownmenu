@@ -50,6 +50,11 @@ const Navigation = ({ pathname, type }) => {
     dispatch(getDropdownMenuNavitems());
   }, [dispatch, token]);
 
+  useEffect(() => {
+    setMobileMenuOpen(false);
+    setOpenDropodownIndex(-1);
+  }, [pathname]);
+
   const getAnchorTarget = (nodeElement) => {
     if (nodeElement.nodeName === 'A') {
       return nodeElement;
