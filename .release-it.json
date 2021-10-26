@@ -12,6 +12,6 @@
     "after:bump": "npx auto-changelog --commit-limit false -p"
   },
   "npm": {
-    "publish": false
+    "publish": true
   }
 }
