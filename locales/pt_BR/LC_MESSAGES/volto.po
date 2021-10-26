@@ -11,122 +11,137 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
- #: customizations/components/theme/Navigation/Navigation
-msgid "Close menu"
-msgstr ""
-
-#: customizations/components/theme/Navigation/Navigation
-msgid "Main navigation"
-msgstr ""
-
-#: customizations/components/theme/Navigation/Navigation
-msgid "Open menu"
-msgstr ""
-
 #: components/DropdownMenu
+# defaultMessage: Unknown Block {block}
 msgid "Unknown Block"
 msgstr ""
 
 #: widget/MenuConfigurationWidget
+# defaultMessage: Add menu path
 msgid "dropdownmenu-add-rootpath"
 msgstr ""
 
 #: widget/MenuConfigurationForm
+# defaultMessage: Additional classes
 msgid "dropdownmenu-additionalClasses"
 msgstr ""
 
 #: widget/MenuConfigurationForm
+# defaultMessage: Additional classes for the item to apply specific styles, accordingly to site layout.
 msgid "dropdownmenu-additionalClassesDescription"
 msgstr ""
 
 #: widget/MenuConfigurationWidget
+# defaultMessage: Add menu item
 msgid "dropdownmenu-addmenuitem"
 msgstr ""
 
 #: widget/MenuConfigurationForm
+# defaultMessage: Blocks
 msgid "dropdownmenu-blocks"
 msgstr ""
 
 #: widget/MenuConfigurationForm
+# defaultMessage: Add some blocks to show in dropdown menu.
 msgid "dropdownmenu-blocks-description"
 msgstr ""
 
 #: components/DropdownMenu
+# defaultMessage: Close menu
 msgid "dropdownmenu-close-menu-button"
 msgstr ""
 
 #: widget/MenuConfigurationWidget
+# defaultMessage: Delete
 msgid "dropdownmenu-delete-button"
 msgstr ""
 
 #: widget/MenuConfigurationWidget
+# defaultMessage: Delete menu path
 msgid "dropdownmenu-delete-menupath"
 msgstr ""
 
 #: widget/MenuConfigurationForm
+# defaultMessage: Delete menu item
 msgid "dropdownmenu-deletemenuitem"
 msgstr ""
 
 #: widget/MenuConfigurationForm
+# defaultMessage: Delete menu item
 msgid "dropdownmenu-deletemenuitem-button"
 msgstr ""
 
 #: widget/MenuConfigurationWidget
+# defaultMessage: Select a menu item
 msgid "dropdownmenu-emptyActiveMenuItem"
 msgstr ""
 
 #: widget/MenuConfigurationWidget
+# defaultMessage: Select a menu path
 msgid "dropdownmenu-emptyActiveMenuPath"
 msgstr ""
 
 #: widget/MenuConfigurationForm
+# defaultMessage: Link
 msgid "dropdownmenu-linkUrl"
 msgstr ""
 
 #: widget/MenuConfigurationWidget
+# defaultMessage: Menu items
 msgid "dropdownmenu-menuitems-header"
 msgstr ""
 
 #: widget/MenuConfigurationForm
+# defaultMessage: Mode
 msgid "dropdownmenu-mode"
 msgstr ""
 
 #: widget/MenuConfigurationForm
+# defaultMessage: Dropdown
 msgid "dropdownmenu-mode-dropdown"
 msgstr ""
 
 #: widget/MenuConfigurationForm
+# defaultMessage: Simple link
 msgid "dropdownmenu-mode-simpleLink"
 msgstr ""
 
 #: widget/MenuConfigurationWidget
+# defaultMessage: Move menu item down
 msgid "dropdownmenu-move-menuitem-down"
 msgstr ""
 
 #: widget/MenuConfigurationWidget
+# defaultMessage: Move menu item up
 msgid "dropdownmenu-move-menuitem-up"
 msgstr ""
 
 #: widget/MenuConfigurationForm
+# defaultMessage: Navigation root
 msgid "dropdownmenu-navigationRoot"
 msgstr ""
 
 #: widget/MenuConfigurationWidget
+# defaultMessage: Root path
 msgid "dropdownmenu-rootpath"
 msgstr ""
 
 #: widget/MenuConfigurationForm
+# defaultMessage: "Show more" link
 msgid "dropdownmenu-showMoreLink"
 msgstr ""
 
 #: widget/MenuConfigurationForm
+# defaultMessage: "Show more" link text
 msgid "dropdownmenu-showMoreText"
 msgstr ""
 
 #: widget/MenuConfigurationForm
+# defaultMessage: Title
 msgid "dropdownmenu-title"
 msgstr ""
 
 #: widget/MenuConfigurationForm
+# defaultMessage: Visible
 msgid "dropdownmenu-visible"
 msgstr ""

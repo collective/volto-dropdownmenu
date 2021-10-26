@@ -11,122 +11,137 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
- #: customizations/components/theme/Navigation/Navigation
-msgid "Close menu"
-msgstr "Chiudi il menu"
-
-#: customizations/components/theme/Navigation/Navigation
-msgid "Main navigation"
-msgstr "Navigazione principale"
-
-#: customizations/components/theme/Navigation/Navigation
-msgid "Open menu"
-msgstr "Apri il menu"
-
 #: components/DropdownMenu
+# defaultMessage: Unknown Block {block}
 msgid "Unknown Block"
 msgstr "Blocco {block} sconosciuto"
 
 #: widget/MenuConfigurationWidget
+# defaultMessage: Add menu path
 msgid "dropdownmenu-add-rootpath"
 msgstr "Aggiungi radice di navigazione"
 
 #: widget/MenuConfigurationForm
+# defaultMessage: Additional classes
 msgid "dropdownmenu-additionalClasses"
 msgstr "Classi aggiuntive"
 
 #: widget/MenuConfigurationForm
+# defaultMessage: Additional classes for the item to apply specific styles, accordingly to site layout.
 msgid "dropdownmenu-additionalClassesDescription"
 msgstr "Classi aggiuntive per l'elemento per applicare stili specifici, in base al layout del sito."
 
 #: widget/MenuConfigurationWidget
+# defaultMessage: Add menu item
 msgid "dropdownmenu-addmenuitem"
 msgstr "Aggiungi voce di menu"
 
 #: widget/MenuConfigurationForm
+# defaultMessage: Blocks
 msgid "dropdownmenu-blocks"
 msgstr "Blocchi"
 
 #: widget/MenuConfigurationForm
+# defaultMessage: Add some blocks to show in dropdown menu.
 msgid "dropdownmenu-blocks-description"
 msgstr "Aggiungi i blocchi che verranno mostrati nel megamenu"
 
 #: components/DropdownMenu
+# defaultMessage: Close menu
 msgid "dropdownmenu-close-menu-button"
 msgstr "Chiudi il menu"
 
 #: widget/MenuConfigurationWidget
+# defaultMessage: Delete
 msgid "dropdownmenu-delete-button"
 msgstr "Elimina il menu"
 
 #: widget/MenuConfigurationWidget
+# defaultMessage: Delete menu path
 msgid "dropdownmenu-delete-menupath"
 msgstr "Elimina"
 
 #: widget/MenuConfigurationForm
+# defaultMessage: Delete menu item
 msgid "dropdownmenu-deletemenuitem"
 msgstr "Elimina"
 
 #: widget/MenuConfigurationForm
+# defaultMessage: Delete menu item
 msgid "dropdownmenu-deletemenuitem-button"
 msgstr "Elimina la voce di menu"
 
 #: widget/MenuConfigurationWidget
+# defaultMessage: Select a menu item
 msgid "dropdownmenu-emptyActiveMenuItem"
 msgstr "Seleziona una voce di menu"
 
 #: widget/MenuConfigurationWidget
+# defaultMessage: Select a menu path
 msgid "dropdownmenu-emptyActiveMenuPath"
 msgstr "Seleziona una radice di navigazione"
 
 #: widget/MenuConfigurationForm
+# defaultMessage: Link
 msgid "dropdownmenu-linkUrl"
 msgstr "Link"
 
 #: widget/MenuConfigurationWidget
+# defaultMessage: Menu items
 msgid "dropdownmenu-menuitems-header"
 msgstr "Voci del menu"
 
 #: widget/MenuConfigurationForm
+# defaultMessage: Mode
 msgid "dropdownmenu-mode"
 msgstr "Modalità"
 
 #: widget/MenuConfigurationForm
+# defaultMessage: Dropdown
 msgid "dropdownmenu-mode-dropdown"
 msgstr "Megamenu"
 
 #: widget/MenuConfigurationForm
+# defaultMessage: Simple link
 msgid "dropdownmenu-mode-simpleLink"
 msgstr "Link semplice"
 
 #: widget/MenuConfigurationWidget
+# defaultMessage: Move menu item down
 msgid "dropdownmenu-move-menuitem-down"
 msgstr "Sposta dopo"
 
 #: widget/MenuConfigurationWidget
+# defaultMessage: Move menu item up
 msgid "dropdownmenu-move-menuitem-up"
 msgstr "Sposta prima"
 
 #: widget/MenuConfigurationForm
+# defaultMessage: Navigation root
 msgid "dropdownmenu-navigationRoot"
 msgstr "Radici di navigazione"
 
 #: widget/MenuConfigurationWidget
+# defaultMessage: Root path
 msgid "dropdownmenu-rootpath"
 msgstr "Radice del menu"
 
 #: widget/MenuConfigurationForm
+# defaultMessage: "Show more" link
 msgid "dropdownmenu-showMoreLink"
 msgstr "Mostra il link ad altro"
 
 #: widget/MenuConfigurationForm
+# defaultMessage: "Show more" link text
 msgid "dropdownmenu-showMoreText"
 msgstr "Testo per il link ad altro"
 
 #: widget/MenuConfigurationForm
+# defaultMessage: Title
 msgid "dropdownmenu-title"
 msgstr "Titolo"
 
 #: widget/MenuConfigurationForm
+# defaultMessage: Visible
 msgid "dropdownmenu-visible"
 msgstr "Visibile"
