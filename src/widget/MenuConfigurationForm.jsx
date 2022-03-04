@@ -76,6 +76,10 @@ const messages = defineMessages({
     id: 'dropdownmenu-deletemenuitem-button',
     defaultMessage: 'Delete menu item',
   },
+  clickableNavigationRoots: {
+    id: 'dropdownmenu-clickableNavigationRoots',
+    defaultMessage: 'Clickable navigation roots',
+  },
 });
 
 const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
@@ -117,11 +121,12 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
     return () => {
       document
         .querySelector('form.ui.form')
-        .removeEventListener('click', preventClick);
+        ?.removeEventListener('click', preventClick);
       document.querySelectorAll('form.ui.form input').forEach((item) => {
-        item.removeEventListener('keypress', preventEnter);
+        item?.removeEventListener('keypress', preventEnter);
       });
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onChangeFormData = (id, value) => {
@@ -201,6 +206,22 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
               }
             />
           </div>
+
+          {config.settings?.['volto-dropdownmenu']?.options
+            ?.clickableNavigationRoots && (
+            <div className="menu-item-field-clickableNavigationRoots">
+              <CheckboxWidget
+                id={`${id}-clickableNavigationRoots`}
+                title={intl.formatMessage(messages.clickableNavigationRoots)}
+                description=""
+                defaultValue={true}
+                value={!!menuItem.clickableNavigationRoots}
+                onChange={(id, value) =>
+                  onChangeFormData('clickableNavigationRoots', value)
+                }
+              />
+            </div>
+          )}
           <div className="menu-item-field-showMoreLink">
             <ObjectBrowserWidget
               id={`${id}-showMoreLink`}
@@ -233,7 +254,6 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
               }
             />
           </div>
-
           <UIForm.Field inline className="help wide" id="menu-blocks">
             <Grid>
               <Grid.Row stretched>

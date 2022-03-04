@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Plone\n"
-"POT-Creation-Date: 2021-10-26T09:00:18.836Z\n"
+"POT-Creation-Date: 2022-03-04T16:04:33.047Z\n"
 "Last-Translator: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -46,6 +46,11 @@ msgstr ""
 #: widget/MenuConfigurationForm
 # defaultMessage: Add some blocks to show in dropdown menu.
 msgid "dropdownmenu-blocks-description"
+msgstr ""
+
+#: widget/MenuConfigurationForm
+# defaultMessage: Clickable navigation roots
+msgid "dropdownmenu-clickableNavigationRoots"
 msgstr ""
 
 #: components/DropdownMenu

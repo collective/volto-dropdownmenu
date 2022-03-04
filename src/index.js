@@ -40,5 +40,11 @@ export default (config) => {
 
   config.settings.controlPanelsIcons['dropdown-menu-settings'] = menuSVG;
 
+  config.settings['volto-dropdownmenu'] = {
+    options: {
+      clickableNavigationRoots: false, //if true, a checkbox option in dropdown menu appears
+    },
+  };
+
   return config;
 };

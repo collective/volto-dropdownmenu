@@ -46,6 +46,11 @@ msgstr "Blocchi"
 msgid "dropdownmenu-blocks-description"
 msgstr "Aggiungi i blocchi che verranno mostrati nel megamenu"
 
+#: widget/MenuConfigurationForm
+# defaultMessage: Clickable navigation roots
+msgid "dropdownmenu-clickableNavigationRoots"
+msgstr "Rendi cliccabili le radici di navigazione"
+
 #: components/DropdownMenu
 # defaultMessage: Close menu
 msgid "dropdownmenu-close-menu-button"

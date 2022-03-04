@@ -46,6 +46,11 @@ msgstr "Blocks"
 msgid "dropdownmenu-blocks-description"
 msgstr "Add some blocks to show in dropdown menu."
 
+#: widget/MenuConfigurationForm
+# defaultMessage: Clickable navigation roots
+msgid "dropdownmenu-clickableNavigationRoots"
+msgstr ""
+
 #: components/DropdownMenu
 # defaultMessage: Close menu
 msgid "dropdownmenu-close-menu-button"

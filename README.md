@@ -23,6 +23,19 @@ To use the default template for the dropdown menu, add `src/addons/volto-dropdow
   ]
 ```
 
+### Navigation roots
+
+By default, navigations roots are clickable, but there's the possibility to make them not clickable.
+Enabling the field 'clickableNavigationRoots' in volto-dropdownmenu config, a field appears in configuration form and let editor to decide if make navigation roots clickable or not.
+
+```json
+ config.settings['volto-dropdownmenu'] = {
+    options: {
+      clickableNavigationRoots: true, //if true, a checkbox option in dropdown menu appears
+    },
+  };
+```
+
 ## Screenshots and demo
 
 ### Controlpanel

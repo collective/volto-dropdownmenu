@@ -32,7 +32,7 @@ const DropdownMenu = ({ menu, open = false, closeMenu }) => {
   const location = useLocation();
   const blocksFieldname = getBlocksFieldname(menu);
   const blocksLayoutFieldname = getBlocksLayoutFieldname(menu);
-
+  const { clickableNavigationRoots = true } = menu;
   const navItemWidth = menu.navigationRoot?.length > 1 ? 3 : 4;
   const blocksWidth =
     menu.navigationRoot?.length === 1
@@ -76,7 +76,10 @@ const DropdownMenu = ({ menu, open = false, closeMenu }) => {
                 <h2>
                   <ConditionalLink
                     to={flattenToAppURL(navRoot['@id'])}
-                    condition={menu.navigationRoot?.length > 1}
+                    condition={
+                      menu.navigationRoot?.length > 1 &&
+                      clickableNavigationRoots
+                    }
                   >
                     <span>{navRoot.title}</span>
                   </ConditionalLink>
