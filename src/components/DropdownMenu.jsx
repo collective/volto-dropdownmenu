@@ -40,6 +40,13 @@ const DropdownMenu = ({ menu, open = false, closeMenu }) => {
       : menu.navigationRoot?.length > 2 || menu.navigationRoot?.length === 0
       ? 12
       : 6;
+  let hasBlocks = hasBlocksData(menu);
+  if (menu?.blocks && Object.keys(menu.blocks).length === 1) {
+    let b = menu.blocks[Object.keys(menu.blocks)[0]];
+    if (b['@type'] === 'text' && (!b.text || b.text?.length === 0)) {
+      hasBlocks = false;
+    }
+  }
 
   return (
     <div
@@ -87,7 +94,7 @@ const DropdownMenu = ({ menu, open = false, closeMenu }) => {
                 )}
               </Grid.Column>
             ))}
-            {hasBlocksData(menu) && (
+            {hasBlocks && (
               <Grid.Column
                 width={blocksWidth}
                 className="dropdownmenu-blocks-column"
