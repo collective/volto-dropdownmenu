@@ -70,7 +70,7 @@ const Navigation = ({ pathname, type }) => {
       const targetItem = getAnchorTarget(e.target);
       const dropdownmenuLinks = [
         ...(document?.querySelectorAll(
-          '.navigation-dropdownmenu .dropdown-menu-wrapper ul li a, .navigation-dropdownmenu .dropdownmenu-blocks-column a, .dropdownmenu-footer a, .navigation-dropdownmenu .menu > a',
+          '.navigation-dropdownmenu .dropdown-menu-wrapper ul li a, .navigation-dropdownmenu .dropdown-menu-wrapper h2 a, .navigation-dropdownmenu .dropdownmenu-blocks-column a, .dropdownmenu-footer a, .navigation-dropdownmenu .menu > a',
         ) ?? []),
       ];
 
