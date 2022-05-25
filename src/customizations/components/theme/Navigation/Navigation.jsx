@@ -88,6 +88,14 @@ const Navigation = ({ pathname, type }) => {
     return () => document.body.removeEventListener('click', clickListener);
   }, []);
 
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.classList.add('mobile-menu-opened'); //to prevent scroll body
+    } else {
+      document.body.classList.remove('mobile-menu-opened'); //re-enable scroll body
+    }
+  }, [isMobileMenuOpen]);
+
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
