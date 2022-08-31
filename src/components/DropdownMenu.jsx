@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { defineMessages, useIntl } from 'react-intl';
 import { Segment, Container, Icon, Grid, Button } from 'semantic-ui-react';
@@ -47,6 +47,24 @@ const DropdownMenu = ({ menu, open = false, closeMenu }) => {
       hasBlocks = false;
     }
   }
+
+  const lastLinkEventListener = (e) => {
+    if (e.code === 'Tab') {
+      document
+        .querySelector(
+          '.dropdown-menu-wrapper.open button.dropdown-close-button',
+        )
+        .focus();
+    }
+  };
+
+  useEffect(() => {
+    const links = document.querySelectorAll('.dropdown-menu-wrapper.open a');
+    const lastLink = links[links.length - 1];
+    if (lastLink) {
+      lastLink.addEventListener('keydown', lastLinkEventListener);
+    }
+  });
 
   return (
     <div
