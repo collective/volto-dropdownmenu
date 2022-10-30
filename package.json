@@ -8,7 +8,7 @@
   "license": "MIT",
   "devDependencies": {
     "@plone/scripts": "^2.0.0",
-    "release-it": "*"
+    "release-it": "^14.10.1"
   },
   "scripts": {
     "i18n": "rm -rf build/messages && NODE_ENV=production i18n --addon",
