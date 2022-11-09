@@ -7,6 +7,18 @@ To be used with mrs-developer, see [Volto docs](https://docs.voltocms.com/custom
 
 Created with [voltocli](https://github.com/nzambello/voltocli).
 
+## Installation 
+
+Afer installation, please add following lines into package.json to enable it. 
+
+```json 
+
+ "addons": [
+    "volto-dropdownmenu"
+  ],
+
+```
+
 ## Usage
 
 > If you are using Volto < 16, then use [v2.4.3](https://github.com/collective/volto-dropdownmenu/tree/v2.4.3)
