@@ -1,84 +1,86 @@
-import React, { useEffect } from 'react';
-import { defineMessages, useIntl } from 'react-intl';
-import { v4 as uuid } from 'uuid';
-import { isEmpty } from 'lodash';
-import { Form as UIForm, Grid, Button } from 'semantic-ui-react';
+import React, { useEffect } from "react";
+import { defineMessages, useIntl } from "react-intl";
+import { v4 as uuid } from "uuid";
+import { isEmpty } from "lodash";
+import { Form as UIForm, Grid, Button } from "semantic-ui-react";
 import {
   Form,
   TextWidget,
   CheckboxWidget,
   ObjectBrowserWidget,
   Sidebar,
-} from '@plone/volto/components';
-import RadioWidget from './RadioWidget';
-import { Portal } from 'react-portal';
-import config from '@plone/volto/registry';
+} from "@plone/volto/components";
+import RadioWidget from "./RadioWidget";
+import SelectWidget from "./SelectWidget";
+import { Portal } from "react-portal";
+import config from "@plone/volto/registry";
 
 const messages = defineMessages({
   title: {
-    id: 'dropdownmenu-title',
-    defaultMessage: 'Title',
+    id: "dropdownmenu-title",
+    defaultMessage: "Title",
   },
   visible: {
-    id: 'dropdownmenu-visible',
-    defaultMessage: 'Visible',
+    id: "dropdownmenu-visible",
+    defaultMessage: "Visible",
   },
   mode: {
-    id: 'dropdownmenu-mode',
-    defaultMessage: 'Mode',
+    id: "dropdownmenu-mode",
+    defaultMessage: "Mode",
   },
   modeSimpleLink: {
-    id: 'dropdownmenu-mode-simpleLink',
-    defaultMessage: 'Simple link',
+    id: "dropdownmenu-mode-simpleLink",
+    defaultMessage: "Simple link",
   },
   modeDropdown: {
-    id: 'dropdownmenu-mode-dropdown',
-    defaultMessage: 'Dropdown',
+    id: "dropdownmenu-mode-dropdown",
+    defaultMessage: "Dropdown",
   },
   linkUrl: {
-    id: 'dropdownmenu-linkUrl',
-    defaultMessage: 'Link',
+    id: "dropdownmenu-linkUrl",
+    defaultMessage: "Link",
   },
   navigationRoot: {
-    id: 'dropdownmenu-navigationRoot',
-    defaultMessage: 'Navigation root',
+    id: "dropdownmenu-navigationRoot",
+    defaultMessage: "Navigation root",
   },
   showMoreLink: {
-    id: 'dropdownmenu-showMoreLink',
+    id: "dropdownmenu-showMoreLink",
     defaultMessage: '"Show more" link',
   },
   showMoreText: {
-    id: 'dropdownmenu-showMoreText',
+    id: "dropdownmenu-showMoreText",
     defaultMessage: '"Show more" link text',
   },
   additionalClasses: {
-    id: 'dropdownmenu-additionalClasses',
-    defaultMessage: 'Additional classes',
+    id: "dropdownmenu-additionalClasses",
+    defaultMessage: "Additional classes",
   },
   additionalClassesDescription: {
-    id: 'dropdownmenu-additionalClassesDescription',
+    id: "dropdownmenu-additionalClassesDescription",
     defaultMessage:
-      'Additional classes for the item to apply specific styles, accordingly to site layout.',
+      "Additional classes for the item to apply specific styles, accordingly to site layout.",
   },
   blocks: {
-    id: 'dropdownmenu-blocks',
-    defaultMessage: 'Blocks',
+    id: "dropdownmenu-blocks",
+    defaultMessage: "Blocks",
   },
   blocks_description: {
-    id: 'dropdownmenu-blocks-description',
-    defaultMessage: 'Add some blocks to show in dropdown menu.',
+    id: "dropdownmenu-blocks-description",
+    defaultMessage: "Add some blocks to show in dropdown menu.",
   },
   deleteMenuItem: {
-    id: 'dropdownmenu-deletemenuitem',
-    defaultMessage: 'Delete menu item',
+    id: "dropdownmenu-deletemenuitem",
+    defaultMessage: "Delete menu item",
   },
   deleteButton: {
-    id: 'dropdownmenu-deletemenuitem-button',
-    defaultMessage: 'Delete menu item',
+    id: "dropdownmenu-deletemenuitem-button",
+    defaultMessage: "Delete menu item",
   },
-  clickableNavigationRoots: {
-    id: 'dropdownmenu-clickableNavigationRoots',
-    defaultMessage: 'Clickable navigation roots',
+  id_lighthouse_description: {
+    id: "ID Lighthouse Help Description",
+    defaultMessage:
+      "Identificativo di servizio a solo uso interno, utilizzato per le verifiche AgID inerenti al PNRR.",
   },
 });
 
@@ -94,7 +96,7 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
   if (!menuItem.blocks || isEmpty(menuItem.blocks)) {
     menuItem.blocks = {
       [defaultBlockId]: {
-        '@type': config.settings.defaultBlockType,
+        "@type": config.settings.defaultBlockType,
       },
     };
   }
@@ -104,29 +106,32 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
   };
 
   const preventEnter = (e) => {
-    if (e.code === 'Enter') {
+    if (e.code === "Enter") {
       preventClick(e);
     }
   };
 
   useEffect(() => {
     document
-      .querySelector('form.ui.form')
-      .addEventListener('click', preventClick);
+      .querySelector("form.ui.form")
+      .addEventListener("click", preventClick);
 
-    document.querySelectorAll('form.ui.form input').forEach((item) => {
-      item.addEventListener('keypress', preventEnter);
+    document.querySelectorAll("form.ui.form input").forEach((item) => {
+      item.addEventListener("keypress", preventEnter);
     });
 
     return () => {
-      document
-        .querySelector('form.ui.form')
-        ?.removeEventListener('click', preventClick);
-      document.querySelectorAll('form.ui.form input').forEach((item) => {
-        item?.removeEventListener('keypress', preventEnter);
+      // eslint-disable-next-line no-lone-blocks
+      {
+        document.querySelector("form.ui.form") &&
+          document
+            .querySelector("form.ui.form")
+            .removeEventListener("click", preventClick);
+      }
+      document.querySelectorAll("form.ui.form input").forEach((item) => {
+        item.removeEventListener("keypress", preventEnter);
       });
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onChangeFormData = (id, value) => {
@@ -149,8 +154,24 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
         description=""
         required={true}
         value={menuItem.title}
-        onChange={(id, value) => onChangeFormData('title', value)}
+        onChange={(id, value) => onChangeFormData("title", value)}
         className="menu-item-field-title"
+      />
+      <SelectWidget
+        id={`${id}-lighthouse`}
+        title="ID lighthouse"
+        description={intl.formatMessage(messages.id_lighthouse_description)}
+        choices={[
+          ["all-services", "all-services"],
+          ["management", "management"],
+          ["live", "live"],
+          ["news", "news"],
+          ["all-topics", "all-topics"],
+        ]}
+        value={menuItem.id_lighthouse}
+        onChange={(id, value) => onChangeFormData("id_lighthouse", value)}
+        aria-label="aria-label"
+        className="id_lighthouse"
       />
       <CheckboxWidget
         id={`${id}-visible`}
@@ -158,7 +179,7 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
         description=""
         defaultValue={true}
         value={!!menuItem.visible}
-        onChange={(id, value) => onChangeFormData('visible', value)}
+        onChange={(id, value) => onChangeFormData("visible", value)}
         className="menu-item-field-visible"
       />
       <RadioWidget
@@ -167,20 +188,20 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
         description=""
         required={true}
         value={menuItem.mode}
-        onChange={(id, value) => onChangeFormData('mode', value)}
+        onChange={(id, value) => onChangeFormData("mode", value)}
         valueList={[
           {
-            value: 'simpleLink',
+            value: "simpleLink",
             label: intl.formatMessage(messages.modeSimpleLink),
           },
           {
-            value: 'dropdown',
+            value: "dropdown",
             label: intl.formatMessage(messages.modeDropdown),
           },
         ]}
         className="menu-item-field-mode"
       />
-      {menuItem.mode === 'simpleLink' && (
+      {menuItem.mode === "simpleLink" && (
         <ObjectBrowserWidget
           id={`${id}-linkUrl`}
           title={intl.formatMessage(messages.linkUrl)}
@@ -188,11 +209,11 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
           required={true}
           mode="link"
           value={menuItem.linkUrl ?? []}
-          onChange={(id, value) => onChangeFormData('linkUrl', value)}
+          onChange={(id, value) => onChangeFormData("linkUrl", value)}
           className="menu-item-field-linkUrl"
         />
       )}
-      {menuItem.mode === 'dropdown' && (
+      {menuItem.mode === "dropdown" && (
         <React.Fragment>
           <div className="menu-item-field-navigationRoot">
             <ObjectBrowserWidget
@@ -202,26 +223,10 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
               required={true}
               value={menuItem.navigationRoot ?? []}
               onChange={(id, value) =>
-                onChangeFormData('navigationRoot', value)
+                onChangeFormData("navigationRoot", value)
               }
             />
           </div>
-
-          {config.settings?.['volto-dropdownmenu']?.options
-            ?.clickableNavigationRoots && (
-            <div className="menu-item-field-clickableNavigationRoots">
-              <CheckboxWidget
-                id={`${id}-clickableNavigationRoots`}
-                title={intl.formatMessage(messages.clickableNavigationRoots)}
-                description=""
-                defaultValue={true}
-                value={!!menuItem.clickableNavigationRoots}
-                onChange={(id, value) =>
-                  onChangeFormData('clickableNavigationRoots', value)
-                }
-              />
-            </div>
-          )}
           <div className="menu-item-field-showMoreLink">
             <ObjectBrowserWidget
               id={`${id}-showMoreLink`}
@@ -229,7 +234,7 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
               description=""
               mode="link"
               value={menuItem.showMoreLink ?? []}
-              onChange={(id, value) => onChangeFormData('showMoreLink', value)}
+              onChange={(id, value) => onChangeFormData("showMoreLink", value)}
             />
           </div>
           <div className="menu-item-field-showMoreText">
@@ -238,7 +243,7 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
               title={intl.formatMessage(messages.showMoreText)}
               description=""
               value={menuItem.showMoreText}
-              onChange={(id, value) => onChangeFormData('showMoreText', value)}
+              onChange={(id, value) => onChangeFormData("showMoreText", value)}
             />
           </div>
           <div className="menu-item-field-additionalClasses">
@@ -246,14 +251,15 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
               id={`${id}-additionalClasses`}
               title={intl.formatMessage(messages.additionalClasses)}
               description={intl.formatMessage(
-                messages.additionalClassesDescription,
+                messages.additionalClassesDescription
               )}
               value={menuItem.additionalClasses}
               onChange={(id, value) =>
-                onChangeFormData('additionalClasses', value)
+                onChangeFormData("additionalClasses", value)
               }
             />
           </div>
+
           <UIForm.Field inline className="help wide" id="menu-blocks">
             <Grid>
               <Grid.Row stretched>
@@ -300,7 +306,7 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
           </Grid.Row>
         </Grid>
       </UIForm.Field>
-      <Portal node={document.getElementById('sidebar')}>
+      <Portal node={document.getElementById("sidebar")}>
         <Sidebar />
       </Portal>
     </>
