@@ -1,16 +1,27 @@
 import menuSVG from '@plone/volto/icons/menu.svg';
 import { dropdownMenuNavItemsReducer } from './reducers';
 import MenuConfigurationWidget from './widget/MenuConfigurationWidget';
+import MenuConfigurationForm from './widget/MenuConfigurationForm';
 import { getDropdownMenuNavitems } from './actions';
 import { getItemsByPath } from './utils';
 
-export { MenuConfigurationWidget, getDropdownMenuNavitems, getItemsByPath };
+export {
+  MenuConfigurationWidget,
+  getDropdownMenuNavitems,
+  getItemsByPath,
+  MenuConfigurationForm,
+};
 
 export default (config) => {
   config.widgets.id = {
     ...config.widgets.id,
     menu_configuration: MenuConfigurationWidget,
   };
+
+  config.registerComponent({
+    name: 'MenuConfigurationForm',
+    component: MenuConfigurationForm,
+  });
 
   config.addonReducers = {
     ...config.addonReducers,
@@ -24,7 +35,7 @@ export default (config) => {
       extend: (dispatchActions) => {
         if (
           dispatchActions.filter(
-            (asyncAction) => asyncAction.key === 'dropdownMenuNavItems',
+            (asyncAction) => asyncAction.key === 'dropdownMenuNavItems'
           ).length === 0
         ) {
           dispatchActions.push({

@@ -7,11 +7,11 @@ To be used with mrs-developer, see [Volto docs](https://docs.voltocms.com/custom
 
 Created with [voltocli](https://github.com/nzambello/voltocli).
 
-## Installation 
+## Installation
 
-Afer installation, please add following lines into package.json to enable it. 
+Afer installation, please add following lines into package.json to enable it.
 
-```json 
+```json
 
  "addons": [
     "volto-dropdownmenu"
@@ -35,6 +35,17 @@ To use the default template for the dropdown menu, add `src/addons/volto-dropdow
     "src/customizations",
     "src/addons/volto-dropdownmenu/src/customizations"
   ]
+```
+
+To customize the `MenuConfigurationForm` component, you can now create your own component in your site and replace it using the Volto component registry in your site config file:
+
+```javascript
+import MyMenuConfigurationForm from './src/MyMenuConfigurationForm';
+
+config.registerComponent({
+  name: 'MenuConfigurationForm',
+  component: MyMenuConfigurationForm,
+});
 ```
 
 ### Navigation roots

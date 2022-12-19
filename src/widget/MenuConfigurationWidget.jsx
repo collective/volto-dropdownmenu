@@ -9,10 +9,9 @@ import {
   Segment,
   Header,
 } from 'semantic-ui-react';
-import { TextWidget } from '@plone/volto/components';
+import { TextWidget, Component } from '@plone/volto/components';
 import { flattenToAppURL } from '@plone/volto/helpers/Url/Url';
 
-import MenuConfigurationForm from './MenuConfigurationForm';
 import './menu_configuration.css';
 
 const messages = defineMessages({
@@ -58,14 +57,14 @@ const messages = defineMessages({
   },
 });
 
-const defaultMenuItem = title => ({
+const defaultMenuItem = (title) => ({
   title,
   visible: true,
   mode: 'simpleLink',
   linkUrl: [],
 });
 
-const defaultRootMenu = title => ({
+const defaultRootMenu = (title) => ({
   rootPath: '/',
   items: [defaultMenuItem(title)],
 });
@@ -82,17 +81,17 @@ const MenuConfigurationWidget = ({
 }) => {
   const intl = useIntl();
   const [menuConfiguration, setMenuConfiguration] = useState(
-    value ? JSON.parse(value) : defaultMenuConfiguration,
+    value ? JSON.parse(value) : defaultMenuConfiguration
   );
   const [activeMenu, setActiveMenu] = useState(0);
   const [activeMenuItem, setActiveMenuItem] = useState(0);
 
-  const handleChangeConfiguration = value => {
+  const handleChangeConfiguration = (value) => {
     setMenuConfiguration(value);
     onChange(id, JSON.stringify(value));
   };
 
-  const addMenuPath = e => {
+  const addMenuPath = (e) => {
     e.preventDefault();
     const menuItemsNumber = menuConfiguration.length;
     const menuItem = `/tab${menuItemsNumber}`;
@@ -168,7 +167,7 @@ const MenuConfigurationWidget = ({
     newMenuConfiguration[pathIndex].items.splice(
       menuItemIndex + (up ? -1 : 1),
       0,
-      menuItem,
+      menuItem
     );
 
     handleChangeConfiguration(newMenuConfiguration);
@@ -221,7 +220,7 @@ const MenuConfigurationWidget = ({
                           description=""
                           required={true}
                           value={flattenToAppURL(
-                            menuConfiguration[activeMenu].rootPath,
+                            menuConfiguration[activeMenu].rootPath
                           )}
                           onChange={(id, value) => {
                             onChangeMenuPath(activeMenu, {
@@ -244,9 +243,11 @@ const MenuConfigurationWidget = ({
                                 <Button
                                   icon="trash"
                                   negative
-                                  onClick={e => deleteMenuPath(e, activeMenu)}
+                                  onClick={(e) => deleteMenuPath(e, activeMenu)}
                                   id="delete-menupath"
-                                  content={intl.formatMessage(messages.deleteButton)}
+                                  content={intl.formatMessage(
+                                    messages.deleteButton
+                                  )}
                                 />
                               </Grid.Column>
                             </Grid.Row>
@@ -277,9 +278,9 @@ const MenuConfigurationWidget = ({
                                     size="tiny"
                                     icon={<Icon name="arrow left" />}
                                     title={intl.formatMessage(
-                                      messages.moveMenuItemUp,
+                                      messages.moveMenuItemUp
                                     )}
-                                    onClick={e =>
+                                    onClick={(e) =>
                                       moveMenuItem(e, activeMenu, idx, 'up')
                                     }
                                   />
@@ -293,20 +294,20 @@ const MenuConfigurationWidget = ({
                                     size="tiny"
                                     icon={<Icon name="arrow right" />}
                                     title={intl.formatMessage(
-                                      messages.moveMenuItemDown,
+                                      messages.moveMenuItemDown
                                     )}
-                                    onClick={e =>
+                                    onClick={(e) =>
                                       moveMenuItem(e, activeMenu, idx, 'down')
                                     }
                                   />
                                 </Button.Group>
                                 <span>{menuItem.title}</span>
                               </Menu.Item>
-                            ),
+                            )
                           )}
                           <Menu.Item
                             name={intl.formatMessage(messages.addMenuItem)}
-                            onClick={e => addMenuItem(e, activeMenu)}
+                            onClick={(e) => addMenuItem(e, activeMenu)}
                           >
                             <Icon name="plus" />
                           </Menu.Item>
@@ -316,17 +317,18 @@ const MenuConfigurationWidget = ({
                         {activeMenuItem > -1 &&
                         activeMenuItem <
                           menuConfiguration[activeMenu].items?.length ? (
-                          <MenuConfigurationForm
+                          <Component
+                            componentName="MenuConfigurationForm"
                             id={`${activeMenu}-${activeMenuItem}`}
                             menuItem={
                               menuConfiguration[activeMenu].items[
                                 activeMenuItem
                               ]
                             }
-                            onChange={menu =>
+                            onChange={(menu) =>
                               onChangeMenuItem(activeMenu, activeMenuItem, menu)
                             }
-                            deleteMenuItem={e =>
+                            deleteMenuItem={(e) =>
                               deleteMenuItem(e, activeMenu, activeMenuItem)
                             }
                           />
