@@ -1,152 +1,160 @@
+# Translation of volto.pot to Spanish
+# Leonardo J. Caballero G. <leonardocaballero@gmail.com>, 2023.
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: Plone\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language: \n"
-"Language-Team: \n"
-"Content-Type: \n"
-"Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"POT-Creation-Date: 2022-03-04T16:04:33.047Z\n"
+"PO-Revision-Date: 2023-05-17 13:26-0400\n"
+"Last-Translator: Leonardo J. Caballero G. <leonardocaballero@gmail.com>\n"
+"Language: es\n"
+"Language-Team: ES <LL@li.org>\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Preferred-Encodings: utf-8\n"
+"MIME-Version: 1.0\n"
+"Language-Code: es\n"
+"Language-Name: Español\n"
+"Domain: volto\n"
+"X-Is-Fallback-For: es-ar es-bo es-cl es-co es-cr es-do es-ec es-es es-sv es-gt es-hn es-mx es-ni es-pa es-py es-pe es-pr es-us es-uy es-ve\n"
 
 #: components/DropdownMenu
 # defaultMessage: Unknown Block {block}
 msgid "Unknown Block"
-msgstr ""
+msgstr "Bloque {block} desconocido"
 
 #: widget/MenuConfigurationWidget
 # defaultMessage: Add menu path
 msgid "dropdownmenu-add-rootpath"
-msgstr ""
+msgstr "Añadir ruta de menú"
 
 #: widget/MenuConfigurationForm
 # defaultMessage: Additional classes
 msgid "dropdownmenu-additionalClasses"
-msgstr ""
+msgstr "Clases adicionales"
 
 #: widget/MenuConfigurationForm
 # defaultMessage: Additional classes for the item to apply specific styles, accordingly to site layout.
 msgid "dropdownmenu-additionalClassesDescription"
-msgstr ""
+msgstr "Clases adicionales para que el elemento aplique estilos específicos, según el diseño del sitio."
 
 #: widget/MenuConfigurationWidget
 # defaultMessage: Add menu item
 msgid "dropdownmenu-addmenuitem"
-msgstr ""
+msgstr "Añadir elemento de menú"
 
 #: widget/MenuConfigurationForm
 # defaultMessage: Blocks
 msgid "dropdownmenu-blocks"
-msgstr ""
+msgstr "Bloques"
 
 #: widget/MenuConfigurationForm
 # defaultMessage: Add some blocks to show in dropdown menu.
 msgid "dropdownmenu-blocks-description"
-msgstr ""
+msgstr "Agregue algunos bloques para mostrar en el menú desplegable."
 
 #: widget/MenuConfigurationForm
 # defaultMessage: Clickable navigation roots
 msgid "dropdownmenu-clickableNavigationRoots"
-msgstr ""
+msgstr "Raíces de navegación en las que se puede hacer clic"
 
 #: components/DropdownMenu
 # defaultMessage: Close menu
 msgid "dropdownmenu-close-menu-button"
-msgstr ""
+msgstr "Cerrar menú"
 
 #: widget/MenuConfigurationWidget
 # defaultMessage: Delete
 msgid "dropdownmenu-delete-button"
-msgstr ""
+msgstr "Eliminar"
 
 #: widget/MenuConfigurationWidget
 # defaultMessage: Delete menu path
 msgid "dropdownmenu-delete-menupath"
-msgstr ""
+msgstr "Eliminar ruta de menú"
 
 #: widget/MenuConfigurationForm
 # defaultMessage: Delete menu item
 msgid "dropdownmenu-deletemenuitem"
-msgstr ""
+msgstr "Eliminar elemento del menú"
 
 #: widget/MenuConfigurationForm
 # defaultMessage: Delete menu item
 msgid "dropdownmenu-deletemenuitem-button"
-msgstr ""
+msgstr "Eliminar elemento del menú"
 
 #: widget/MenuConfigurationWidget
 # defaultMessage: Select a menu item
 msgid "dropdownmenu-emptyActiveMenuItem"
-msgstr ""
+msgstr "Seleccione un elemento del menú"
 
 #: widget/MenuConfigurationWidget
 # defaultMessage: Select a menu path
 msgid "dropdownmenu-emptyActiveMenuPath"
-msgstr ""
+msgstr "Seleccione una ruta de menú"
 
 #: widget/MenuConfigurationForm
 # defaultMessage: Link
 msgid "dropdownmenu-linkUrl"
-msgstr ""
+msgstr "Enlace"
 
 #: widget/MenuConfigurationWidget
 # defaultMessage: Menu items
 msgid "dropdownmenu-menuitems-header"
-msgstr ""
+msgstr "Elementos de menú"
 
 #: widget/MenuConfigurationForm
 # defaultMessage: Mode
 msgid "dropdownmenu-mode"
-msgstr ""
+msgstr "Modo"
 
 #: widget/MenuConfigurationForm
 # defaultMessage: Dropdown
 msgid "dropdownmenu-mode-dropdown"
-msgstr ""
+msgstr "Desplegable"
 
 #: widget/MenuConfigurationForm
 # defaultMessage: Simple link
 msgid "dropdownmenu-mode-simpleLink"
-msgstr ""
+msgstr "Enlace sencillo"
 
 #: widget/MenuConfigurationWidget
 # defaultMessage: Move menu item down
 msgid "dropdownmenu-move-menuitem-down"
-msgstr ""
+msgstr "Mover elemento de menú hacia abajo"
 
 #: widget/MenuConfigurationWidget
 # defaultMessage: Move menu item up
 msgid "dropdownmenu-move-menuitem-up"
-msgstr ""
+msgstr "Mover elemento de menú hacia arriba"
 
 #: widget/MenuConfigurationForm
 # defaultMessage: Navigation root
 msgid "dropdownmenu-navigationRoot"
-msgstr ""
+msgstr "Raíz de navegación"
 
 #: widget/MenuConfigurationWidget
 # defaultMessage: Root path
 msgid "dropdownmenu-rootpath"
-msgstr ""
+msgstr "Ruta raíz"
 
 #: widget/MenuConfigurationForm
 # defaultMessage: "Show more" link
 msgid "dropdownmenu-showMoreLink"
-msgstr ""
+msgstr "Enlace 'Mostrar más'"
 
 #: widget/MenuConfigurationForm
 # defaultMessage: "Show more" link text
 msgid "dropdownmenu-showMoreText"
-msgstr ""
+msgstr "Texto del enlace 'Mostrar más'"
 
 #: widget/MenuConfigurationForm
 # defaultMessage: Title
 msgid "dropdownmenu-title"
-msgstr ""
+msgstr "Título"
 
 #: widget/MenuConfigurationForm
 # defaultMessage: Visible
 msgid "dropdownmenu-visible"
-msgstr ""
+msgstr "Visibile"
