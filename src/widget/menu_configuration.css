@@ -15,6 +15,21 @@
   margin: 1em 0;
 }
 
+#menu-configuration
+  .block.image
+  .no-image-wrapper
+  .toolbar-inner
+  .ui.buttons:nth-of-type(2),
+#menu-configuration
+  .block.image
+  .no-image-wrapper
+  .toolbar-inner
+  .ui.buttons:nth-of-type(2)
+  + .ui.input {
+  /*nascondo il pulsante di upload immagine perchè non funziona da qui*/
+  display: none;
+}
+
 .menu-configuration-widget .ui.header.dropdownmenu-items-header {
   font-size: 1.2rem;
   opacity: 0.8;
