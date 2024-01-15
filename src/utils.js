@@ -10,13 +10,13 @@ export function getItemsByPath(items, pathname) {
       }, {})
     : [];
   const matchingPaths = Object.keys(itemsByPath)
-    .filter((path) => pathname.startsWith(path))
+    .filter((path) => `${pathname.trim('/')}/`.includes(`${path}/`))
     .sort((a, b) => {
       if (a.length > b.length) return -1;
       else if (a.length < b.length) return 1;
       else return 0;
     });
-
+  console.log(matchingPaths);
   if (matchingPaths.length > 0) return itemsByPath[matchingPaths[0]].items;
   else if (rootPathConfig) return rootPathConfig.items;
   else return [];
