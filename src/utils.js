@@ -16,7 +16,7 @@ export function getItemsByPath(items, pathname) {
       else if (a.length < b.length) return 1;
       else return 0;
     });
-  console.log(matchingPaths);
+
   if (matchingPaths.length > 0) return itemsByPath[matchingPaths[0]].items;
   else if (rootPathConfig) return rootPathConfig.items;
   else return [];
