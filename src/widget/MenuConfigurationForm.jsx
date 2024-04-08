@@ -10,7 +10,8 @@ import {
   ObjectBrowserWidget,
   Sidebar,
 } from '@plone/volto/components';
-import RadioWidget from './RadioWidget';
+
+import { RadioWidget } from 'volto-dropdownmenu/widget';
 import { Portal } from 'react-portal';
 import config from '@plone/volto/registry';
 

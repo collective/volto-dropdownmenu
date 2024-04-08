@@ -81,7 +81,7 @@ const MenuConfigurationWidget = ({
 }) => {
   const intl = useIntl();
   const [menuConfiguration, setMenuConfiguration] = useState(
-    value ? JSON.parse(value) : defaultMenuConfiguration
+    value ? JSON.parse(value) : defaultMenuConfiguration,
   );
   const [activeMenu, setActiveMenu] = useState(0);
   const [activeMenuItem, setActiveMenuItem] = useState(0);
@@ -167,7 +167,7 @@ const MenuConfigurationWidget = ({
     newMenuConfiguration[pathIndex].items.splice(
       menuItemIndex + (up ? -1 : 1),
       0,
-      menuItem
+      menuItem,
     );
 
     handleChangeConfiguration(newMenuConfiguration);
@@ -220,7 +220,7 @@ const MenuConfigurationWidget = ({
                           description=""
                           required={true}
                           value={flattenToAppURL(
-                            menuConfiguration[activeMenu].rootPath
+                            menuConfiguration[activeMenu].rootPath,
                           )}
                           onChange={(id, value) => {
                             onChangeMenuPath(activeMenu, {
@@ -246,7 +246,7 @@ const MenuConfigurationWidget = ({
                                   onClick={(e) => deleteMenuPath(e, activeMenu)}
                                   id="delete-menupath"
                                   content={intl.formatMessage(
-                                    messages.deleteButton
+                                    messages.deleteButton,
                                   )}
                                 />
                               </Grid.Column>
@@ -278,7 +278,7 @@ const MenuConfigurationWidget = ({
                                     size="tiny"
                                     icon={<Icon name="arrow left" />}
                                     title={intl.formatMessage(
-                                      messages.moveMenuItemUp
+                                      messages.moveMenuItemUp,
                                     )}
                                     onClick={(e) =>
                                       moveMenuItem(e, activeMenu, idx, 'up')
@@ -294,7 +294,7 @@ const MenuConfigurationWidget = ({
                                     size="tiny"
                                     icon={<Icon name="arrow right" />}
                                     title={intl.formatMessage(
-                                      messages.moveMenuItemDown
+                                      messages.moveMenuItemDown,
                                     )}
                                     onClick={(e) =>
                                       moveMenuItem(e, activeMenu, idx, 'down')
@@ -303,7 +303,7 @@ const MenuConfigurationWidget = ({
                                 </Button.Group>
                                 <span>{menuItem.title}</span>
                               </Menu.Item>
-                            )
+                            ),
                           )}
                           <Menu.Item
                             name={intl.formatMessage(messages.addMenuItem)}
