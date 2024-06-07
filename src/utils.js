@@ -10,7 +10,7 @@ export function getItemsByPath(items, pathname) {
       }, {})
     : [];
   const matchingPaths = Object.keys(itemsByPath)
-    .filter((path) => `${pathname.trim('/')}/`.includes(`${path}/`))
+    .filter((path) => pathname === path || pathname.startsWith(`${path}/`))
     .sort((a, b) => {
       if (a.length > b.length) return -1;
       else if (a.length < b.length) return 1;
