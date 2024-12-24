@@ -4,14 +4,13 @@ import { defineMessages, useIntl } from 'react-intl';
 import { Segment, Container, Icon, Grid, Button } from 'semantic-ui-react';
 import { map } from 'lodash';
 import cx from 'classnames';
-import { ConditionalLink } from '@plone/volto/components';
+import ConditionalLink from '@plone/volto/components/manage/ConditionalLink/ConditionalLink';
 import {
-  flattenToAppURL,
   getBlocksFieldname,
   getBlocksLayoutFieldname,
   hasBlocksData,
-  getBaseUrl,
-} from '@plone/volto/helpers';
+} from '@plone/volto/helpers/Blocks/Blocks';
+import { flattenToAppURL, getBaseUrl } from '@plone/volto/helpers/Url/Url';
 import config from '@plone/volto/registry';
 
 import './dropdownmenu.css';
@@ -38,8 +37,8 @@ const DropdownMenu = ({ menu, open = false, closeMenu }) => {
     menu.navigationRoot?.length === 1
       ? 8
       : menu.navigationRoot?.length > 2 || menu.navigationRoot?.length === 0
-      ? 12
-      : 6;
+        ? 12
+        : 6;
   let hasBlocks = hasBlocksData(menu);
   if (menu?.blocks && Object.keys(menu.blocks).length === 1) {
     let b = menu.blocks[Object.keys(menu.blocks)[0]];

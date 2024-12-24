@@ -12,7 +12,7 @@ import cx from 'classnames';
 import OutsideClickHandler from 'react-outside-click-handler';
 import config from '@plone/volto/registry';
 
-import { flattenToAppURL } from '@plone/volto/helpers';
+import { flattenToAppURL } from '@plone/volto/helpers/Url/Url';
 
 import DropdownMenu from '../../../../components/DropdownMenu';
 import { getDropdownMenuNavitems } from '../../../../actions';

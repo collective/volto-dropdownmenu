@@ -3,13 +3,13 @@ import { defineMessages, useIntl } from 'react-intl';
 import { v4 as uuid } from 'uuid';
 import { isEmpty } from 'lodash';
 import { Form as UIForm, Grid, Button } from 'semantic-ui-react';
+import Sidebar from '@plone/volto/components/manage/Sidebar/Sidebar';
+import { Form } from '@plone/volto/components/manage/Form';
 import {
-  Form,
   TextWidget,
   CheckboxWidget,
   ObjectBrowserWidget,
-  Sidebar,
-} from '@plone/volto/components';
+} from '@plone/volto/components/manage/Widgets';
 
 import { RadioWidget } from 'volto-dropdownmenu/widget';
 import { Portal } from 'react-portal';
