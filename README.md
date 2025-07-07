@@ -3,7 +3,17 @@
 Volto addon for a customizable dropdown menu.
 Intended to be used with [collective.volto.dropdownmenu](https://github.com/collective/collective.volto.dropdownmenu)
 
-To be used with mrs-developer, see [Volto docs](https://docs.voltocms.com/customizing/add-ons/) for further usage informations.
+To be used with ``mrs-developer``, see [Volto docs](https://6.docs.plone.org/volto/development/add-ons/install-an-add-on-dev-18.html#configure-mrs-developer) for further usage information. The following is an example configuration:
+
+```json
+  "volto-dropdownmenu": {
+    "output": "./packages/",
+    "package": "volto-dropdownmenu",
+    "url": "git@github.com:collective/volto-dropdownmenu.git",
+    "https": "https://github.com/collective/volto-dropdownmenu.git",
+    "branch": "master"
+  }
+```
 
 Created with [voltocli](https://github.com/nzambello/voltocli).
 
@@ -50,8 +60,8 @@ config.registerComponent({
 
 ### Navigation roots
 
-By default, navigations roots are clickable, but there's the possibility to make them not clickable.
-Enabling the field 'clickableNavigationRoots' in volto-dropdownmenu config, a field appears in configuration form and let editor to decide if make navigation roots clickable or not.
+By default, navigation roots are clickable, but there's the possibility to make them not clickable.
+Enabling the field 'clickableNavigationRoots' in ``volto-dropdownmenu`` config, a field appears in configuration form and let editor to decide if make navigation roots clickable or not.
 
 ```json
   config.settings["volto-dropdownmenu"] = {
@@ -63,9 +73,9 @@ Enabling the field 'clickableNavigationRoots' in volto-dropdownmenu config, a fi
 
 ## Screenshots and demo
 
-### Controlpanel
+### Control panel
 
-![Addon controlpanel](./docs/controlpanel.png)
+![Addon control panel](./docs/controlpanel.png)
 
 ### Dropdown menu
 
