@@ -12,7 +12,7 @@ import {
 } from '@plone/volto/components/manage/Widgets';
 
 import { RadioWidget } from 'volto-dropdownmenu/widget';
-import { Portal } from 'react-portal';
+import { createPortal } from 'react-dom';
 import config from '@plone/volto/registry';
 
 const messages = defineMessages({
@@ -301,9 +301,7 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
           </Grid.Row>
         </Grid>
       </UIForm.Field>
-      <Portal node={document.getElementById('sidebar')}>
-        <Sidebar />
-      </Portal>
+      {createPortal(<Sidebar />, document.getElementById('sidebar'))}
     </>
   );
 };
