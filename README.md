@@ -73,13 +73,17 @@ Enabling the field 'clickableNavigationRoots' in ``volto-dropdownmenu`` config, 
 
 ## Screenshots and demo
 
+### Dropdown Menu Settings
+
+![Dropdown Menu Settings](https://raw.githubusercontent.com/collective/volto-dropdownmenu/refs/heads/master/docs/images/dropdown-menu-settings.png "Dropdown Menu Settings")
+
 ### Control panel
 
-![Addon control panel](./docs/controlpanel.png)
+![Add-on control panel](https://raw.githubusercontent.com/collective/volto-dropdownmenu/refs/heads/master/docs/images/controlpanel.png "Add-on control panel")
 
 ### Dropdown menu
 
-![Dropdown menu](./docs/dropdown-menu.png)
+![Dropdown menu](https://raw.githubusercontent.com/collective/volto-dropdownmenu/refs/heads/master/docs/images/dropdown-menu.png "Dropdown menu")
 
 ### Demo
 
