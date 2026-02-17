@@ -100,18 +100,31 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
     };
   }
 
-  const preventEnter = (e) => {
-    if (e.code === 'Enter') {
+  const preventClick = (e) => {
+    // only prevent default when the click is on a button
+    const btn = e.target?.closest && e.target.closest('button');
+    if (btn) {
       e.preventDefault();
     }
   };
 
+  const preventEnter = (e) => {
+    if (e.code === 'Enter') {
+      const btn = e.target?.closest && e.target.closest('button');
+      if (btn) preventClick(e);
+    }
+  };
+
   useEffect(() => {
+    const form = document.querySelector('form.ui.form');
+    form?.addEventListener('click', preventClick);
+
     document.querySelectorAll('form.ui.form input').forEach((item) => {
       item.addEventListener('keypress', preventEnter);
     });
 
     return () => {
+      form?.removeEventListener('click', preventClick);
       document.querySelectorAll('form.ui.form input').forEach((item) => {
         item?.removeEventListener('keypress', preventEnter);
       });
