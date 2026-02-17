@@ -100,29 +100,18 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
     };
   }
 
-  const preventClick = (e) => {
-    e.preventDefault();
-  };
-
   const preventEnter = (e) => {
     if (e.code === 'Enter') {
-      preventClick(e);
+      e.preventDefault();
     }
   };
 
   useEffect(() => {
-    document
-      .querySelector('form.ui.form')
-      .addEventListener('click', preventClick);
-
     document.querySelectorAll('form.ui.form input').forEach((item) => {
       item.addEventListener('keypress', preventEnter);
     });
 
     return () => {
-      document
-        .querySelector('form.ui.form')
-        ?.removeEventListener('click', preventClick);
       document.querySelectorAll('form.ui.form input').forEach((item) => {
         item?.removeEventListener('keypress', preventEnter);
       });
