@@ -10,7 +10,7 @@ import {
   Header,
 } from 'semantic-ui-react';
 import Component from '@plone/volto/components/theme/Component/Component';
-import { TextWidget } from '@plone/volto/components/manage/Widgets';
+import TextWidget from '@plone/volto/components/manage/Widgets/TextWidget';
 import { flattenToAppURL } from '@plone/volto/helpers/Url/Url';
 
 import './menu_configuration.css';

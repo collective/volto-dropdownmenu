@@ -4,12 +4,11 @@ import { v4 as uuid } from 'uuid';
 import { isEmpty } from 'lodash';
 import { Form as UIForm, Grid, Button } from 'semantic-ui-react';
 import Sidebar from '@plone/volto/components/manage/Sidebar/Sidebar';
-import { Form } from '@plone/volto/components/manage/Form';
-import {
-  TextWidget,
-  CheckboxWidget,
-  ObjectBrowserWidget,
-} from '@plone/volto/components/manage/Widgets';
+import Form from '@plone/volto/components/manage/Form/Form';
+
+import TextWidget from '@plone/volto/components/manage/Widgets/TextWidget';
+import CheckboxWidget from '@plone/volto/components/manage/Widgets/CheckboxWidget';
+import ObjectBrowserWidget from '@plone/volto/components/manage/Widgets/ObjectBrowserWidget';
 
 import { RadioWidget } from 'volto-dropdownmenu/widget';
 import { createPortal } from 'react-dom';
@@ -101,7 +100,11 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
   }
 
   const preventClick = (e) => {
-    e.preventDefault();
+    // only prevent default when the click is on a button
+    const btn = e.target?.closest && e.target.closest('button');
+    if (btn) {
+      e.preventDefault();
+    }
   };
 
   const preventEnter = (e) => {
@@ -113,7 +116,7 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
   useEffect(() => {
     document
       .querySelector('form.ui.form')
-      .addEventListener('click', preventClick);
+      ?.addEventListener('click', preventClick);
 
     document.querySelectorAll('form.ui.form input').forEach((item) => {
       item.addEventListener('keypress', preventEnter);
