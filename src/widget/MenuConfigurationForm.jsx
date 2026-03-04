@@ -118,56 +118,43 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
   // - the second one is to make sure Enter does not indirectly generate any submits
 
   useEffect(() => {
-    // Get the main Volto HTML form.
-    // By default it treats Enter key presses and buttons as submit triggers.
+    // Get the main Volto HTML form
     const form = document.querySelector('form.ui.form');
 
-    // Prevent any form submission:
-    // - Enter pressed on inputs
-    // - Click on buttons with implicit type="submit"
-    // This avoids Volto unmounting or resetting the entire form.
+    // Handler per bloccare submit espliciti o impliciti
     const preventSubmit = (e) => {
-      e.preventDefault(); // Stop the native submit behavior
-      e.stopPropagation(); // Stop the event from reaching other handlers
+      e.preventDefault();
+      e.stopPropagation();
     };
 
-    // Listen in the capture phase to intercept the submit
-    // before Semantic UI or Volto can handle it.
-    form?.addEventListener('submit', preventSubmit, true);
-
-    return () => {
-      // Cleanup: remove the listener when the component unmounts
-      form?.removeEventListener('submit', preventSubmit, true);
-    };
-  }, []);
-
-  useEffect(() => {
-    const handler = (e) => {
-      // If Enter is pressed
+    // Handler globale per bloccare Enter sugli input,
+    // tranne dentro menu-blocks-container
+    const handleEnter = (e) => {
       if (e.key === 'Enter') {
-        const form = e.target.closest('form.ui.form');
-
-        // If we're inside the main form
-        if (form) {
-          // **Exception:** if we're inside menu-blocks-container
+        const targetForm = e.target.closest('form.ui.form');
+        if (targetForm) {
           const inBlocks = e.target.closest('.menu-blocks-container');
           if (inBlocks) {
-            // let react and volto manage Enter
+            // Lascia Enter libero dentro i blocks (React/Volto crea nuovo blocco)
             return;
           }
-
-          // otherwise block submit
+          // Blocca Enter altrove per evitare submit indesiderati
           e.preventDefault();
           e.stopPropagation();
         }
       }
     };
 
-    // listener in capture phase to be safe
-    document.addEventListener('keydown', handler, true);
+    // Blocca submit nativi (click su button con type submit, ecc.)
+    form?.addEventListener('submit', preventSubmit, true);
+
+    // Blocca Enter fuori dai blocks
+    document.addEventListener('keydown', handleEnter, true);
 
     return () => {
-      document.removeEventListener('keydown', handler, true);
+      // Cleanup all listeners
+      form?.removeEventListener('submit', preventSubmit, true);
+      document.removeEventListener('keydown', handleEnter, true);
     };
   }, []);
 
