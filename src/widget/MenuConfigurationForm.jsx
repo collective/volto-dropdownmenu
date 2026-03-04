@@ -99,24 +99,6 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
     };
   }
 
-  // const preventClick = (e) => {
-  //   // only prevent default when the click is on a button
-  //   const btn = e.target?.closest && e.target.closest('button');
-  //   if (btn) {
-  //     e.preventDefault();
-  //   }
-  // };
-
-  // const preventEnter = (e) => {
-  //   if (e.code === 'Enter') {
-  //     preventClick(e);
-  //   }
-  // };
-
-  // two useEffects because:
-  // - the first one blocks the real problem: html default submit
-  // - the second one is to make sure Enter does not indirectly generate any submits
-
   useEffect(() => {
     // Get the main Volto HTML form
     const form = document.querySelector('form.ui.form');
