@@ -99,38 +99,76 @@ const MenuConfigurationForm = ({ id, menuItem, onChange, deleteMenuItem }) => {
     };
   }
 
-  const preventClick = (e) => {
-    // only prevent default when the click is on a button
-    const btn = e.target?.closest && e.target.closest('button');
-    if (btn) {
-      e.preventDefault();
-    }
-  };
+  // const preventClick = (e) => {
+  //   // only prevent default when the click is on a button
+  //   const btn = e.target?.closest && e.target.closest('button');
+  //   if (btn) {
+  //     e.preventDefault();
+  //   }
+  // };
 
-  const preventEnter = (e) => {
-    if (e.code === 'Enter') {
-      preventClick(e);
-    }
-  };
+  // const preventEnter = (e) => {
+  //   if (e.code === 'Enter') {
+  //     preventClick(e);
+  //   }
+  // };
+
+  // two useEffects because:
+  // - the first one blocks the real problem: html default submit
+  // - the second one is to make sure Enter does not indirectly generate any submits
 
   useEffect(() => {
-    document
-      .querySelector('form.ui.form')
-      ?.addEventListener('click', preventClick);
+    // Get the main Volto HTML form.
+    // By default it treats Enter key presses and buttons as submit triggers.
+    const form = document.querySelector('form.ui.form');
 
-    document.querySelectorAll('form.ui.form input').forEach((item) => {
-      item.addEventListener('keypress', preventEnter);
-    });
+    // Prevent any form submission:
+    // - Enter pressed on inputs
+    // - Click on buttons with implicit type="submit"
+    // This avoids Volto unmounting or resetting the entire form.
+    const preventSubmit = (e) => {
+      e.preventDefault(); // Stop the native submit behavior
+      e.stopPropagation(); // Stop the event from reaching other handlers
+    };
+
+    // Listen in the capture phase to intercept the submit
+    // before Semantic UI or Volto can handle it.
+    form?.addEventListener('submit', preventSubmit, true);
 
     return () => {
-      document
-        .querySelector('form.ui.form')
-        ?.removeEventListener('click', preventClick);
-      document.querySelectorAll('form.ui.form input').forEach((item) => {
-        item?.removeEventListener('keypress', preventEnter);
-      });
+      // Cleanup: remove the listener when the component unmounts
+      form?.removeEventListener('submit', preventSubmit, true);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const handler = (e) => {
+      // If Enter is pressed
+      if (e.key === 'Enter') {
+        const form = e.target.closest('form.ui.form');
+
+        // If we're inside the main form
+        if (form) {
+          // **Exception:** if we're inside menu-blocks-container
+          const inBlocks = e.target.closest('.menu-blocks-container');
+          if (inBlocks) {
+            // let react and volto manage Enter
+            return;
+          }
+
+          // otherwise block submit
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      }
+    };
+
+    // listener in capture phase to be safe
+    document.addEventListener('keydown', handler, true);
+
+    return () => {
+      document.removeEventListener('keydown', handler, true);
+    };
   }, []);
 
   const onChangeFormData = (id, value) => {
