@@ -31,6 +31,8 @@ Afer installation, please add following lines into package.json to enable it.
 
 ## Usage
 
+> This version requires Volto >= 19. If you are using Volto < 19, then use [v4.1.6](https://github.com/collective/volto-dropdownmenu/tree/v4.1.6)
+>
 > If you are using Volto < 16, then use [v2.4.3](https://github.com/collective/volto-dropdownmenu/tree/v2.4.3)
 >
 > If you are using Volto < 12, then use [v1.3.0](https://github.com/collective/volto-dropdownmenu/tree/v1.3.0)

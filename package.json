@@ -6,18 +6,33 @@
   "repository": "https://github.com/collective/volto-dropdownmenu.git",
   "author": "collective",
   "license": "MIT",
+  "keywords": [
+    "volto-addon",
+    "volto",
+    "plone",
+    "react"
+  ],
+  "engines": {
+    "node": "^22 || ^24"
+  },
+  "packageManager": "pnpm@10.20.0",
   "devDependencies": {
-    "@plone/scripts": "^2.0.0",
+    "@plone/scripts": "^4.0.0",
+    "prettier": "^3.3.3",
     "release-it": "^14.10.1"
   },
   "scripts": {
     "i18n": "rm -rf build/messages && NODE_ENV=production i18n --addon",
-    "release": "release-it"
+    "prettier": "prettier --check 'src/**/*.{js,jsx}'",
+    "prettier:fix": "prettier --write 'src/**/*.{js,jsx}'",
+    "dry-release": "release-it --dry-run",
+    "release": "release-it",
+    "release-alpha": "release-it --preRelease=alpha"
   },
-  "dependencies": {
-    "react-outside-click-handler": "1.3.0"
-  },
+  "dependencies": {},
   "peerDependencies": {
-    "@plone/volto": ">=16.0.0-alpha.38"
+    "@plone/volto": ">=19.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }

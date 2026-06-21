@@ -15,7 +15,7 @@ export {
   MenuConfigurationForm,
 };
 
-export default (config) => {
+const applyConfig = (config) => {
   config.widgets.id = {
     ...config.widgets.id,
     menu_configuration: MenuConfigurationWidget,
@@ -62,3 +62,5 @@ export default (config) => {
 
   return config;
 };
+
+export default applyConfig;

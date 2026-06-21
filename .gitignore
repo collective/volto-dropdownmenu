@@ -5,7 +5,6 @@ logs
 npm-debug.log*
 .DS_Store
 *.swp
-yarn-error.log
 
 node_modules
 build
@@ -15,13 +14,8 @@ dist
 .env.test.local
 .env.production.local
 
-# Yarn 3
+# pnpm
 .pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
+
 temp_auto_push.bat
 temp_interactive_push.bat
