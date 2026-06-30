@@ -44,7 +44,7 @@ const applyConfig = (config) => {
           dispatchActions.push({
             key: 'dropdownMenuNavItems',
             promise: ({ location, store: { dispatch } }) =>
-              __SERVER__ && dispatch(getDropdownMenuNavitems()),
+              dispatch(getDropdownMenuNavitems()),
           });
         }
         return dispatchActions;
