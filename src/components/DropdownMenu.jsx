@@ -119,7 +119,7 @@ const DropdownMenu = ({ menu, open = false, closeMenu }) => {
                 width={blocksWidth}
                 className="dropdownmenu-blocks-column"
               >
-                {map(menu[blocksLayoutFieldname].items, (block) => {
+                {map(menu[blocksLayoutFieldname]?.items, (block) => {
                   const blockType = menu[blocksFieldname]?.[block]?.['@type'];
                   if (['title', 'pageDescription'].indexOf(blockType) > -1)
                     return null;

@@ -1,0 +1,12 @@
+module.exports = {
+  trailingComma: 'all',
+  singleQuote: true,
+  overrides: [
+    {
+      files: '*.overrides',
+      options: {
+        parser: 'less',
+      },
+    },
+  ],
+};

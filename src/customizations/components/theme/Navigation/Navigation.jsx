@@ -3,20 +3,19 @@
  * @module components/theme/Navigation/Navigation
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { defineMessages, useIntl } from 'react-intl';
 import { Menu, Button, Icon } from 'semantic-ui-react';
 import cx from 'classnames';
-import OutsideClickHandler from 'react-outside-click-handler';
-import config from '@plone/volto/registry';
 
 import { flattenToAppURL } from '@plone/volto/helpers/Url/Url';
 
 import DropdownMenu from '../../../../components/DropdownMenu';
 import { getDropdownMenuNavitems } from '../../../../actions';
 import { getItemsByPath } from '../../../../utils';
+import useOutsideClick from '../../../../hooks/useOutsideClick';
 
 const messages = defineMessages({
   closeMobileMenu: {
@@ -34,17 +33,27 @@ const messages = defineMessages({
 });
 
 const Navigation = ({ pathname, type }) => {
-  const { settings } = config;
   const token = useSelector((state) => state.userSession?.token);
+  // In Volto 19 `isMultilingual` was removed from `config.settings` and is now
+  // exposed by the backend through the site data (`@site` endpoint).
+  const isMultilingual = useSelector(
+    (state) => state.site?.data?.features?.multilingual,
+  );
   const intl = useIntl();
   const { lang } = intl.locale;
   const dispatch = useDispatch();
+  const navRef = useRef(null);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openDropdownIndex, setOpenDropodownIndex] = useState(-1);
 
   const dropdownMenuNavItems = useSelector(
     (state) => state.dropdownMenuNavItems?.result,
   );
+
+  useOutsideClick(navRef, () => {
+    setOpenDropodownIndex(-1);
+    setMobileMenuOpen(false);
+  });
 
   useEffect(() => {
     dispatch(getDropdownMenuNavitems());
@@ -123,117 +132,107 @@ const Navigation = ({ pathname, type }) => {
 
   return (
     <nav
+      ref={navRef}
       className="navigation navigation-dropdownmenu"
       role="navigation"
       aria-label={intl.formatMessage(messages.dropdownmenu_aria)}
     >
-      <OutsideClickHandler
-        onOutsideClick={() => {
-          setOpenDropodownIndex(-1);
-          if (isMobileMenuOpen) {
-            setMobileMenuOpen(false);
+      <div className="hamburger-wrapper mobile tablet only">
+        <button
+          className={cx('hamburger hamburger--collapse', {
+            'is-active': isMobileMenuOpen,
+          })}
+          aria-label={
+            isMobileMenuOpen
+              ? intl.formatMessage(messages.closeMobileMenu, {
+                  type,
+                })
+              : intl.formatMessage(messages.openMobileMenu, {
+                  type,
+                })
           }
-        }}
-      >
-        <div className="hamburger-wrapper mobile tablet only">
-          <button
-            className={cx('hamburger hamburger--collapse', {
-              'is-active': isMobileMenuOpen,
-            })}
-            aria-label={
-              isMobileMenuOpen
-                ? intl.formatMessage(messages.closeMobileMenu, {
-                    type,
-                  })
-                : intl.formatMessage(messages.openMobileMenu, {
-                    type,
-                  })
-            }
-            title={
-              isMobileMenuOpen
-                ? intl.formatMessage(messages.closeMobileMenu, {
-                    type,
-                  })
-                : intl.formatMessage(messages.openMobileMenu, {
-                    type,
-                  })
-            }
-            type="button"
-            onClick={toggleMobileMenu}
-          >
-            <span className="hamburger-box">
-              <span className="hamburger-inner" />
-            </span>
-          </button>
-        </div>
-        <Menu
-          stackable
-          pointing
-          secondary
-          className={
-            isMobileMenuOpen ? 'open' : 'computer large screen widescreen only'
+          title={
+            isMobileMenuOpen
+              ? intl.formatMessage(messages.closeMobileMenu, {
+                  type,
+                })
+              : intl.formatMessage(messages.openMobileMenu, {
+                  type,
+                })
           }
+          type="button"
+          onClick={toggleMobileMenu}
         >
-          {menu?.length > 0
-            ? menu
-                ?.filter((item) => item.visible)
-                ?.filter(
-                  (item) =>
-                    item.mode === 'dropdown' || item.linkUrl?.[0]?.['@id'],
-                )
-                ?.map((item, index) =>
-                  item.mode === 'simpleLink' ? (
-                    <NavLink
-                      to={flattenToAppURL(item.linkUrl?.[0]?.['@id'])}
-                      key={'simplelink-' + index}
-                      className={cx('item', {
+          <span className="hamburger-box">
+            <span className="hamburger-inner" />
+          </span>
+        </button>
+      </div>
+      <Menu
+        stackable
+        pointing
+        secondary
+        className={
+          isMobileMenuOpen ? 'open' : 'computer large screen widescreen only'
+        }
+      >
+        {menu?.length > 0
+          ? menu
+              ?.filter((item) => item.visible)
+              ?.filter(
+                (item) =>
+                  item.mode === 'dropdown' || item.linkUrl?.[0]?.['@id'],
+              )
+              ?.map((item, index) =>
+                item.mode === 'simpleLink' ? (
+                  <NavLink
+                    to={flattenToAppURL(item.linkUrl?.[0]?.['@id'])}
+                    key={'simplelink-' + index}
+                    className={cx('item', {
+                      [item.additionalClasses]:
+                        item.additionalClasses?.length > 0,
+                    })}
+                    activeClassName="active"
+                    exact={
+                      isMultilingual
+                        ? item.linkUrl?.[0]?.['@id'] === `/${lang}`
+                        : item.linkUrl?.[0]?.['@id'] === ''
+                    }
+                  >
+                    <span>{item.title}</span>
+                  </NavLink>
+                ) : (
+                  <React.Fragment key={'dropdown-' + index}>
+                    <Button
+                      className={cx('item', 'dropdownmenu-item', {
+                        open: openDropdownIndex === index,
+                        active: isMenuActive(item),
                         [item.additionalClasses]:
                           item.additionalClasses?.length > 0,
                       })}
-                      activeClassName="active"
-                      exact={
-                        settings.isMultilingual
-                          ? item.linkUrl?.[0]?.['@id'] === `/${lang}`
-                          : item.linkUrl?.[0]?.['@id'] === ''
-                      }
+                      onClick={() => toggleDropdownMenu(index)}
+                      aria-expanded={openDropdownIndex === index ? true : false}
+                      aria-haspopup={true}
                     >
                       <span>{item.title}</span>
-                    </NavLink>
-                  ) : (
-                    <React.Fragment key={'dropdown-' + index}>
-                      <Button
-                        className={cx('item', 'dropdownmenu-item', {
-                          open: openDropdownIndex === index,
-                          active: isMenuActive(item),
-                          [item.additionalClasses]:
-                            item.additionalClasses?.length > 0,
-                        })}
-                        onClick={() => toggleDropdownMenu(index)}
-                        aria-expanded={
-                          openDropdownIndex === index ? true : false
+                      <Icon
+                        name="dropdown"
+                        size="large"
+                        flipped={
+                          openDropdownIndex === index ? 'vertically' : null
                         }
-                        aria-haspopup={true}
-                      >
-                        <span>{item.title}</span>
-                        <Icon
-                          name="dropdown"
-                          size="large"
-                          flipped={
-                            openDropdownIndex === index ? 'vertically' : null
-                          }
-                        />
-                      </Button>
-                      <DropdownMenu
-                        menu={item}
-                        open={openDropdownIndex === index}
-                        closeMenu={() => setOpenDropodownIndex(-1)}
                       />
-                    </React.Fragment>
-                  ),
-                )
-            : null}
-        </Menu>
-      </OutsideClickHandler>
+                    </Button>
+                    <DropdownMenu
+                      menu={item}
+                      open={openDropdownIndex === index}
+                      closeMenu={() => setOpenDropodownIndex(-1)}
+                    />
+                  </React.Fragment>
+                ),
+              )
+          : null}
+      </Menu>
     </nav>
   );
 };
